@@ -1,12 +1,12 @@
 # AcademyFlash-Software
 
 ## Next.js com Node comandos no ambiente de desenvolvimento
-*Configurando ambiente de desenvolvimento pela primeira vez*
+**Configurando ambiente de desenvolvimento pela primeira vez**  
 $ npm i npx -g  // Caso no npm não reconheça o comando npx  
 $ npx create-next-app@latest nextjs-blog  
 $ cd nextjs-blog  
 $ npm run dev  
-*Comandos sempre usados*
+**Comandos sempre usados**  
 $ crtl + c        => Encerra o servidor  
 $ npm run dev     => Inicia o servidor
 
