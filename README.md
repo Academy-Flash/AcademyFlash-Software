@@ -1,16 +1,16 @@
 # AcademyFlash-Software
 
-## Next.js com Node criando ambiente de desenvolvimento
+## Next.js com Node comandos no ambiente de desenvolvimento
+*Configurando ambiente de desenvolvimento pela primeira vez*
 $ npm i npx -g  // Caso no npm não reconheça o comando npx  
 $ npx create-next-app@latest nextjs-blog  
 $ cd nextjs-blog  
 $ npm run dev  
-
-## Comandos sempre usados
-$ crtl + c        => Encerra o servidor
+*Comandos sempre usados*
+$ crtl + c        => Encerra o servidor  
 $ npm run dev     => Inicia o servidor
 
-# Comandos git
+## Comandos git
 $ git init  
 $ git add .                 => Adiciona todos os arquivos para o commit  
 $ git commit -m "commit description"  
