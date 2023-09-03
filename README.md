@@ -50,7 +50,7 @@ $ git checkout teste          (mudar para a branch teste)
 $ git diff                    (diferenças nos arquivos alterados nas diferentes branches)
 ```
 
-##Docker  
+## Docker  
 ```
 $ docker images
 $ docker start <container ID>       => Inicia um container
@@ -61,12 +61,20 @@ $ docker run -i -t ubuntu           => Exemplo de execução Ubuntu
 $ docker pause <ID container>       => Pausa a execução
 $ docker unpause <ID container>     => Despausa a execução
 $ docker image ls                   => Lista as imagens instaladas
+$ docker pull postgres
+
 ```
 **Docker Compose**  
 ```
 $ docker-compose up       => Sobe os containers, deve ser executado dentro da pasta que contém o arquivo .yml
 $ docker-compose up -d    => Sobe os containers em background (terminal limpo)
 $ docker-compose down     => Para os containers
+```
+
+## Strapi  
+```
+$ npx create-strapi-app my-project --quickstart .   => Cria um projeto Strapi
+
 ```
 
 

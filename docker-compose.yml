@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  postgres_strapi_academyflash:
+    container_name: api_strapi_academyflash
+    hostname: api_strapi_academyflash
+    image: postgres:9.6
+    PGDATA: /var/lib/postgresql/data/pgdata
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=academyflash
+      - POSTGRES_USER=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
