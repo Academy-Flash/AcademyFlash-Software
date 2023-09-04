@@ -1,3 +1,6 @@
+#TODO: Decidir se usaremos mesmo o Strapi
+#TODO: Decidir se usaremos mesmo o Docker
+
 # AcademyFlash-Software
 
 ## Next.js com Node comandos no ambiente de desenvolvimento
@@ -74,7 +77,7 @@ $ docker-compose down     => Para os containers
 ## Strapi  
 ```
 $ npx create-strapi-app my-project --quickstart .   => Cria um projeto Strapi
-
+npm build
 ```
 
 
