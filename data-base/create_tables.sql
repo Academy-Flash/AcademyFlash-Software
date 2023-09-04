@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS folders (
     id serial NOT NULL, 
     folder_name character varying(255),
     description character varying(255),
-    CONSTRAINT pasta_pkey PRIMARY KEY (id),
+    CONSTRAINT pasta_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS parent_folders (
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS decks (
     rating integer NOT NULL,
     category character varying(255), -- Add a table for category in the future
     description character varying(255),
-    CONSTRAINT deck_pkey PRIMARY KEY (id),
+    CONSTRAINT deck_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS cards (
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS cards (
     CONSTRAINT card_id_deck_fkey FOREIGN KEY (id_deck)
         REFERENCES decks (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON DELETE NO ACTION
 );
 
 CREATE TABLE IF NOT EXISTS folder_deck(
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS folder_deck(
     CONSTRAINT folder_deck_id_folder_fkey FOREIGN KEY (id_folder)
         REFERENCES folders (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON DELETE NO ACTION
 );
 
 CREATE TABLE IF NOT EXISTS reviews(
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS reviews(
     CONSTRAINT review_id_user_fkey FOREIGN KEY (id_user)
         REFERENCES users (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON DELETE NO ACTION
 );
 
 
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS user_folders(
     CONSTRAINT user_folder_id_user_fkey FOREIGN KEY (id_user)
         REFERENCES users (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON DELETE NO ACTION
 );
 
 CREATE TABLE IF NOT EXISTS decks_history(
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS decks_history(
     CONSTRAINT deck_history_id_user_fkey FOREIGN KEY (id_user)
         REFERENCES users (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON DELETE NO ACTION
 );
 
 CREATE TABLE IF NOT EXISTS cards_history(
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS cards_history(
     CONSTRAINT card_history_id_user_fkey FOREIGN KEY (id_user)
         REFERENCES users (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON DELETE NO ACTION
 );
 
 CREATE TABLE IF NOT EXISTS communities(
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS communities(
     date_creation timestamp without time zone NOT NULL,
     user_count integer NOT NULL,
     card_count integer NOT NULL,
-    CONSTRAINT community_pkey PRIMARY KEY (id),
+    CONSTRAINT community_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS community_users(
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS community_users(
     CONSTRAINT community_user_id_user_fkey FOREIGN KEY (id_user)
         REFERENCES users (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON DELETE NO ACTION
 );
 
 CREATE TABLE IF NOT EXISTS community_folders(
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS community_folders(
     CONSTRAINT community_folder_id_folder_fkey FOREIGN KEY (id_folder)
         REFERENCES folders (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON DELETE NO ACTION
 );
 
 CREATE TABLE IF NOT EXISTS ranks(
@@ -176,7 +176,7 @@ CREATE TABLE IF NOT EXISTS ranks(
     CONSTRAINT rank_id_community_fkey FOREIGN KEY (id_community)
         REFERENCES communities (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
+        ON DELETE NO ACTION
 );
 
 CREATE TABLE IF NOT EXISTS user_ranks(
@@ -191,7 +191,7 @@ CREATE TABLE IF NOT EXISTS user_ranks(
         CONSTRAINT user_rank_id_user_fkey FOREIGN KEY (id_user)
             REFERENCES users (id) MATCH SIMPLE
             ON UPDATE NO ACTION
-            ON DELETE NO ACTION,
+            ON DELETE NO ACTION
     );
 
     CREATE TABLE IF NOT EXISTS user_notifications(
@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS user_ranks(
         CONSTRAINT notification_id_user_fkey FOREIGN KEY (id_user)
             REFERENCES users (id) MATCH SIMPLE
             ON UPDATE NO ACTION
-            ON DELETE NO ACTION,
+            ON DELETE NO ACTION
     );
 
     CREATE TABLE IF NOT EXISTS users_acess_logs(
@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS user_ranks(
         CONSTRAINT acess_log_id_user_fkey FOREIGN KEY (id_user)
             REFERENCES users (id) MATCH SIMPLE
             ON UPDATE NO ACTION
-            ON DELETE NO ACTION,
+            ON DELETE NO ACTION
     );
 
     CREATE TABLE IF NOT EXISTS communities_acess_logs(
@@ -230,7 +230,7 @@ CREATE TABLE IF NOT EXISTS user_ranks(
         CONSTRAINT acess_log_community_id_user_fkey FOREIGN KEY (id_user)
             REFERENCES users (id) MATCH SIMPLE
             ON UPDATE NO ACTION
-            ON DELETE NO ACTION,
+            ON DELETE NO ACTION
     );
 
     CREATE TABLE IF NOT EXISTS edits_logs_communities(
@@ -246,7 +246,7 @@ CREATE TABLE IF NOT EXISTS user_ranks(
         CONSTRAINT edit_log_community_id_user_fkey FOREIGN KEY (id_user)
             REFERENCES users (id) MATCH SIMPLE
             ON UPDATE NO ACTION
-            ON DELETE NO ACTION,
+            ON DELETE NO ACTION
     );
 
     CREATE TABLE IF NOT EXISTS edits_logs_decks(
@@ -262,7 +262,7 @@ CREATE TABLE IF NOT EXISTS user_ranks(
         CONSTRAINT edit_log_deck_id_user_fkey FOREIGN KEY (id_user)
             REFERENCES users (id) MATCH SIMPLE
             ON UPDATE NO ACTION
-            ON DELETE NO ACTION,
+            ON DELETE NO ACTION
     );
 
     CREATE TABLE IF NOT EXISTS edits_logs_cards(
@@ -278,7 +278,7 @@ CREATE TABLE IF NOT EXISTS user_ranks(
         CONSTRAINT edit_log_card_id_user_fkey FOREIGN KEY (id_user)
             REFERENCES users (id) MATCH SIMPLE
             ON UPDATE NO ACTION
-            ON DELETE NO ACTION,
+            ON DELETE NO ACTION
     );
 
 
