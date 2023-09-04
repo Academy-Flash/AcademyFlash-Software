@@ -1,6 +1,6 @@
 -- Creating database in postgresql
 
-CREATE DATABASE db_name
+CREATE DATABASE academy_flash_db
     WITH 
     OWNER = postgres
     ENCODING = 'UTF8'
