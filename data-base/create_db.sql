@@ -1,6 +1,6 @@
 -- Creating database in postgresql
 
-CREATE DATABASE [IF NOT EXIST] db_name
+CREATE DATABASE IF NOT EXIST db_name
     WITH 
     OWNER = postgres
     ENCODING = 'UTF8'
@@ -11,7 +11,7 @@ CREATE DATABASE [IF NOT EXIST] db_name
 
 sql
 
-CREATE TABLE [IF NOT EXIST] users (
+CREATE TABLE IF NOT EXIST users (
     id integer NOT NULL DEFAULT nextval('user_id_seq'::regclass),
     username character varying(255) COLLATE pg_catalog."default" NOT NULL,
     email character varying(255) COLLATE pg_catalog."default" NOT NULL,
@@ -19,14 +19,14 @@ CREATE TABLE [IF NOT EXIST] users (
     CONSTRAINT usuario_pkey PRIMARY KEY (id)
 );
 
-CREATE TABLE [IF NOT EXIST] folders (
+CREATE TABLE IF NOT EXIST folders (
     id integer NOT NULL DEFAULT nextval('folder_id_seq'::regclass),
     folder_name character varying(255) COLLATE pg_catalog."default" NOT NULL,
     discription character varying(255) COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT pasta_pkey PRIMARY KEY (id),
 );
 
-CREATE TABLE [IF NOT EXIST] parent_folders (
+CREATE TABLE IF NOT EXIST parent_folders (
     id_folder integer NOT NULL,
     id_parent_folder integer NOT NULL,
     CONSTRAINT parent_folder_pkey PRIMARY KEY (id_folder, id_parent_folder),
@@ -40,7 +40,7 @@ CREATE TABLE [IF NOT EXIST] parent_folders (
         ON DELETE NO ACTION
 );
 
-CREATE TABLE [IF NOT EXIST] decks (
+CREATE TABLE IF NOT EXIST decks (
     id integer NOT NULL DEFAULT nextval('decks_id_seq'::regclass),
     deck_name character varying(255) COLLATE pg_catalog."default" NOT NULL,
     rating integer NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE [IF NOT EXIST] decks (
     CONSTRAINT deck_pkey PRIMARY KEY (id),
 );
 
-CREATE TABLE [IF NOT EXIST] cards (
+CREATE TABLE IF NOT EXIST cards (
     id integer NOT NULL DEFAULT nextval('cards_id_seq'::regclass),
     question character varying(255) COLLATE pg_catalog."default" NOT NULL,
     answer character varying(255) COLLATE pg_catalog."default" NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE [IF NOT EXIST] cards (
         ON DELETE NO ACTION,
 );
 
-CREATE TABLE [IF NOT EXIST] folder_deck(
+CREATE TABLE IF NOT EXIST folder_deck(
     id_folder integer NOT NULL,
     id_deck integer NOT NULL,
     CONSTRAINT folder_deck_pkey PRIMARY KEY (id_folder, id_deck),
@@ -77,7 +77,7 @@ CREATE TABLE [IF NOT EXIST] folder_deck(
         ON DELETE NO ACTION,
 );
 
-CREATE TABLE [IF NOT EXIST] reviews(
+CREATE TABLE IF NOT EXIST reviews(
     id integer NOT NULL DEFAULT nextval('reviews_id_seq'::regclass),
     id_card integer NOT NULL,
     id_user integer NOT NULL,
@@ -96,7 +96,7 @@ CREATE TABLE [IF NOT EXIST] reviews(
 );
 
 
-CREATE TABLE [IF NOT EXIST] user_folders(
+CREATE TABLE IF NOT EXIST user_folders(
     id_user integer NOT NULL,
     id_folder integer NOT NULL,
     CONSTRAINT user_folder_pkey PRIMARY KEY (id_user, id_folder),
@@ -110,7 +110,7 @@ CREATE TABLE [IF NOT EXIST] user_folders(
         ON DELETE NO ACTION,
 );
 
-CREATE TABLE [IF NOT EXIST] decks_history(
+CREATE TABLE IF NOT EXIST decks_history(
     id_user integer NOT NULL,
     id_deck integer NOT NULL,
     time_date timestamp without time zone NOT NULL,
@@ -126,7 +126,7 @@ CREATE TABLE [IF NOT EXIST] decks_history(
         ON DELETE NO ACTION,
 );
 
-CREATE TABLE [IF NOT EXIST] cards_history(
+CREATE TABLE IF NOT EXIST cards_history(
     id_user integer NOT NULL,
     id_card integer NOT NULL,
     time_date timestamp without time zone NOT NULL,
@@ -142,7 +142,7 @@ CREATE TABLE [IF NOT EXIST] cards_history(
         ON DELETE NO ACTION,
 );
 
-CREATE TABLE [IF NOT EXIST] communities(
+CREATE TABLE IF NOT EXIST communities(
     id integer NOT NULL DEFAULT nextval('communities_id_seq'::regclass),
     community_name character varying(255) COLLATE pg_catalog."default" NOT NULL,
     discription character varying(255) COLLATE pg_catalog."default" NOT NULL,
@@ -152,7 +152,7 @@ CREATE TABLE [IF NOT EXIST] communities(
     CONSTRAINT community_pkey PRIMARY KEY (id),
 );
 
-CREATE TABLE [IF NOT EXIST] community_users(
+CREATE TABLE IF NOT EXIST community_users(
     id_user integer NOT NULL,
     id_community integer NOT NULL,
     CONSTRAINT community_user_pkey PRIMARY KEY (id_user, id_community),
@@ -166,7 +166,7 @@ CREATE TABLE [IF NOT EXIST] community_users(
         ON DELETE NO ACTION,
 );
 
-CREATE TABLE [IF NOT EXIST] community_folders(
+CREATE TABLE IF NOT EXIST community_folders(
     id_community integer NOT NULL,
     id_folder integer NOT NULL,
     CONSTRAINT community_folder_pkey PRIMARY KEY (id_community, id_folder),
@@ -180,7 +180,7 @@ CREATE TABLE [IF NOT EXIST] community_folders(
         ON DELETE NO ACTION,
 );
 
-CREATE TABLE [IF NOT EXIST] ranks(
+CREATE TABLE IF NOT EXIST ranks(
     id integer NOT NULL DEFAULT nextval('ranks_id_seq'::regclass),
     id_community integer NOT NULL,
     rank_name character varying(255) COLLATE pg_catalog."default" NOT NULL,
@@ -191,7 +191,7 @@ CREATE TABLE [IF NOT EXIST] ranks(
         ON DELETE NO ACTION,
 );
 
-CREATE TABLE [IF NOT EXIST] user_ranks(
+CREATE TABLE IF NOT EXIST user_ranks(
     id_user integer NOT NULL,
     id_rank integer NOT NULL,
     position integer NOT NULL,
@@ -206,7 +206,7 @@ CREATE TABLE [IF NOT EXIST] user_ranks(
         ON DELETE NO ACTION,
 );
 
-CREATE TABLE [IF NOT EXIST] user_notifications(
+CREATE TABLE IF NOT EXIST user_notifications(
     id integer NOT NULL DEFAULT nextval('notifications_id_seq'::regclass),
     id_user integer NOT NULL,
     notification_text character varying(255) COLLATE pg_catalog."default" NOT NULL,
@@ -218,7 +218,7 @@ CREATE TABLE [IF NOT EXIST] user_notifications(
         ON DELETE NO ACTION,
 );
 
-CREATE TABLE [IF NOT EXIST] users_acess_logs(
+CREATE TABLE IF NOT EXIST users_acess_logs(
     id integer NOT NULL DEFAULT nextval('users_acess_logs_id_seq'::regclass),
     id_user integer NOT NULL,
     time_date timestamp without time zone NOT NULL,
@@ -229,7 +229,7 @@ CREATE TABLE [IF NOT EXIST] users_acess_logs(
         ON DELETE NO ACTION,
 );
 
-CREATE TABLE [IF NOT EXIST] communities_acess_logs(
+CREATE TABLE IF NOT EXIST communities_acess_logs(
     id integer NOT NULL DEFAULT nextval('communities_acess_logs_id_seq'::regclass),
     id_community integer NOT NULL,
     id_user integer NOT NULL,
@@ -245,7 +245,7 @@ CREATE TABLE [IF NOT EXIST] communities_acess_logs(
         ON DELETE NO ACTION,
 );
 
-CREATE TABLE [IF NOT EXIST] edits_logs_communities(
+CREATE TABLE IF NOT EXIST edits_logs_communities(
     id integer NOT NULL DEFAULT nextval('edits_logs_communities_id_seq'::regclass),
     id_community integer NOT NULL,
     id_user integer NOT NULL,
@@ -261,7 +261,7 @@ CREATE TABLE [IF NOT EXIST] edits_logs_communities(
         ON DELETE NO ACTION,
 );
 
-CREATE TABLE [IF NOT EXIST] edits_logs_decks(
+CREATE TABLE IF NOT EXIST edits_logs_decks(
     id integer NOT NULL DEFAULT nextval('edits_logs_decks_id_seq'::regclass),
     id_deck integer NOT NULL,
     id_user integer NOT NULL,
@@ -277,7 +277,7 @@ CREATE TABLE [IF NOT EXIST] edits_logs_decks(
         ON DELETE NO ACTION,
 );
 
-CREATE TABLE [IF NOT EXIST] edits_logs_cards(
+CREATE TABLE IF NOT EXIST edits_logs_cards(
     id integer NOT NULL DEFAULT nextval('edits_logs_cards_id_seq'::regclass),
     id_card integer NOT NULL,
     id_user integer NOT NULL,
