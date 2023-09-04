@@ -1,6 +1,6 @@
 
 CREATE TABLE IF NOT EXISTS users (
-    id serial NOT NULL 
+    id serial NOT NULL,
     username character varying(255),
     email character varying(255),
     hashed_password character varying(255),
@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS folders (
-    id serial NOT NULL 
+    id serial NOT NULL, 
     folder_name character varying(255),
     description character varying(255),
     CONSTRAINT pasta_pkey PRIMARY KEY (id),
