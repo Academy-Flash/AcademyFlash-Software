@@ -47,6 +47,7 @@ $ git config user.email                                                    (ver 
 ```
 $ git branch teste            (criar nova branch, neste caso chamado teste)
 $ git checkout teste          (mudar para a branch teste)
+$ git switch dev
 $ git diff                    (diferenças nos arquivos alterados nas diferentes branches)
 ```
 
@@ -65,7 +66,8 @@ $ npm install react-icons --save
 [Prisma Documentation](https://www.prisma.io/docs/getting-started/quickstart)
 ```
 $ npm install typescript ts-node @types/node --save-dev
-$ npm install @prisma/client
+$ npm install prisma --save-dev
+$ npm i @prisma/client
 $ npx prisma init
 $ npx prisma migrate dev --name init
 $ npx prisma studio
