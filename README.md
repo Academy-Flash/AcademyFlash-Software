@@ -53,6 +53,27 @@ $ git checkout teste          (mudar para a branch teste)
 $ git diff                    (diferenças nos arquivos alterados nas diferentes branches)
 ```
 
+## Tailwind CSS/Prisma/Utils 
+**Tailwind**  
+[TailWind Documentation](https://tailwindcss.com/docs/guides/nextjs)
+```
+$ npm install -D tailwindcss postcss autoprefixer
+$ npx tailwindcss init -p
+```
+**Utils (Libraries downloaded)**  
+```
+$ npm install react-icons --save
+```
+**Prisma**  
+[Prisma Documentation](https://www.prisma.io/docs/getting-started/quickstart)
+```
+$ npm install typescript ts-node @types/node --save-dev
+$ npm install @prisma/client
+$ npx prisma init
+$ npx prisma migrate dev --name init
+$ npx prisma studio
+```
+
 ## Docker  
 ```
 $ docker images
@@ -74,26 +95,6 @@ $ docker-compose up -d    => Sobe os containers em background (terminal limpo)
 $ docker-compose down     => Para os containers
 ```
 
-## Tailwind CSS/Prisma/Utils 
-**Tailwind**
-[TailWind Documentation](https://tailwindcss.com/docs/guides/nextjs)
-```
-$ npm install -D tailwindcss postcss autoprefixer
-$ npx tailwindcss init -p
-```
-**Utils (Libraries downloaded)**  
-```
-$ npm install react-icons --save
-```
-**Prisma**  
-[Prisma Documentation](https://www.prisma.io/docs/getting-started/quickstart)
-```
-$ npm install typescript ts-node @types/node --save-dev
-$ npm install @prisma/client
-$ npx prisma init
-$ npx prisma migrate dev --name init
-$ npx prisma studio
-```
 
 
 
