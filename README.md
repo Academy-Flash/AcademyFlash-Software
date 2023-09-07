@@ -47,6 +47,7 @@ $ git config user.email                                                    (ver 
 ```
 $ git branch teste            (criar nova branch, neste caso chamado teste)
 $ git checkout teste          (mudar para a branch teste)
+$ git switch dev
 $ git diff                    (diferenças nos arquivos alterados nas diferentes branches)
 ```
 
