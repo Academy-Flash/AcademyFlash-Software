@@ -74,10 +74,26 @@ $ docker-compose up -d    => Sobe os containers em background (terminal limpo)
 $ docker-compose down     => Para os containers
 ```
 
-## Strapi  
+## Tailwind CSS/Prisma/Utils 
+**Tailwind**
+[TailWind Documentation](https://tailwindcss.com/docs/guides/nextjs)
 ```
-$ npx create-strapi-app my-project --quickstart .   => Cria um projeto Strapi
-npm build
+$ npm install -D tailwindcss postcss autoprefixer
+$ npx tailwindcss init -p
 ```
+**Utils (Libraries downloaded)**  
+```
+$ npm install react-icons --save
+```
+**Prisma**  
+[Prisma Documentation](https://www.prisma.io/docs/getting-started/quickstart)
+```
+$ npm install typescript ts-node @types/node --save-dev
+$ npm install @prisma/client
+$ npx prisma init
+$ npx prisma migrate dev --name init
+$ npx prisma studio
+```
+
 
 
