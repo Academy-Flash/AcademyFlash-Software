@@ -1,6 +1,3 @@
-#TODO: Decidir se usaremos mesmo o Strapi
-#TODO: Decidir se usaremos mesmo o Docker
-
 # AcademyFlash-Software
 
 ## Next.js com Node comandos no ambiente de desenvolvimento
@@ -94,7 +91,3 @@ $ docker-compose up       => Sobe os containers, deve ser executado dentro da pa
 $ docker-compose up -d    => Sobe os containers em background (terminal limpo)
 $ docker-compose down     => Para os containers
 ```
-
-
-
-
