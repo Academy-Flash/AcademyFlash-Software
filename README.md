@@ -37,8 +37,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-# AcademyFlash-Software
-
 ## Next.js com Node comandos no ambiente de desenvolvimento
 **Configurando ambiente de desenvolvimento pela primeira vez** 
 ```
