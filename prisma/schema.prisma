@@ -1,0 +1,224 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model cards {
+  id               Int                @id(map: "card_pkey") @default(autoincrement())
+  question         String?            @db.VarChar(255)
+  answer           String?            @db.VarChar(255)
+  rating           Int
+  difficulty       Int
+  id_deck          Int
+  decks            decks              @relation(fields: [id_deck], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "card_id_deck_fkey")
+  cards_history    cards_history[]
+  edits_logs_cards edits_logs_cards[]
+  reviews          reviews[]
+}
+
+model cards_history {
+  id_user   Int
+  id_card   Int
+  time_date DateTime @db.Timestamp(6)
+  position  Int
+  cards     cards    @relation(fields: [id_card], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "card_history_id_card_fkey")
+  users     users    @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "card_history_id_user_fkey")
+
+  @@id([id_user, id_card], map: "card_history_pkey")
+}
+
+model communities {
+  id                     Int                      @id(map: "community_pkey") @default(autoincrement())
+  community_name         String?                  @db.VarChar(255)
+  description            String?                  @db.VarChar(255)
+  date_creation          DateTime                 @db.Timestamp(6)
+  user_count             Int
+  card_count             Int
+  communities_acess_logs communities_acess_logs[]
+  community_folders      community_folders[]
+  community_users        community_users[]
+  edits_logs_communities edits_logs_communities[]
+  ranks                  ranks[]
+}
+
+model communities_acess_logs {
+  id           Int         @id(map: "acess_log_community_pkey") @default(autoincrement())
+  id_community Int
+  id_user      Int
+  time_date    DateTime    @db.Timestamp(6)
+  communities  communities @relation(fields: [id_community], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "acess_log_community_id_community_fkey")
+  users        users       @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "acess_log_community_id_user_fkey")
+}
+
+model community_folders {
+  id_community Int
+  id_folder    Int
+  communities  communities @relation(fields: [id_community], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "community_folder_id_community_fkey")
+  folders      folders     @relation(fields: [id_folder], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "community_folder_id_folder_fkey")
+
+  @@id([id_community, id_folder], map: "community_folder_pkey")
+}
+
+model community_users {
+  id_user      Int
+  id_community Int
+  communities  communities @relation(fields: [id_community], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "community_user_id_community_fkey")
+  users        users       @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "community_user_id_user_fkey")
+
+  @@id([id_user, id_community], map: "community_user_pkey")
+}
+
+model decks {
+  id               Int                @id(map: "deck_pkey") @default(autoincrement())
+  deck_name        String?            @db.VarChar(255)
+  rating           Int
+  category         String?            @db.VarChar(255)
+  description      String?            @db.VarChar(255)
+  cards            cards[]
+  decks_history    decks_history[]
+  edits_logs_decks edits_logs_decks[]
+  folder_deck      folder_deck[]
+}
+
+model decks_history {
+  id_user   Int
+  id_deck   Int
+  time_date DateTime @db.Timestamp(6)
+  position  Int
+  decks     decks    @relation(fields: [id_deck], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "deck_history_id_deck_fkey")
+  users     users    @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "deck_history_id_user_fkey")
+
+  @@id([id_user, id_deck], map: "deck_history_pkey")
+}
+
+model edits_logs_cards {
+  id        Int      @id(map: "edit_log_card_pkey") @default(autoincrement())
+  id_card   Int
+  id_user   Int
+  time_date DateTime @db.Timestamp(6)
+  cards     cards    @relation(fields: [id_card], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "edit_log_card_id_card_fkey")
+  users     users    @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "edit_log_card_id_user_fkey")
+}
+
+model edits_logs_communities {
+  id           Int         @id(map: "edit_log_community_pkey") @default(autoincrement())
+  id_community Int
+  id_user      Int
+  time_date    DateTime    @db.Timestamp(6)
+  communities  communities @relation(fields: [id_community], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "edit_log_community_id_community_fkey")
+  users        users       @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "edit_log_community_id_user_fkey")
+}
+
+model edits_logs_decks {
+  id        Int      @id(map: "edit_log_deck_pkey") @default(autoincrement())
+  id_deck   Int
+  id_user   Int
+  time_date DateTime @db.Timestamp(6)
+  decks     decks    @relation(fields: [id_deck], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "edit_log_deck_id_deck_fkey")
+  users     users    @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "edit_log_deck_id_user_fkey")
+}
+
+model folder_deck {
+  id_folder Int
+  id_deck   Int
+  decks     decks   @relation(fields: [id_deck], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  folders   folders @relation(fields: [id_folder], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([id_folder, id_deck])
+}
+
+model folders {
+  id                                                      Int                 @id(map: "pasta_pkey") @default(autoincrement())
+  folder_name                                             String?             @db.VarChar(255)
+  description                                             String?             @db.VarChar(255)
+  community_folders                                       community_folders[]
+  folder_deck                                             folder_deck[]
+  parent_folders_parent_folders_id_folderTofolders        parent_folders[]    @relation("parent_folders_id_folderTofolders")
+  parent_folders_parent_folders_id_parent_folderTofolders parent_folders[]    @relation("parent_folders_id_parent_folderTofolders")
+  user_folders                                            user_folders[]
+}
+
+model parent_folders {
+  id_folder                                        Int
+  id_parent_folder                                 Int
+  folders_parent_folders_id_folderTofolders        folders @relation("parent_folders_id_folderTofolders", fields: [id_folder], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "parent_folder_id_folder_fkey")
+  folders_parent_folders_id_parent_folderTofolders folders @relation("parent_folders_id_parent_folderTofolders", fields: [id_parent_folder], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "parent_folder_id_parent_folder_fkey")
+
+  @@id([id_folder, id_parent_folder], map: "parent_folder_pkey")
+}
+
+model ranks {
+  id           Int          @id(map: "rank_pkey") @default(autoincrement())
+  id_community Int
+  rank_name    String?      @db.VarChar(255)
+  communities  communities  @relation(fields: [id_community], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rank_id_community_fkey")
+  user_ranks   user_ranks[]
+}
+
+model reviews {
+  id        Int      @id(map: "review_pkey") @default(autoincrement())
+  id_card   Int
+  id_user   Int
+  time_date DateTime @db.Timestamp(6)
+  rating    Int
+  comment   String?  @db.VarChar(255)
+  cards     cards    @relation(fields: [id_card], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "review_id_card_fkey")
+  users     users    @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "review_id_user_fkey")
+}
+
+model user_folders {
+  id_user   Int
+  id_folder Int
+  folders   folders @relation(fields: [id_folder], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_folder_id_folder_fkey")
+  users     users   @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_folder_id_user_fkey")
+
+  @@id([id_user, id_folder], map: "user_folder_pkey")
+}
+
+model user_notifications {
+  id                Int      @id(map: "notification_pkey") @default(autoincrement())
+  id_user           Int
+  notification_text String   @db.VarChar(255)
+  time_date         DateTime @db.Timestamp(6)
+  users             users    @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "notification_id_user_fkey")
+}
+
+model user_ranks {
+  id_user  Int
+  id_rank  Int
+  position Int
+  ranks    ranks @relation(fields: [id_rank], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_rank_id_rank_fkey")
+  users    users @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_rank_id_user_fkey")
+
+  @@id([id_user, id_rank], map: "user_rank_pkey")
+}
+
+model users {
+  id                     Int                      @id(map: "usuario_pkey") @default(autoincrement())
+  username               String?                  @db.VarChar(255)
+  email                  String?                  @db.VarChar(255)
+  hashed_password        String?                  @db.VarChar(255)
+  cards_history          cards_history[]
+  communities_acess_logs communities_acess_logs[]
+  community_users        community_users[]
+  decks_history          decks_history[]
+  edits_logs_cards       edits_logs_cards[]
+  edits_logs_communities edits_logs_communities[]
+  edits_logs_decks       edits_logs_decks[]
+  reviews                reviews[]
+  user_folders           user_folders[]
+  user_notifications     user_notifications[]
+  user_ranks             user_ranks[]
+  users_acess_logs       users_acess_logs[]
+}
+
+model users_acess_logs {
+  id        Int      @id(map: "acess_log_pkey") @default(autoincrement())
+  id_user   Int
+  time_date DateTime @db.Timestamp(6)
+  users     users    @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "acess_log_id_user_fkey")
+}
