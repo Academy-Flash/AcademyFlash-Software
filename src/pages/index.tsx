@@ -32,11 +32,10 @@ export default function Home() {
 
           <Search />
           
-          <div className='flex mt-5 space-x-2'> 
+          <div className='flex mt-5 space-x-2 h-full'> 
             <DaysStrike />
 
-            <RecentCards />
-
+            <RecentCards/>
           </div>
 
           <RecentFolders />
