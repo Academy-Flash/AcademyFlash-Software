@@ -1,9 +1,8 @@
 import Link from 'next/link'
 import { BsCardText } from 'react-icons/bs'
 
-export const RecentCards = () => {
+export const DaysStrike = () => {
     return (
-
         <section className="flex items-center space-x-2">
             <div className="bg-pink-600 rounded-lg p-4 font-inter">
                     <div className="flex items-center space-x-2">
