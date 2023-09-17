@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Group } from "../components/_ui/Group";
 import { Search } from "@/components/_ui/Search";
 import { RecentFolders } from '../components/_ui/RecentFolders';
-
+import { RecentCards } from "@/components/_ui/RecentCards";
 
 const prisma = new PrismaClient();
 
@@ -35,6 +35,8 @@ export default function Home() {
 
           {/*   */}
 
+          <RecentCards />
+          
         </div>
 
       </div>
