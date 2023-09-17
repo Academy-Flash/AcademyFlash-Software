@@ -1,0 +1,6 @@
+prisma generate - Toda vez que alterar o modelo dentro do schema.prisma, é necessário rodar o prisma generate, para que o Prisma possa dar o CRUD de graça pra gente. Com Typescript se torna fácil escrever tudo, porque ele vai auto completar tudo bonitinho.
+
+prisma db push - Deve ser usado apenas em momentos de prototipação, ou seja, quando tudo estiver correto e as bases estiverem certas, não se deve mais usar db push, porque utilizaremos migrations para manter o histórico de mudanças no banco de dados.
+
+npx prisma migrate dev --name type-change - é assim que faremos, colocando um nome a cada alteração no banco de dados. Cada alteração ficará salva em migrations/ como se fosse um histórico. Cada vez que o schema for alterado, é necessário fazer um prisma generate e esse comando.
+

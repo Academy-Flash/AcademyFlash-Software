@@ -1,11 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
 
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   const prisma = new PrismaClient();
+
   try {
     const userCount = await prisma.users.count();
     res.status(200).json({ userCount });
@@ -14,4 +16,5 @@ export default async function handler(
   } finally {
     await prisma.$disconnect();
   }
+  
 }
