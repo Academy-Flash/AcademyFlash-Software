@@ -3,7 +3,6 @@
 // Pode conter o header, footer, sidebar, etc
 
 import { ReactNode } from "react"
-import { Search } from '../_ui/Search/index'
 //react icons
 import { ImMenu } from 'react-icons/im'
 import { BsFillPeopleFill } from 'react-icons/bs'
@@ -42,15 +41,8 @@ const FOOTER_ICONS = [
 export const Layout = ({ children }: LayoutInterface) => {
     return (
         <>
-            
-            
-            <header>
-                <h1 className=" text-black">Header</h1>
-            </header>
-            <Search />
+            <h1 className="text-black">QQ ISSO BAUAB????</h1>
             {children}
-            
-            
             
             <footer className="bg-red-700 flex pb-4 pt-4 w-full bottom-0 absolute">
 
@@ -68,19 +60,7 @@ export const Layout = ({ children }: LayoutInterface) => {
                 
                 ))}
 
-                {/*
-                
-                <ul className="">
-                    <li><a href="/menu" target="_blank"><CgMenuGridR size={30} className=' stroke-yellow-500'/></a></li>
-                    <li><a href="/social" target="_blank"><BsFillPeopleFill size={30} className=' fill-yellow-500'/></a></li>
-                    <li><a href="/add" target="_blank">OI</a></li>
-                </ul>
-                
-                */}
-
-
             </footer>
-            
             
         </>
     )

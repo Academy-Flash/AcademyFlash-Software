@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { PrismaClient } from "@prisma/client";
 import { useEffect, useState } from "react";
+import { Group } from "../components/_ui/Group";
+import { Search } from "@/components/_ui/Search";
 
 
 const prisma = new PrismaClient();
@@ -18,12 +20,25 @@ export default function Home() {
   }, []);
 
   return (
+
     <main>
+      <div className='w-full h-full justify-center relative items-center'>
+
+        <div className='max-w-screen-lg w-full h-full flex-row relative'>
+
+          <Group />
+
+          <Search />
+
+        </div>
+
+      </div>
       
       <h1 className=" text-black">{userCount}</h1>
       <Link className=" text-black" href='/comunidades'>
         comunidades     
       </Link>
+
     </main>
   )
 }
