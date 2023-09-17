@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { PrismaClient } from "@prisma/client";
 import { useEffect, useState } from "react";
+
+
 const prisma = new PrismaClient();
 
 export default function Home() {
+
   const [userCount, setUserCount] = useState<number>(0);
 
   useEffect(() => {
@@ -16,9 +19,10 @@ export default function Home() {
 
   return (
     <main>
-      <h1>{userCount}</h1>
-      <Link href='/comunidades'>
-        comunidades        
+      
+      <h1 className=" text-black">{userCount}</h1>
+      <Link className=" text-black" href='/comunidades'>
+        comunidades     
       </Link>
     </main>
   )

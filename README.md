@@ -87,6 +87,10 @@ $ git checkout teste          (mudar para a branch teste)
 $ git switch dev
 $ git diff                    (diferenças nos arquivos alterados nas diferentes branches)
 ```
+**Pull Request**  
+```
+
+```
 
 ## Tailwind CSS/Prisma/Utils 
 **Tailwind**  
