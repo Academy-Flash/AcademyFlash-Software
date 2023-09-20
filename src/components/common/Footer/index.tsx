@@ -32,23 +32,24 @@ const FOOTER_ICONS = [
 
 export const Footer = () => {
     return (
-        <></>
-        // <footer className="bg-red-700 flex p-4 w-full bottom-0 fixed">
+        <>
+        <footer className="bg-red-700 flex p-4 w-full bottom-0 fixed">
 
-        //     {FOOTER_ICONS.map((item) => (
+            {FOOTER_ICONS.map((item) => (
 
-        //         <Link
-        //             className="hover:bg-white/10 transition duration-200 rounded-3xl flex flex-col items-center justify-center w-1/5"
-        //             key={item.title}
-        //             href={`/${item.title.toLowerCase()}`}
-        //         >
-        //             <div> <item.icon size={30} className=' fill-yellow-500' /> </div>
+                 <Link
+                     className="hover:bg-white/10 transition duration-200 rounded-3xl flex flex-col items-center justify-center w-1/5"
+                     key={item.title}
+                     href={`/${item.title.toLowerCase()}`}
+                 >
+                     <div> <item.icon size={30} className=' fill-yellow-500' /> </div>
 
-        //             <div className="text-yellow-500"> {item.title} </div>
-        //         </Link>
+                     <div className="text-yellow-500"> {item.title} </div>
+                 </Link>
             
-        //     ))}
+             ))}
 
-        // </footer>
+         </footer>
+        </>
     )
 }
