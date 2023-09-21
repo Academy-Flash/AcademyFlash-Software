@@ -3,13 +3,13 @@ import Link from 'next/link'
 
 export const Group = () => {
     return (
-        <section className="flex items-center space-x-2 bg-green-700 max-w-fit text-white font-bold p-2 rounded-md">
-
-            <div className="pl-4 font-bold text-left ">Current Group
-                <div className="pl-0 flex bg-green-700 text-white font-bold px-2 rounded-md">Federal University of São Paulo
-                    <div className="pl-4"><Link href='/group' className='bg-green-900 text-white font-bold px-2  rounded-md'>Choose Other</Link></div>
-                </div>
+        <section className="flex justify-between bg-green-700 text-white font-bold py-2 px-4 rounded-md">
+            <div>
+                <span className="font-bold text-left block">CURRENT GROUP</span>
+                <span className="bg-green-700 text-white font-bold block">Federal University of São Paulo</span>
             </div>
+
+            <Link href='/group' className='bg-green-900 text-white font-bold p-2 rounded-md flex items-center justify-center'>Choose Other</Link>
         
         </section>
     )

@@ -32,8 +32,7 @@ const FOOTER_ICONS = [
 
 export const Footer = () => {
     return (
-        <>
-        <footer className="bg-red-700 flex p-4 w-full bottom-0 fixed">
+        <footer className="bg-red-700 flex p-2 w-[80%] h-16 fixed bottom-0 left-[10%]">
 
             {FOOTER_ICONS.map((item) => (
 
@@ -42,7 +41,7 @@ export const Footer = () => {
                      key={item.title}
                      href={`/${item.title.toLowerCase()}`}
                  >
-                     <div> <item.icon size={30} className=' fill-yellow-500' /> </div>
+                     <div> <item.icon size={25} className=' fill-yellow-500' /> </div>
 
                      <div className="text-yellow-500"> {item.title} </div>
                  </Link>
@@ -50,6 +49,5 @@ export const Footer = () => {
              ))}
 
          </footer>
-        </>
     )
 }

@@ -1,6 +1,5 @@
-import {FaRegComment } from 'react-icons/fa'
-import { BiLike } from 'react-icons/bi'
-import { BiSolidShareAlt } from 'react-icons/bi'
+import { FaRegComment } from 'react-icons/fa'
+import { BiLike, BiSolidShareAlt } from 'react-icons/bi'
 import { AiOutlinePullRequest } from 'react-icons/ai'
 
 export default function CardsPage() {

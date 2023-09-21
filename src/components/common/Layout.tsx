@@ -4,20 +4,22 @@
 
 import { ReactNode } from "react"
 import { Footer } from "./Footer"
+import { Header } from "./Header"
 
 interface LayoutInterface {
     children: ReactNode
 }
 
 export const Layout = ({ children }: LayoutInterface) => {
+    const pageName = children?.type.name
+
     return (
-        <>
-            {/* <header>
-                oi
-            </header> */}
+        <div className="w-[80%] m-auto h-[calc(100vh-64px)] relative overflow-y-auto pr-2">
+            {pageName != 'Signup' ? <Header /> : ''}
+
             {children}
             
-            <Footer />
-        </>
+            {pageName != 'Signup' ? <Footer /> : ''}
+        </div>
     )
 }

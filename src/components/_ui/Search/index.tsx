@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { useState } from 'react'
 import { FiSearch } from 'react-icons/fi'
 
@@ -22,9 +21,9 @@ export const Search = () => {
 
     return (
 
-        <section className='bg-blue-700 max-w-max text-white font-bold p-2 rounded-md mt-10'>
+        <section className='bg-blue-400 text-white font-bold p-2 rounded-md'>
 
-            <div className="inline-flex">
+            <div className="flex">
                 <button className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mx-2' onClick={handleSearch}>
                     <FiSearch size={20} />
                 </button>
