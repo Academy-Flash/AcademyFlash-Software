@@ -17,8 +17,17 @@ export default function ConfigMenuBackground(props: ConfigMenuBackgroundProps) {
   return (
     /* Container flexbox para centralizar o conteúdo */
     <div
-      className={`w-[90%] h-[90%] bg-[#D9D9D9] flex center-itens justify-center rounded-[38px] ${props.className}`}
-      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
+      className={`w-[90%] h-[90%] flex center-itens justify-center bg-[#D9D9D9]  rounded-[38px] ${props.className}`}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)', 
+      }}
     >
       <div>
         <label htmlFor="musicVolume">Volume da Música:</label>
