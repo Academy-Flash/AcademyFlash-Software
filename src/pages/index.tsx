@@ -6,6 +6,7 @@ import { RecentFolders } from '../components/_ui/RecentFolders';
 import { RecentCards } from "@/components/_ui/RecentCards";
 import { DaysStrike } from "@/components/_ui/DaysStrike";
 import { ConfigGear } from "@/components/_ui/ConfigGear";
+import Stars from "@/components/_ui/Stars"; 
 
 const prisma = new PrismaClient();
 
@@ -25,7 +26,7 @@ export default function Home() {
 
     <main className="w-full flex flex-col gap-3">
       <div className="flex justify-between">
-        <div>oi</div>
+        <Stars />
         <ConfigGear />
       </div>
 

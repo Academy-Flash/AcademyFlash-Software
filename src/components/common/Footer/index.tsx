@@ -1,8 +1,8 @@
 //react icons
-import { ImMenu } from 'react-icons/im'
+import { PiHouseSimpleFill } from 'react-icons/pi'
 import { BsFillPeopleFill } from 'react-icons/bs'
 import { AiOutlinePlusSquare } from 'react-icons/ai'
-import { BsFillBasket3Fill} from 'react-icons/bs'
+import { VscFileSymlinkDirectory} from 'react-icons/vsc'
 import { AiFillSmile } from 'react-icons/ai'
 import Link from "next/link"
 
@@ -10,7 +10,7 @@ import Link from "next/link"
 const FOOTER_ICONS = [
     {
         title: 'Menu',
-        icon: ImMenu,
+        icon: PiHouseSimpleFill,
     },
     {
         title: 'Community',
@@ -22,7 +22,7 @@ const FOOTER_ICONS = [
     },
     {
         title: 'Folder',
-        icon: BsFillBasket3Fill,
+        icon: VscFileSymlinkDirectory,
     },
     {
         title: 'Profile',
@@ -52,7 +52,7 @@ export const Footer = () => {
                      key={item.title}
                      href={`${handleFooterClick(item)}`}
                  >
-                     <div> <item.icon size={25} className=' fill-yellow-500' /> </div>
+                     <div> <item.icon size={25} className=' fill-yellow-500 border-black ' /> </div>
 
                      <div className="text-yellow-500"> {item.title} </div>
                  </Link>
