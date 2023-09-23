@@ -5,6 +5,7 @@ import { Search } from "@/components/_ui/Search";
 import { RecentFolders } from '../components/_ui/RecentFolders';
 import { RecentCards } from "@/components/_ui/RecentCards";
 import { DaysStrike } from "@/components/_ui/DaysStrike";
+import { ConfigGear } from "@/components/_ui/ConfigGear";
 
 const prisma = new PrismaClient();
 
@@ -23,6 +24,9 @@ export default function Home() {
   return (
 
     <main className="w-full flex flex-col gap-3">
+      <div className="flex flex-row-reverse">
+        < ConfigGear />
+      </div>
 
       <Group />
 

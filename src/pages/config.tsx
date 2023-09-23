@@ -17,43 +17,54 @@ export default function ConfigMenuBackground(props: ConfigMenuBackgroundProps) {
   return (
     /* Container flexbox para centralizar o conteúdo */
     <div
-      className={`w-full h-[90%] flex center-itens justify-center bg-[#D9D9D9]  rounded-[38px] ${props.className}`}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)', // Centraliza vertical e horizontalmente
-      }}
+    className={`w-full h-[90%] flex center-itens justify-center bg-[#D9D9D9] rounded-[38px] ${props.className}`}
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start', // Alinhar à esquerda
+      justifyContent: 'flex-start', // Alinhar ao topo
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)', // Centraliza vertical e horizontalmente
+    }}
     >
-      <div>
-        <label htmlFor="musicVolume">Volume da Música:</label>
-        <input
-          type="range"
-          id="musicVolume"
-          name="musicVolume"
-          min="0"
-          max="100"
-          value={musicVolume}
-          onChange={handleMusicVolumeChange}
-        />
-        <span>{musicVolume}%</span>
+      <div className='p-20 w-full h-[40%]'>
+        <label htmlFor="musicVolume">Volumes:</label>
+          <div className='p-5 w-full'>
+            <label htmlFor="musicVolume">Música:</label>
+            <input
+              type="range"
+              id="musicVolume"
+              name="musicVolume"
+              min="0"
+              max="100"
+              value={musicVolume}
+              onChange={handleMusicVolumeChange}
+              className="custom-slider"
+            />
+          </div>
+          <div className='p-5 w-full'>
+            <label htmlFor="soundVolume">Som Geral:</label>
+            <input
+              type="range"
+              id="soundVolume"
+              name="soundVolume"
+              min="0"
+              max="100"
+              value={soundVolume}
+              onChange={handleSoundVolumeChange}
+              className="custom-slider"
+            />
+        </div>
       </div>
-      <div>
-        <label htmlFor="soundVolume">Volume do Som Geral:</label>
-        <input
-          type="range"
-          id="soundVolume"
-          name="soundVolume"
-          min="0"
-          max="100"
-          value={soundVolume}
-          onChange={handleSoundVolumeChange}
-        />
-        <span>{soundVolume}%</span>
+
+      <div className='p-20 w-full h-[20%]'>
+        <label>Modo Escuro:</label>
+        <label className="switch">
+          <input type="checkbox" />
+          <span className="slider round"></span>
+        </label>
       </div>
     </div>
   );
