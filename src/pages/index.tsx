@@ -24,8 +24,9 @@ export default function Home() {
   return (
 
     <main className="w-full flex flex-col gap-3">
-      <div className="flex flex-row-reverse">
-        < ConfigGear />
+      <div className="flex justify-between">
+        <div>oi</div>
+        <ConfigGear />
       </div>
 
       <Group />

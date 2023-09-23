@@ -50,7 +50,7 @@ export const Footer = () => {
                  <Link
                      className="hover:bg-white/10 transition duration-200 rounded-3xl flex flex-col items-center justify-center w-1/5"
                      key={item.title}
-                     href={`/${handleFooterClick(item)}`}
+                     href={`${handleFooterClick(item)}`}
                  >
                      <div> <item.icon size={25} className=' fill-yellow-500' /> </div>
 
