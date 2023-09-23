@@ -68,9 +68,9 @@ export default function ConfigMenuBackground(props: ConfigMenuBackgroundProps) {
         }}
       >
         <label style={{ color: 'black' }}>Modo Escuro:</label>
-        <label className="switch">
+        <label className="slider">
           <input type="checkbox" />
-          <span className="slider round"></span>
+          <span className="slider-round"></span>
         </label>
       </div>
     </div>
