@@ -67,7 +67,7 @@ export default function ConfigMenuBackground(props: ConfigMenuBackgroundProps) {
           justifyContent: 'flex-end', // Alinhar à direita
         }}
       >
-        <label style={{ color: 'black' }}>Modo Escuro:</label>
+        <label className='px-10' style={{ color: 'black' }}>Modo Escuro:</label>
         <label className="slider">
           <input type="checkbox" />
           <span className="slider-round"></span>

@@ -83,8 +83,8 @@ body {
 .slider {
   position: relative;
   display: inline-block;
-  width: 60px; /* Largura do botão deslizante */
-  height: 34px; /* Altura do botão deslizante */
+  width: 55px; /* Largura do botão deslizante */
+  height: 28px; /* Altura do botão deslizante */
 }
 
 /* Estilos para o botão deslizante em si */
@@ -115,8 +115,8 @@ body {
 .slider-round:before {
   position: absolute;
   content: "";
-  height: 26px; /* Tamanho do círculo (knob) */
-  width: 26px; /* Tamanho do círculo (knob) */
+  height: 20px; /* Tamanho do círculo (knob) */
+  width: 20px; /* Tamanho do círculo (knob) */
   left: 4px; /* Posição do círculo quando desligado */
   bottom: 4px; /* Posição do círculo quando desligado */
   background-color: white; /* Cor do círculo (knob) */
