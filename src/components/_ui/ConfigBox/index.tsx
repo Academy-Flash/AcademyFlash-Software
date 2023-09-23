@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-export default function ConfigMenuBackground(props: ConfigMenuBackgroundProps) {
+export default function ConfigMenuBackground() {
   const [musicVolume, setMusicVolume] = useState(50); // Valor inicial do volume da música (50%)
   const [soundVolume, setSoundVolume] = useState(50); // Valor inicial do volume do som geral (50%)
-  console.log(musicVolume, soundVolume, props.className, props.style);
+
   const handleMusicVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMusicVolume(Number(e.target.value));
     // Aqui você pode adicionar a lógica para ajustar o volume da música na sua aplicação
@@ -17,7 +17,7 @@ export default function ConfigMenuBackground(props: ConfigMenuBackgroundProps) {
   return (
     /* Container flexbox para centralizar o conteúdo */
     <div
-      className={`w-full h-[90%] flex center-itens justify-center bg-[#D9D9D9] rounded-[38px] ${props.className}`}
+      className={`w-full h-[90%] flex center-itens justify-center bg-[#D9D9D9] rounded-[38px]`}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -75,9 +75,4 @@ export default function ConfigMenuBackground(props: ConfigMenuBackgroundProps) {
       </div>
     </div>
   );
-}
-
-interface ConfigMenuBackgroundProps {
-  className: string;
-  style: object;
 }
