@@ -1,6 +1,6 @@
-import { FaRegComment } from 'react-icons/fa'
-import { BiLike, BiSolidShareAlt } from 'react-icons/bi'
-import { AiOutlinePullRequest } from 'react-icons/ai'
+import { AiOutlineQuestionCircle } from 'react-icons/ai'
+import { MdNavigateNext } from 'react-icons/md'
+import FeedbackCards from '@/components/_ui/FeedbackCard'
 
 export default function CardsPage() {
     return (
@@ -16,21 +16,27 @@ export default function CardsPage() {
                     <section className="text-black mt-5 text-base">
                         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo nulla doloribus nostrum, officiis laudantium quibusdam ex eveniet itaque perferendis suscipit quidem aperiam, numquam rerum! Omnis nesciunt totam repudiandae qui. Molestias.
                     </section>
-                    <section className="text-black mt-6 flex items-center justify-evenly w-full">
-                        <div className='rounded-full hover:bg-black/50 p-2 cursor-pointer transition duration-200'> <FaRegComment /> </div>
-                        <div className='rounded-full hover:bg-black/50 p-2 cursor-pointer transition duration-200'> <BiLike /> </div>
-                        <div className='rounded-full hover:bg-black/50 p-2 cursor-pointer transition duration-200'> <BiSolidShareAlt /> </div>
-                        <div className='rounded-full hover:bg-black/50 p-2 cursor-pointer transition duration-200'> <AiOutlinePullRequest/> </div>
-                    </section>
+                    
+                    <FeedbackCards/>
 
                 </div>
             </div>
-            <div className='mt-10 flex space-x-24 justify-center items-center'>
-                <button className="bg-gray-500 border-black border-2 hover:bg-gray-600 text-white font-semibold rounded-full w-16 h-16 ">
-                    Answer
+            <div className='relative mt-10 flex space-x-24 justify-center items-center'>
+
+                <button className="overflow-hidden bg-gray-400 border-black border-2 hover:bg-gray-600 text-white font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group">
+                    < AiOutlineQuestionCircle size={40} className="fill-black"/>
+                    <span className="absolute rounded-full inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-gray-600 group-hover:translate-x-0 ease">
+                        <h1 className='text-black font-bold'>Answer</h1>
+                    </span>
                 </button>
-                <button className="bg-gray-500 hover:bg-gray-600 border-black border-2 text-white font-semibold rounded-full w-16 h-16 ">
-                    Next
+
+
+                <button className="overflow-hidden bg-gray-400 hover:bg-gray-600 border-black border-2 text-white font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group">
+                    
+                    < MdNavigateNext size={50} className="fill-black"/>
+                    <span className="absolute rounded-full inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-gray-600 group-hover:translate-x-0 ease">
+                        <h1 className='text-black font-bold'>Next</h1>
+                    </span>
                 </button>
             </div>
         </main>
