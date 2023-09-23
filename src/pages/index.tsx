@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { PrismaClient } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { Group } from "../components/_ui/Group";
@@ -6,6 +5,7 @@ import { Search } from "@/components/_ui/Search";
 import { RecentFolders } from '../components/_ui/RecentFolders';
 import { RecentCards } from "@/components/_ui/RecentCards";
 import { DaysStrike } from "@/components/_ui/DaysStrike";
+import { ConfigGear } from "@/components/_ui/ConfigGear";
 
 const prisma = new PrismaClient();
 
@@ -23,34 +23,21 @@ export default function Home() {
 
   return (
 
-    <main>
-      <div className='w-full h-full flex justify-center relative items-center'>
-
-        <div className='max-w-screen-lg w-full h-full flex-row relative'>
-
-          <Group />
-
-          <Search />
-          
-          <div className='flex mt-5 space-x-2 h-full'> 
-            <DaysStrike />
-
-            <RecentCards/>
-          </div>
-
-          <RecentFolders />
-
-          {/*   */}
-
-          
-        </div>
-
+    <main className="w-full flex flex-col gap-3">
+      <div className="flex flex-row-reverse">
+        < ConfigGear />
       </div>
+
+      <Group />
+
+      <Search />
       
-      <h1 className=" text-black">{userCount}</h1>
-      <Link className=" text-black" href='/comunidades'>
-        comunidades     
-      </Link>
+      <div className='flex gap-2 w-full'> 
+        <DaysStrike />
+        <RecentCards/>
+      </div>
+
+      <RecentFolders />
 
     </main>
   )
