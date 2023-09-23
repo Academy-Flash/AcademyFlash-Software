@@ -33,7 +33,7 @@ const FOOTER_ICONS = [
 // Function for choosing the page to be displayed after clicking on the footer icon
 function handleFooterClick(FOOTER_ICONS: any) {
     if(FOOTER_ICONS.title.toLowerCase() === 'menu') {
-        return ''
+        return '/'
     }
     else {
         return `/${FOOTER_ICONS.title.toLowerCase()}`
