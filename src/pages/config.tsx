@@ -17,7 +17,7 @@ export default function ConfigMenuBackground(props: ConfigMenuBackgroundProps) {
   return (
     /* Container flexbox para centralizar o conteúdo */
     <div
-      className={`w-[90%] h-[90%] flex center-itens justify-center bg-[#D9D9D9]  rounded-[38px] ${props.className}`}
+      className={`w-full h-[90%] flex center-itens justify-center bg-[#D9D9D9]  rounded-[38px] ${props.className}`}
       style={{
         display: 'flex',
         flexDirection: 'column',

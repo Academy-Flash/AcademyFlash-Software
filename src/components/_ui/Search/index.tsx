@@ -28,7 +28,7 @@ export const Search = () => {
                     <FiSearch size={20} />
                 </button>
 
-                <input className='px-2 py-2 rounded-md bg-white text-black'
+                <input className='w-full h-full px-2 py-2 rounded-md bg-white text-black'
                     type='text' placeholder="Pesquise o card"
                     value={input}
 
