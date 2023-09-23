@@ -30,9 +30,9 @@ export default function ConfigMenuBackground(props: ConfigMenuBackgroundProps) {
     }}
     >
       <div className='p-20 w-full h-[40%]'>
-        <label htmlFor="musicVolume">Volumes:</label>
+        <label htmlFor="musicVolume" style={{ color: 'black' }}>Volumes:</label>
           <div className='p-5 w-full'>
-            <label htmlFor="musicVolume">Música:</label>
+            <label htmlFor="musicVolume" style={{ color: 'black' }}>Música:</label>
             <input
               type="range"
               id="musicVolume"
@@ -45,7 +45,7 @@ export default function ConfigMenuBackground(props: ConfigMenuBackgroundProps) {
             />
           </div>
           <div className='p-5 w-full'>
-            <label htmlFor="soundVolume">Som Geral:</label>
+            <label htmlFor="soundVolume" style={{ color: 'black' }}>Som Geral:</label>
             <input
               type="range"
               id="soundVolume"
@@ -60,7 +60,7 @@ export default function ConfigMenuBackground(props: ConfigMenuBackgroundProps) {
       </div>
 
       <div className='p-20 w-full h-[20%]'>
-        <label>Modo Escuro:</label>
+        <label style={{ color: 'black' }}>Modo Escuro:</label>
         <label className="switch">
           <input type="checkbox" />
           <span className="slider round"></span>
