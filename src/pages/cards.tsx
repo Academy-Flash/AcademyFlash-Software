@@ -6,7 +6,7 @@ export default function CardsPage() {
     return (
 
         <main className="bg-gray-300 h-full w-full">
-            <div className='pt-20 flex justify-center items-center bg-red-500'>
+            <div className='pt-20 flex justify-center items-center'>
                 <div className="overflow-hidden flex-row rounded-[40px] border-black border-4 bg-gray-100 drop-shadow-lg p-[30px] w-[70%] h-[70%] items-center">
                     <section className="text-black flex items-center space-x-1">
                         <div className="font-bold">UNIFESP</div>
