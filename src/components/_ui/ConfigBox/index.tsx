@@ -33,9 +33,9 @@ export default function ConfigMenuBackground({ onToggle }: ConfigGearProps) {
         transform: 'translate(-50%, -50%)', // Centraliza vertical e horizontalmente
       }}
     >  
-      <div className='p-3'>
+      <div className='flex justify-end p-3'>
         <button className='flex justify-center items-center cursor-pointer hover:bg-black/20 w-12 h-12 transition duration-200 rounded-full' onClick={onToggle}>
-          <AiFillCloseCircle  size={30} className='fill-gray-500' />
+          <AiFillCloseCircle size={30} className='fill-gray-500' />
         </button>
       </div>
 
