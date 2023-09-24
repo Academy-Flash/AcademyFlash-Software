@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import { AiFillCloseCircle } from 'react-icons/ai';
 
-export default function ConfigMenuBackground() {
+interface ConfigGearProps {
+  onToggle: () => void;
+}
+
+export default function ConfigMenuBackground({ onToggle }: ConfigGearProps) {
   const [musicVolume, setMusicVolume] = useState(50); // Valor inicial do volume da música (50%)
   const [soundVolume, setSoundVolume] = useState(50); // Valor inicial do volume do som geral (50%)
 
@@ -17,19 +22,24 @@ export default function ConfigMenuBackground() {
   return (
     /* Container flexbox para centralizar o conteúdo */
     <div
-      className={`w-full h-[90%] flex center-itens justify-center bg-[#D9D9D9] rounded-[38px]`}
+      className={`w-[90%] h-[90%] flex center-itens justify-center bg-[#D9D9D9] rounded-[38px]`}
       style={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'flex-start', // Alinhar à esquerda
         justifyContent: 'flex-start', // Alinhar ao topo
         position: 'absolute',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)', // Centraliza vertical e horizontalmente
       }}
-    >
-      <div className='p-20 w-full h-[40%]'>
+    >  
+      <div className='p-3'>
+        <button className='flex justify-center items-center cursor-pointer hover:bg-black/20 w-12 h-12 transition duration-200 rounded-full' onClick={onToggle}>
+          <AiFillCloseCircle  size={30} className='fill-gray-500' />
+        </button>
+      </div>
+
+      <div className='p-20 w-full'>
         <label htmlFor="musicVolume" style={{ color: 'black' }}>Volumes:</label>
         <div className='p-5 w-full'>
           <label htmlFor="musicVolume" style={{ color: 'black' }}>Música:</label>
