@@ -14,7 +14,7 @@ const prisma = new PrismaClient();
 export default function Home() {
 
   const [userCount, setUserCount] = useState<number>(0);
-  const [config, setConfig] = useState(true); // Use useState for config
+  const [config, setConfig] = useState(false); // Use useState for config
   
   function toggleConfig() {
     setConfig(prevConfig => !prevConfig);
@@ -31,6 +31,10 @@ export default function Home() {
   return (
     <main className="w-full flex flex-col gap-3">
       
+      {config && (
+        <div className={`transition duration-300 ease-in-out ${config ? 'opacity-100' : 'opacity-0'} fixed top-0 left-0 w-full h-full bg-black z-10 `}/>
+      )}
+
       <div className="flex justify-between">
         <Stars />
         <ConfigGear onToggle={toggleConfig}/>
@@ -47,7 +51,7 @@ export default function Home() {
 
       <RecentFolders />
       
-      <div className={`transition duration-300 ease-in-out ${config ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`transition duration-300 ease-in-out z-20 ${config ? 'opacity-100' : 'opacity-0'}`}>
         <ConfigBox onToggle={toggleConfig} />
       </div>
 
