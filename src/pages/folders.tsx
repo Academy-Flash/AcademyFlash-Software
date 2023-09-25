@@ -35,12 +35,16 @@ const list = [
       name: '09',
       color: 'gray',
     },
+    // {
+    //   name: '10',
+    //   color: 'gray',
+    // }
   ];
   
   const folders = () => {
     return (
       <div className="h-screen flex justify-center items-center">
-        <div className="grid grid-cols-3 grid-rows-3 gap-4 h-5/6 w-4/5">
+        <div className="grid grid-cols-3 gap-4 h-4/5 w-4/5">
           {list.map((item, index) => (
             <div
               key={index}
