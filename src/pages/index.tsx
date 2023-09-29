@@ -8,6 +8,7 @@ import { DaysStrike } from "@/components/_ui/DaysStrike";
 import { ConfigGear } from "@/components/_ui/ConfigGear";
 import Stars from "@/components/_ui/Stars"; 
 import ConfigBox from "@/components/_ui/ConfigBox";
+import ProfileBox from "@/components/_ui/ProfileBox";
 
 const prisma = new PrismaClient();
 
@@ -15,9 +16,14 @@ export default function Home() {
 
   const [userCount, setUserCount] = useState<number>(0);
   const [config, setConfig] = useState(false); // Use useState for config
-  
+  const [configBox, setProfileBox] = useState(false); // Use useState for profile box
+
   function toggleConfig() {
     setConfig(prevConfig => !prevConfig);
+  }
+
+  function toggleProfileBox() {
+    setProfileBox(prevProfileBox => !prevProfileBox);
   }
 
   useEffect(() => {
@@ -53,6 +59,10 @@ export default function Home() {
       
       <div className={`transition duration-300 ease-in-out z-20 ${config ? 'opacity-100' : 'opacity-0'}`}>
         <ConfigBox onToggle={toggleConfig} />
+      </div>
+      
+      <div className={`transition duration-300 ease-in-out z-20 ${config ? 'opacity-100' : 'opacity-0'}`}>
+        <ProfileBox onToggle={toggleProfileBox} />
       </div>
 
     </main>
