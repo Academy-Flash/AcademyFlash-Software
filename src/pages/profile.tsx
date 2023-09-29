@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { BiUserCircle} from 'react-icons/bi';
 import { FiCalendar } from 'react-icons/fi';
-
-
+import { LiaUserFriendsSolid } from 'react-icons/lia';
+import { AiOutlineMail } from 'react-icons/ai';
+import { AiOutlineUser } from 'react-icons/ai';
 
 interface ConfigGearProps {
   onToggle: () => void;
@@ -12,7 +13,7 @@ export default function profile({ onToggle }: ConfigGearProps) {
   return (
     /* Container flexbox para centralizar o conteúdo */
     <div
-      className={`w-full h-full items-center justify-center`}
+      className={`w-full h-full flex-col items-center justify-center relative overflow-y-auto`}
       style={{backgroundColor: '#F24130'}}
     >  
     
@@ -36,10 +37,42 @@ export default function profile({ onToggle }: ConfigGearProps) {
 
       </div>
       
-      <div className='w-full flex items-center justify-center pt-3 text-center' >
+      <div className='flex items-center justify-center pt-5 text-center' >
 
-        <FiCalendar/>
-        <h1 className='w-full text-white text-xl font-bold'>  Pontuação: 100</h1>
+        <FiCalendar size={50} style={{color : '#f2be5c'}}/>
+        <h1 className='pl-4 text-white text-xl font-bold' style={{color : '#f2be5c'}}>  
+          Calendar
+        </h1>
+
+      </div>
+
+            
+      <div className='flex items-center justify-center pt-5 text-center' >
+
+        <LiaUserFriendsSolid size={50} style={{color : '#f2be5c'}}/>
+        <h1 className='pl-4 text-white text-xl font-bold' style={{color : '#f2be5c'}}>  
+          Friends
+        </h1>
+
+      </div>
+
+  
+      <div className='flex items-center justify-center pt-5 text-center' >
+
+        <AiOutlineMail size={50} style={{color : '#f2be5c'}}/>
+        <h1 className='pl-4 text-xl font-bold' style={{color : '#f2be5c'}}>  
+          News
+        </h1>
+
+      </div>
+
+      
+      <div className='flex items-center justify-center pt-5 text-center' >
+
+        <AiOutlineUser size={50} style={{color : '#f2be5c'}}/>
+        <h1 className='pl-4 text-xl font-bold' style={{color : '#f2be5c'}} >  
+          Profile Settings 
+        </h1>
 
       </div>
 
