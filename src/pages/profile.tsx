@@ -50,46 +50,48 @@ export default function ProfileBox({ onToggle }: ConfigGearProps) {
 
       </div>
       
-      <div className='flex items-center justify-center pt-5 text-center' >
+      <div className='flex flex-col' >
+        <div className='flex-col justify-start mx-auto'>
+          <div className='flex items-center justify-start pt-5 text-center' >
 
-        <FiCalendar size={50} style={{color : '#f2be5c'}}/>
-        <h1 className='pl-4 text-white text-xl font-bold' style={{color : '#f2be5c'}}>  
-          Calendar
-        </h1>
+            <FiCalendar size={50} style={{color : '#f2be5c'}}/>
+            <h1 className='pl-4 text-white text-xl font-bold' style={{color : '#f2be5c'}}>  
+              Calendar
+            </h1>
 
-      </div>
+          </div>
 
-            
-      <div className='flex items-center justify-center pt-5 text-center' >
+                
+          <div className='flex items-center justify-start pt-5 text-center' >
 
-        <LiaUserFriendsSolid size={50} style={{color : '#f2be5c'}}/>
-        <h1 className='pl-4 text-white text-xl font-bold' style={{color : '#f2be5c'}}>  
-          Friends
-        </h1>
+            <LiaUserFriendsSolid size={50} style={{color : '#f2be5c'}}/>
+            <h1 className='pl-4 text-white text-xl font-bold' style={{color : '#f2be5c'}}>  
+              Friends
+            </h1>
 
-      </div>
-
-  
-      <div className='flex items-center justify-center pt-5 text-center' >
-
-        <AiOutlineMail size={50} style={{color : '#f2be5c'}}/>
-        <h1 className='pl-4 text-xl font-bold' style={{color : '#f2be5c'}}>  
-          News
-        </h1>
-
-      </div>
+          </div>
 
       
-      <div className='flex items-center justify-center pt-5 text-center' >
+          <div className='flex items-center justify-start pt-5 text-center' >
 
-        <AiOutlineUser size={50} style={{color : '#f2be5c'}}/>
-        <h1 className='pl-4 text-xl font-bold' style={{color : '#f2be5c'}} >  
-          Profile Settings 
-        </h1>
+            <AiOutlineMail size={50} style={{color : '#f2be5c'}}/>
+            <h1 className='pl-4 text-xl font-bold' style={{color : '#f2be5c'}}>  
+              News
+            </h1>
 
+          </div>
+
+          
+          <div className='flex items-center justify-start pt-5 text-center' >
+
+            <AiOutlineUser size={50} style={{color : '#f2be5c'}}/>
+            <h1 className='pl-4 text-xl font-bold' style={{color : '#f2be5c'}} >  
+              Profile Settings 
+            </h1>
+
+          </div>
+        </div>
       </div>
-
-
     </div>
   );
 }
