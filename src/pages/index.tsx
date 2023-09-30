@@ -16,14 +16,9 @@ export default function Home() {
 
   const [userCount, setUserCount] = useState<number>(0);
   const [config, setConfig] = useState(false); // Use useState for config
-  const [configBox, setProfileBox] = useState(false); // Use useState for profile box
 
   function toggleConfig() {
     setConfig(prevConfig => !prevConfig);
-  }
-
-  function toggleProfileBox() {
-    setProfileBox(prevProfileBox => !prevProfileBox);
   }
 
   useEffect(() => {
@@ -61,10 +56,6 @@ export default function Home() {
         <ConfigBox onToggle={toggleConfig} />
       </div>
       
-      <div className={`transition duration-300 ease-in-out z-20 ${config ? 'opacity-100' : 'opacity-0'}`}>
-        <ProfileBox onToggle={toggleProfileBox} />
-      </div>
-
     </main>
   )
 }
