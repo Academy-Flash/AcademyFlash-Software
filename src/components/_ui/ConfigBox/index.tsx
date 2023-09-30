@@ -90,7 +90,7 @@ export default function ConfigMenuBackground({ onToggle }: ConfigGearProps) {
         </button>
       </div>
 
-      <div className='p-20 w-full'>
+      <div className='p-10 w-full'>
         <label htmlFor="musicVolume" style={{ color: 'black' }}>Volumes:</label>
         <div className='p-5 w-full'>
           <label htmlFor="musicVolume" style={{ color: 'black' }}>Música:</label>
@@ -112,13 +112,15 @@ export default function ConfigMenuBackground({ onToggle }: ConfigGearProps) {
         </div>
       </div>
 
-      <div className='p-20 w-full flex justify-end'>
+      <div className='w-full flex justify-end pr-10'>
         <FormControlLabel
-          control={<MaterialUISwitch sx={{ m: 1, backgroundColor : 'dark'}} />}
+          control={<MaterialUISwitch sx={{ m: 1}} />}
           label="Dark Mode"
           labelPlacement='top'
           /*checked={false}*/
-          /*onChange={}*/
+          onChange={() => {
+            document.documentElement.classList.toggle('dark');
+          }}
           sx={{ color: 'black'}}
         />
       </div>

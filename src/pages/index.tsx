@@ -32,7 +32,8 @@ export default function Home() {
     <main className="w-full flex flex-col gap-3">
       
       {config && (
-        <div className={`transition duration-300 ease-in-out ${config ? 'opacity-100' : 'opacity-0'} fixed top-0 left-0 w-full h-full bg-black z-10 `}/>
+        <div style={{
+        }} className={`transition duration-300 ease-in ${config ? 'opacity-80' : 'opacity-0'} fixed top-0 left-0 w-full h-full bg-black z-10`}/>
       )}
 
       <div className="flex justify-between">
@@ -51,7 +52,7 @@ export default function Home() {
 
       <RecentFolders />
       
-      <div className={`transition duration-300 ease-in-out z-20 ${config ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`transition duration-300 ease-in z-20 ${config ? 'opacity-100' : 'opacity-0'}`}>
         <ConfigBox onToggle={toggleConfig} />
       </div>
 
