@@ -41,7 +41,7 @@ const list = [
   // }
 ];
 
-const folders = () => {
+const folder = () => {
   return (
     <div className="h-screen flex justify-center items-center">
       <div className="grid grid-cols-3 gap-4 h-4/5 w-4/5">
@@ -60,4 +60,4 @@ const folders = () => {
   );
 };
 
-export default folders;
+export default folder;
