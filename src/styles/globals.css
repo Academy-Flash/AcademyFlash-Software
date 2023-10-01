@@ -130,3 +130,8 @@ body {
   -webkit-transform: translateX(26px); /* Move o círculo (knob) para a direita quando ligado */
   transform: translateX(26px); /* Move o círculo (knob) para a direita quando ligado */
 }
+
+.grid-cols-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
