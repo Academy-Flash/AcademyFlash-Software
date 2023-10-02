@@ -2,16 +2,28 @@ import { AiOutlineQuestionCircle } from 'react-icons/ai'
 import { MdNavigateNext } from 'react-icons/md'
 import FeedbackCards from '@/components/_ui/FeedbackCard'
 import { Cards } from '@/components/_ui/Cards'
+import { BiSolidCommentDetail } from 'react-icons/bi'
 
 export default function CardsPage() {
     return (
 
-        <main className="bg-gray-300 h-full w-full">
+        <main className="bg-gray-600 h-full w-full">
             <div className='pt-20 flex justify-center items-center'>
                 <div className="overflow-hidden flex-row rounded-[40px] border-black border-4 bg-gray-100 drop-shadow-lg p-[30px] w-[70%] h-[70%] items-center">
                     <Cards />
                 </div>
             </div>
+            
+            <div className='flex justify-center items-center space-x-2'>
+                <div className='bg-[#D9D9D9] mt-5 w-fit h-fit rounded-full shadow-lg shadow-black/60 border-black border-2'>
+                    <FeedbackCards />
+                </div>
+                <div className='mt-5 bg-[#D9D9D9] rounded-full hover:bg-white/30 p-2 cursor-pointer transition duration-200 border-black border-2'>
+                    <BiSolidCommentDetail className='fill-black' size={20} />
+                </div>
+            </div>
+
+
             <div className='relative mt-10 flex space-x-24 justify-center items-center'>
 
                 <button className="overflow-hidden bg-gray-400 border-black border-2 hover:bg-gray-600 text-white font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group">

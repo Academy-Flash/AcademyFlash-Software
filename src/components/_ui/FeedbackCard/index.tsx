@@ -1,15 +1,18 @@
-import { FaRegComment } from 'react-icons/fa'
-import { BiLike, BiSolidShareAlt } from 'react-icons/bi'
-import { AiOutlinePullRequest } from 'react-icons/ai'
+import { BiLike, BiDislike, BiSolidShareAlt } from 'react-icons/bi'
+import { BiSave } from 'react-icons/bi'
 
 
 export default function FeedbackCards() {
     return (
-        <section className="text-black mt-6 flex items-center justify-evenly w-full">
-            <div className='rounded-full hover:bg-black/50 p-2 cursor-pointer transition duration-200'> <FaRegComment /> </div>
-            <div className='rounded-full hover:bg-black/50 p-2 cursor-pointer transition duration-200'> <BiLike /> </div>
-            <div className='rounded-full hover:bg-black/50 p-2 cursor-pointer transition duration-200'> <BiSolidShareAlt /> </div>
-            <div className='rounded-full hover:bg-black/50 p-2 cursor-pointer transition duration-200'> <AiOutlinePullRequest/> </div>
-        </section>
+        <>
+        
+            <div className="text-black flex items-center px-5 space-x-10 w-full">
+                <div className='rounded-full hover:bg-black/50 p-2 cursor-pointer transition duration-200'><BiSave size={20}/> </div>
+                <div className='rounded-full hover:bg-black/50 p-2 cursor-pointer transition duration-200'><BiSolidShareAlt size={20}/> </div>
+                <div className='rounded-full hover:bg-black/50 p-2 cursor-pointer transition duration-200'> <BiLike className='fill-green-700' size={20} />  </div>
+                <div className='rounded-full hover:bg-black/50 p-2 cursor-pointer transition duration-200'><BiDislike className='fill-red-700' size={20} />  </div>
+            </div>
+        
+        </>
     )
 }

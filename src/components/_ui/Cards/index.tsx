@@ -1,4 +1,4 @@
-import FeedbackCards from '@/components/_ui/FeedbackCard'
+
 
 export const Cards = () => {
     return (
@@ -12,8 +12,6 @@ export const Cards = () => {
                 <section className="text-black mt-5 text-base">
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo nulla doloribus nostrum, officiis laudantium quibusdam ex eveniet itaque perferendis suscipit quidem aperiam, numquam rerum! Omnis nesciunt totam repudiandae qui. Molestias.
                 </section>
-                
-                <FeedbackCards/>
             </>
     )
 }
