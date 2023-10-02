@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Footer } from "./Footer"
 import { Header } from "./Header"
 import ProfileBox from "@/components/_ui/ProfileBox";
+import { motion } from "framer-motion"
 
 interface LayoutInterface {
     children: ReactNode
@@ -23,14 +24,26 @@ export const Layout = ({ children }: LayoutInterface) => {
   }
 
   return (
+
+     
     <div className="w-[80%] m-auto h-[calc(100vh-64px)] relative overflow-y-auto pr-2">
-      {pageName != 'Signup' ? <Header /> : ''}
 
-      {children}
-      
-      {profileBox && (<ProfileBox onToggle={toggleProfileBox} />)}
+      {pageName !== 'Signup' ? <Header /> : ''}
 
-      {pageName != 'Signup' ? <Footer onToggleProfile={toggleProfileBox}/> : ''}
+      <div className={`transition-opacity duration-500 ease-in ${profileBox ? 'opacity-0 hidden pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
+        {/* Conteúdo anterior */}
+        {children}
+      </div>
+
+      <div className={`w-full h-full transition-all duration-500 transform absolute ${profileBox ? 'translate-x-0 pointer-events-auto opacity-100' : 'translate-x-full pointer-events-none opacity-0'} z-20`}>
+        {/* Caixa de perfil */}
+        <ProfileBox onToggle={toggleProfileBox} style={{ visibility: profileBox ? 'visible' : 'hidden' }} />
+      </div>
+
+      {pageName !== 'Signup' ? <Footer onToggleProfile={toggleProfileBox}/> : ''}
+
     </div>
+
+
   )
 }

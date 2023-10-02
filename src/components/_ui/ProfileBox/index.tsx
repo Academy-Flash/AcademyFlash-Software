@@ -6,15 +6,16 @@ import { AiOutlineMail } from 'react-icons/ai';
 import { AiOutlineUser } from 'react-icons/ai';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 
-interface ConfigGearProps {
+interface ProfileBoxProps {
   onToggle: () => void;
+  style?: React.CSSProperties;
 }
 
-export default function ProfileBox({ onToggle }: ConfigGearProps) {
+export default function ProfileBox({ onToggle, style }: ProfileBoxProps) {
   return (
     /* Container flexbox para centralizar o conteúdo */
     <div
-      className={`w-full h-full flex-col relative overflow-y-auto`}
+      className={`w-full h-full flex-col relative overflow-y-auto ${style?.visibility ?? 'hidden'} `}
       style={{backgroundColor: '#F24130'}}
     >  
       
@@ -92,6 +93,9 @@ export default function ProfileBox({ onToggle }: ConfigGearProps) {
           </div>
         </div>
       </div>
+      
+      {/*Empty div to add space between the content and the bottom of the page*/}
+      <div style={{ height: '50px' }}></div> 
     </div>
   );
 }
