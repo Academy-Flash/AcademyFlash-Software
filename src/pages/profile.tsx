@@ -17,18 +17,6 @@ export default function ProfileBox({ onToggle }: ConfigGearProps) {
       className={`w-full h-full flex-col relative overflow-y-auto`}
       style={{backgroundColor: '#F24130'}}
     >  
-      
-      <div className='w-full items-start justify-start pt-3 pl-10' > 
-        <button className='cursor-pointer hover:bg-black/20 transition duration-200 rounded-full' onClick={onToggle}>
-          <AiOutlineArrowLeft 
-            size={50} 
-            className='' 
-            style={{
-              color: '#f2be5c',
-            }}
-          />
-        </button>
-      </div>
 
       <div className='w-full items-center justify-center pt-3' > 
       
