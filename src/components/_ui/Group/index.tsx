@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const Group = () => {
     return (
-        <section className="flex justify-between bg-green-700 text-white font-bold py-2 px-4 rounded-md">
+        <section className="flex justify-between bg-green-700 text-white font-bold py-2 px-4 rounded-md dark:bg-black">
             <div>
                 <span className="font-bold text-left block">CURRENT GROUP</span>
                 <span className="bg-green-700 text-white font-bold block">Federal University of São Paulo</span>
