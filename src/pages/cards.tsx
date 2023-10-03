@@ -3,11 +3,33 @@ import { MdNavigateNext } from 'react-icons/md'
 import FeedbackCards from '@/components/_ui/FeedbackCard'
 import { Cards } from '@/components/_ui/Cards'
 import { BiSolidCommentDetail } from 'react-icons/bi'
+import { useState } from 'react';
+
 
 export default function CardsPage() {
+
+    const [darkMode, setDarkMode] = useState(false);
+
+    const toggleDarkMode = () => {
+        setDarkMode(!darkMode);
+    }
+
+
     return (
 
-        <main className="bg-gray-600 h-full w-full">
+        <main className="bg-gray-400 h-full w-full">
+            
+                <button
+                    className={`overflow-hidden bg-[#D9D9D9] border-${darkMode ? 'white' : 'black'} border-2 hover:bg-gray-600 text-${darkMode ? 'white' : 'black'} font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group`}
+                    onClick={toggleDarkMode}
+                >
+                    <AiOutlineQuestionCircle size={40} className={`fill-${darkMode ? 'white' : 'black'}`} />
+                    <span className={`absolute rounded-full inset-0 flex items-center justify-center w-full h-full text-${darkMode ? 'white' : 'black'} duration-300 -translate-x-full bg-gray-300 group-hover:translate-x-0 ease`}>
+                        <h1 className={`text-${darkMode ? 'black' : 'white'} font-bold`}>Toggle</h1>
+                    </span>
+                </button>
+
+
             <div className='pt-20 flex justify-center items-center'>
                 <div className="overflow-hidden flex-row rounded-[40px] border-black border-4 bg-gray-100 drop-shadow-lg p-[30px] w-[70%] h-[70%] items-center">
                     <Cards />
@@ -26,18 +48,18 @@ export default function CardsPage() {
 
             <div className='relative mt-10 flex space-x-24 justify-center items-center'>
 
-                <button className="overflow-hidden bg-gray-400 border-black border-2 hover:bg-gray-600 text-white font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group">
+                <button className="overflow-hidden bg-[#D9D9D9] border-black border-2 hover:bg-gray-600 text-white font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group">
                     < AiOutlineQuestionCircle size={40} className="fill-black"/>
-                    <span className="absolute rounded-full inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-gray-600 group-hover:translate-x-0 ease">
+                    <span className="absolute rounded-full inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-gray-300 group-hover:translate-x-0 ease">
                         <h1 className='text-black font-bold'>Answer</h1>
                     </span>
                 </button>
 
 
-                <button className="overflow-hidden bg-gray-400 hover:bg-gray-600 border-black border-2 text-white font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group">
+                <button className="overflow-hidden bg-[#D9D9D9] hover:bg-gray-600 border-black border-2 text-white font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group">
                     
                     < MdNavigateNext size={50} className="fill-black"/>
-                    <span className="absolute rounded-full inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-gray-600 group-hover:translate-x-0 ease">
+                    <span className="absolute rounded-full inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-gray-300 group-hover:translate-x-0 ease">
                         <h1 className='text-black font-bold'>Next</h1>
                     </span>
                 </button>
