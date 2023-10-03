@@ -22,8 +22,9 @@ export const Layout = ({ children }: LayoutInterface) => {
 
   return (
     <div className="w-[80%] m-auto h-[calc(100vh-64px)] relative overflow-y-auto px-2 bg-orange-100 dark:bg-gray-700 text-black dark:text-white">
-      {pageName !== 'Signup' ? <Header /> : ''}
-    
+      {/* {pageName !== 'Signup' ? <Header /> : ''}
+      */}
+      
       {children}
 
       {pageName !== 'Signup' ? <Footer onToggleProfile={toggleProfileBox}/> : ''}
