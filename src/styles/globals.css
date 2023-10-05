@@ -131,6 +131,7 @@ body {
   transform: translateX(26px); /* Move o círculo (knob) para a direita quando ligado */
 }
 
+/* Estilo colunas grid*/
 .grid-cols-auto {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -150,5 +151,3 @@ body {
     grid-template-columns: repeat(4, 1fr);
   }
 }
-
-/* Add more media queries as needed for different screen sizes */
