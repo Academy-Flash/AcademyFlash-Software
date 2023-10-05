@@ -1,7 +1,7 @@
 export const Header = () => {
     return (
-        <nav className="text-black">
-            testando
+        <nav className="py-3">
+            teste
         </nav>
     )
 }
