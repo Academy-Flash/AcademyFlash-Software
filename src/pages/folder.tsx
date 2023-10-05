@@ -32,7 +32,7 @@ const list = [
   {
     name: 'Broken',
     color: 'gray',
-    url: 'https://youtu.be/uO8SeXh_LaA?si=_iR89mhdnilSSmgB',
+    url: 'https://www.youtube.com/watch?v=M9K2guaz_7E',
     image: 'https://i.redd.it/g119ewgm4mm71.jpg',
   },
   {
