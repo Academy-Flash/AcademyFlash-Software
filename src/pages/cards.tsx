@@ -26,27 +26,17 @@ export default function CardsPage() {
 
 
     return (
-
-        <main className="bg-gray-400 h-full w-full flex-col items-center justify-center">
+        
+        <main className="bg-gray-400 h-full w-full flex-col items-center justify-center ">
+            {commentBox && (<div className='w-full h-full top-0 left-0 opacity-50 fixed bg-black z-20'></div>)}
+    
+            {commentBox && (
+                    <div className='h-[60%] w-[60%] flex justify-center fixed z-30 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+                    <CommentsPage onToggle={toggleCommentBox} style={{ visibility: commentBox ? 'visible' : 'hidden' }}/>
+                    </div>
+                
+            )} 
             
-            <AnimatePresence initial={false}>
-                {commentBox ? (
-                <motion.div
-                    className="w-fit h-fit flex justify-center items-center absolute z-20 bg-black/50"
-                    initial={{ opacity: 0, x: '100%' }}
-                    animate={{ opacity: 1, x: '0%' }}
-                    exit={{ opacity: 0, x: '100%' }}
-                    transition={{ duration: 1, ease: 'easeInOut' }}
-                    style={{
-                    position: 'absolute',
-                    }}
-                >
-                    {/* Caixa de perfil */}
-                    <CommentsPage onToggle={toggleCommentBox} style={{ visibility: commentBox ? 'visible' : 'hidden' }} />
-
-                </motion.div>
-                ) : null}
-            </AnimatePresence>
             
             <button
                 className={`overflow-hidden bg-[#D9D9D9] border-${darkMode ? 'white' : 'black'} border-2 hover:bg-gray-600 text-${darkMode ? 'white' : 'black'} font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group`}
@@ -94,7 +84,7 @@ export default function CardsPage() {
                 </button>
 
             </div>
-
+           
 
 
         
