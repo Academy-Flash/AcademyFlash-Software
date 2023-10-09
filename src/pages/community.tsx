@@ -113,3 +113,21 @@ const list = [
             </div>
         );
     }
+
+//Função para criar comunidade inserindo na lista
+
+function createCommunity() {
+    const communityName = (document.getElementById("communityName") as HTMLInputElement)?.value;
+    const communityUrl = (document.getElementById("communityUrl") as HTMLInputElement)?.value;
+    const communityImage = (document.getElementById("communityImage") as HTMLInputElement)?.value;
+
+    const community = {
+        id: 1,
+        name: communityName,
+        url: communityUrl,
+        image: communityImage,
+    };
+
+    list.push(community);
+    console.log(list);
+}
