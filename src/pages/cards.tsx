@@ -5,7 +5,7 @@ import { Cards } from '@/components/_ui/Cards'
 import { BiSolidCommentDetail } from 'react-icons/bi'
 import { useState } from 'react';
 import ProfileBox from "@/components/_ui/ProfileBox";
-import CommentsPage from '@/components/Comments'
+import CommentsPage from '@/components/_ui/Comments'
 import { motion, AnimatePresence } from "framer-motion"
 
 
