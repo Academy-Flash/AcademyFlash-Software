@@ -24,7 +24,7 @@ export const Layout = ({ children }: LayoutInterface) => {
       
       {children}
 
-      {pageName !== '/signup' ? <Footer /> : ''}
+      {!['/signup', '/signin'].includes(pageName) ? <Footer /> : ''}
     </div>
 
   )
