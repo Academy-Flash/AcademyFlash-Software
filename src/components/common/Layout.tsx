@@ -18,9 +18,7 @@ export const Layout = ({ children }: LayoutInterface) => {
   const pageName = router.pathname;
 
   return (
-    <div className="w-[80%] m-auto h-[calc(100vh-64px)] relative overflow-y-auto px-2 bg-orange-100 dark:bg-gray-700 text-black dark:text-white">
-      {/* {pageName !== 'Signup' ? <Header /> : ''}
-      */}
+    <div className="w-[80%] m-auto h-[calc(100vh-64px)] relative overflow-hidden px-2 bg-gray-700 text-white layout-principal">
       
       {children}
 
