@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { VscCircleLargeFilled } from 'react-icons/vsc'
 import Link from "next/link"
+import useCommunity from '@/pages/api/getCurrentCommunity';
 
 interface Community {
     id: number;
@@ -12,6 +13,8 @@ interface Community {
 }
 
 export const Group = () => {
+    const { get_current_community, set_current_community } = useCommunity();
+
     const [showPopup, setShowPopup] = useState(false);
 
     const handleButtonClick = () => {
@@ -33,7 +36,7 @@ export const Group = () => {
             <section className="flex justify-between bg-green-700 text-white font-bold py-2 px-4 rounded-md dark:bg-black">
                 <div>
                     <span className="font-bold text-left block">CURRENT GROUP</span>
-                    <span className="bg-green-700 text-white font-bold block">Federal University of São Paulo</span>
+                    <span className="bg-green-700 text-white font-bold block">{get_current_community()}</span>
                 </div>
 
                 <button className='bg-green-900 text-white font-bold p-2 rounded-md flex items-center justify-center' onClick={handleButtonClick}>Choose Other</button>
@@ -45,15 +48,15 @@ export const Group = () => {
                     <div className="bg-gray-700 p-4 rounded-md justify-center">
                         <h2 className="text-lg font-bold mb-2">Choose Other Group</h2>
                         <div className="flex flex-col gap-2">
-                            {communities.map((deck, index) => (
-                                <Link
+                            {communities.map((communities, index) => (
+                                <button
                                     className="hover:bg-white/10 transition duration-200 rounded-3xl w-full flex items-center justify-left gap-2 p-1 text-white"
                                     key={index}
-                                    href={`/cards?deck_name=${deck.community_name}`}
+                                    onClick={() => set_current_community(communities.community_name)}
                                 >
-                                    <VscCircleLargeFilled size={30} className={`${deck.community_name === "Personal" ? "text-red-500" : "text-green-500"}`} /> 
-                                    {deck.community_name}
-                                </Link>
+                                    <VscCircleLargeFilled size={30} className={`${communities.community_name === "Personal" ? "text-red-500" : "text-green-500"}`} /> 
+                                    {communities.community_name}
+                                </button>
                             ))}
                         </div>
                         <div className="flex justify-center">
