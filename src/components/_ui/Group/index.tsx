@@ -1,4 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { VscCircleLargeFilled } from 'react-icons/vsc'
+import Link from "next/link"
+
+interface Community {
+    id: number;
+    community_name: string;
+    description: string;
+    date_creation: Date;
+    user_count: number;
+    card_count: number;
+}
 
 export const Group = () => {
     const [showPopup, setShowPopup] = useState(false);
@@ -6,6 +17,16 @@ export const Group = () => {
     const handleButtonClick = () => {
         setShowPopup(true);
     }
+
+    const [communities, setCommunities] = useState<Community[]>([]);
+
+    useEffect(() => {
+        fetch('/api/getCommunities')
+          .then((response) => response.json())
+          .then((data) => {
+            setCommunities(data)
+          });
+      }, []);
 
     return (
         <>
@@ -21,10 +42,23 @@ export const Group = () => {
 
             {showPopup && (
                 <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-500 bg-opacity-50">
-                    <div className="bg-gray-700 p-4 rounded-md">
+                    <div className="bg-gray-700 p-4 rounded-md justify-center">
                         <h2 className="text-lg font-bold mb-2">Choose Other Group</h2>
-                        <p className="mb-4">Popup content goes here.</p>
-                        <button className="bg-green-900 text-white font-bold p-2 rounded-md" onClick={() => setShowPopup(false)}>Close</button>
+                        <div className="flex flex-col gap-2">
+                            {communities.map((deck, index) => (
+                                <Link
+                                    className="hover:bg-white/10 transition duration-200 rounded-3xl w-full flex items-center justify-left gap-2 p-1 text-white"
+                                    key={index}
+                                    href={`/cards?deck_name=${deck.community_name}`}
+                                >
+                                    <VscCircleLargeFilled size={30} className={`${deck.community_name === "Personal" ? "text-red-500" : "text-green-500"}`} /> 
+                                    {deck.community_name}
+                                </Link>
+                            ))}
+                        </div>
+                        <div className="flex justify-center">
+                            <button className="bg-green-900 text-white font-bold p-2 rounded-md" onClick={() => setShowPopup(false)}>Close</button>
+                        </div>
                     </div>
                 </div>
             )}
