@@ -15,6 +15,7 @@ const AddCardPage = () => {
     const [back, setBack] = useState('');
     const [decks, setDecks] = useState<Deck[]>([]);
     const [selectedDeck, setSelectedDeck] = useState('');
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
     
     const router = useRouter();
 
@@ -29,7 +30,7 @@ const AddCardPage = () => {
             }
         };
         fetchDecks();
-    }, []);
+    }, [isPopupOpen]);
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -92,7 +93,7 @@ const AddCardPage = () => {
                 </div>
                 <button type="submit">Save</button>
             </form>
-            <Popup />
+            <Popup isOpen={isPopupOpen} setIsOpen={setIsPopupOpen} />
         </div>
     );
 };

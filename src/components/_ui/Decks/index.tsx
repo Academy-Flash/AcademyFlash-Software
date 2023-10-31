@@ -1,6 +1,7 @@
 import { VscCircleLargeFilled } from 'react-icons/vsc'
 import { useEffect, useState } from "react";
 import Link from "next/link"
+import useCommunity from '@/pages/api/getCurrentCommunity';
 
 interface Deck {
     id: number;
@@ -12,14 +13,20 @@ interface Deck {
 
 export const Decks = () => {
 
+    const {get_current_community} = useCommunity()
     const [decks, setDecks] = useState<Deck[]>([]);
+    const [community_name, setCommunityName] = useState<string>(get_current_community());
 
     useEffect(() => {
-        fetch('/api/getDecks')
-          .then((response) => response.json())
-          .then((data) => {
-            setDecks(data)
-          });
+        async function getDecks() {
+            await fetch('/api/getDecks', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({com_name: community_name}),
+            }).then((response) => response.json())
+            .then((data) => setDecks(data));
+        }
+        getDecks()
       }, []);
 
     return (

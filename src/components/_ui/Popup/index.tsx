@@ -1,32 +1,36 @@
 import React, { useState } from "react";
 
-const Popup = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [newDeckName, setNewDeckName] = useState('');
-    const [newDeckCategory, setNewDeckCategory] = useState('');
-    const [newDeckDescription, setNewDeckDescription] = useState('');
+interface PopupProps {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-    const handleSubmitDeck = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const deck = { newDeckName, newDeckCategory, newDeckDescription };
-        await createDeck(deck);
-        setIsOpen(false);
-    };
-    
-    const createDeck = async (deck: { newDeckName:string, newDeckCategory: string, newDeckDescription: string }) => {
-        try {
-            await fetch('/api/create/deck', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(deck),
-            });
-        } catch (error) {
-            console.error(error);
-        }
+const Popup: React.FC<PopupProps> = ({ isOpen, setIsOpen }) => {
+  const [newDeckName, setNewDeckName] = useState('');
+  const [newDeckCategory, setNewDeckCategory] = useState('');
+  const [newDeckDescription, setNewDeckDescription] = useState('');
+
+  const handleSubmitDeck = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const deck = { newDeckName, newDeckCategory, newDeckDescription };
+    await createDeck(deck);
+    setIsOpen(false);
+  };
+  
+  const createDeck = async (deck: { newDeckName:string, newDeckCategory: string, newDeckDescription: string }) => {
+    try {
+      await fetch('/api/create/deck', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(deck),
+      });
+    } catch (error) {
+      console.error(error);
     }
+  }
 
-    return (
-        <>
+  return (
+    <>
             <button type='button' className='bg-blue-500 text-white rounded-md' onClick={() => setIsOpen(true)}>Create a new deck</button>
             {isOpen && (
                 <div className='fixed top-0 left-0 w-full h-full bg-gray-200 bg-opacity-50 flex justify-center items-center'>
@@ -52,7 +56,7 @@ const Popup = () => {
                 </div>
             )}
         </>
-    );
+  );
 };
 
 export default Popup;
