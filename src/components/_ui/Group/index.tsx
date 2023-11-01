@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { VscCircleLargeFilled } from 'react-icons/vsc'
 import Link from "next/link"
 import useCommunity from '@/pages/api/getCurrentCommunity';
+import { useCurrentCommunity } from '@/pages/context/CurrentCommunityContext';
 
 interface Community {
     id: number;
@@ -13,7 +14,7 @@ interface Community {
 }
 
 export const Group = () => {
-    const { get_current_community, set_current_community } = useCommunity();
+    const { currentCommunity, setCurrentCommunity  } = useCurrentCommunity();
 
     const [showPopup, setShowPopup] = useState(false);
 
@@ -21,8 +22,13 @@ export const Group = () => {
         setShowPopup(true);
     }
 
-    const [communities, setCommunities] = useState<Community[]>([]);
+    const handleCommunitySelection = (communityName: string) => {
+        setCurrentCommunity(communityName);
+        setShowPopup(false);
+      };
 
+    const [communities, setCommunities] = useState<Community[]>([]);
+    
     useEffect(() => {
         fetch('/api/getCommunities')
           .then((response) => response.json())
@@ -36,7 +42,7 @@ export const Group = () => {
             <section className="flex justify-between bg-green-700 text-white font-bold py-2 px-4 rounded-md dark:bg-black">
                 <div>
                     <span className="font-bold text-left block">CURRENT GROUP</span>
-                    <span className="bg-green-700 text-white font-bold block">{get_current_community()}</span>
+                    <span className="bg-green-700 text-white font-bold block">{currentCommunity}</span>
                 </div>
 
                 <button className='bg-green-900 text-white font-bold p-2 rounded-md flex items-center justify-center' onClick={handleButtonClick}>Choose Other</button>
@@ -52,7 +58,7 @@ export const Group = () => {
                                 <button
                                     className="hover:bg-white/10 transition duration-200 rounded-3xl w-full flex items-center justify-left gap-2 p-1 text-white"
                                     key={index}
-                                    onClick={() => set_current_community(communities.community_name)}
+                                    onClick={() => handleCommunitySelection(communities.community_name)}
                                 >
                                     <VscCircleLargeFilled size={30} className={`${communities.community_name === "Personal" ? "text-red-500" : "text-green-500"}`} /> 
                                     {communities.community_name}
