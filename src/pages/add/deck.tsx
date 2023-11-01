@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import { useCurrentCommunity } from "@/pages/context/CurrentCommunityContext";
 
 const AddDeckPage = () => {
+    const { currentCommunity } = useCurrentCommunity();
+
     const [name, setName] = useState("");
     const [category, setCategory] = useState("");
     const [description, setDescription] = useState("");
@@ -9,11 +12,11 @@ const AddDeckPage = () => {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        await createDeck({ newDeckName: name, newDeckCategory: category, newDeckDescription: description });
+        await createDeck({ newDeckName: name, newDeckCategory: category, newDeckDescription: description, newDeckCommunity: currentCommunity });
         router.push('/');
     };
 
-    const createDeck = async (deck: { newDeckName: string, newDeckCategory: string, newDeckDescription: string }) => {
+    const createDeck = async (deck: { newDeckName: string, newDeckCategory: string, newDeckDescription: string, newDeckCommunity: string }) => {
         try {
             await fetch('/api/create/deck', {
                 method: 'POST',
@@ -27,7 +30,7 @@ const AddDeckPage = () => {
 
     return (
         <div className="flex flex-col w-full h-full justify-center items-center gap-3">
-            <h1>Add Deck</h1>
+            <h1>Add Deck to {currentCommunity}</h1>
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                 <div>
                     <label htmlFor="name">Name: </label>
