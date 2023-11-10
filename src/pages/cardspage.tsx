@@ -7,9 +7,29 @@ import { useState } from 'react';
 import ProfileBox from "@/components/_ui/ProfileBox";
 import CommentsPage from '@/components/_ui/Comments'
 import { motion, AnimatePresence } from "framer-motion"
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+
+
+interface CardInterface {
+    question: string
+    answer: string
+    rating: number
+    difficulty: number
+    id_deck: number
+}
 
 
 export default function CardsPage() {
+    const [index, setIndex] = useState(0);
+
+    function nextIndex() {
+        if (index < cards.length - 1) {
+            setIndex(index + 1);
+        } else {
+            setIndex(0);
+        }
+    }
 
     const [commentBox, setCommentBox] = useState(false); // Use useState for profile box
 
@@ -28,7 +48,31 @@ export default function CardsPage() {
     const toggleDarkMode = () => {
         setDarkMode(!darkMode);
     }
+    // ------------------
+    const router = useRouter();
 
+    const deck_name = router.query.deck_name;
+
+    const [cards, setCards] = useState<CardInterface[]>([]);
+
+    useEffect(() => {
+        async function getCards() {
+            try {
+                const response = await fetch('/api/getCards', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({deck_name: deck_name}),
+                });
+                const data = await response.json();
+                setCards(data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        getCards()
+    }, [router, deck_name])
+
+    // ----------------
 
     return (
 
@@ -66,7 +110,7 @@ export default function CardsPage() {
 
             <div className='pt-20 flex justify-center items-center'>
                 <div className="overflow-hidden flex-row rounded-[40px] border-black border-4 bg-gray-100 drop-shadow-lg p-[30px] w-[70%] h-fit items-center">
-                    <Cards showAnswer={answer}/>
+                    <Cards showAnswer={answer} index={index} cards={cards}/>
                 </div>
             </div>
             
@@ -90,7 +134,7 @@ export default function CardsPage() {
                 </button>
 
 
-                <button className="overflow-hidden bg-[#D9D9D9] hover:bg-gray-600 border-black border-2 text-white font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group">
+                <button onClick={nextIndex} className="overflow-hidden bg-[#D9D9D9] hover:bg-gray-600 border-black border-2 text-white font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group">
                     
                     < MdNavigateNext size={50} className="fill-black"/>
                     <span className="absolute rounded-full inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-gray-300 group-hover:translate-x-0 ease">
