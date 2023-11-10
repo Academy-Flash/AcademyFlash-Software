@@ -31,7 +31,7 @@ const CardsPage = () => {
             }
         }
         getCards()
-    }, [])
+    }, [cards])
 
     const [flippedCards, setFlippedCards] = useState<number[]>([]);
 

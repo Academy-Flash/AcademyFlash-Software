@@ -48,7 +48,7 @@ export const Decks = () => {
                     <Link
                         className="hover:bg-white/10 transition duration-200 rounded-3xl w-full flex items-center justify-left gap-2 p-1 text-white"
                         key={index}
-                        href={`/cardspage?deck_name=${deck.deck_name}`}
+                        href={`/cards?deck_name=${deck.deck_name}`}
                     >
                         <VscCircleLargeFilled size={30} className="fill-green-300" />
                         {deck.deck_name}
