@@ -4,11 +4,12 @@ import FeedbackCards from '@/components/_ui/FeedbackCard'
 import { Cards } from '@/components/_ui/Cards'
 import { BiSolidCommentDetail } from 'react-icons/bi'
 import { useState } from 'react';
-import ProfileBox from "@/components/_ui/ProfileBox";
+import Link from "next/link"
 import CommentsPage from '@/components/_ui/Comments'
 import { motion, AnimatePresence } from "framer-motion"
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { PiCards } from 'react-icons/pi';
 
 
 interface CardInterface {
@@ -21,7 +22,14 @@ interface CardInterface {
 
 
 export default function CardsPage() {
-    const [index, setIndex] = useState(0);
+    const router = useRouter(); // Use router to get the deck_name from the url
+    const [index, setIndex] = useState(0); // Use useState for index of the actual card
+    const [commentBox, setCommentBox] = useState(false); // Use useState for profile box
+    const [answer, setAnswer] = useState(false); // Use useState for Answer
+    const [darkMode, setDarkMode] = useState(false); // Use useState for dark mode
+    const [cards, setCards] = useState<CardInterface[]>([]); // Use useState for all the cards from de decks
+
+    const deck_name = router.query.deck_name;
 
     function nextIndex() {
         if (index < cards.length - 1) {
@@ -31,30 +39,31 @@ export default function CardsPage() {
         }
     }
 
-    const [commentBox, setCommentBox] = useState(false); // Use useState for profile box
-
     function toggleCommentBox() {
         setCommentBox(prevCommentBox => !prevCommentBox);
     }
 
-    const [answer, setAnswer] = useState(false); // Use useState for Answer
-
-    function toggleConfig() {
+    function toggleAnswer() {
       setAnswer(prevAnswer => !prevAnswer);
     }
 
-    const [darkMode, setDarkMode] = useState(false);
+    function toggleNext() {
+        if (answer){
+            toggleAnswer();
+        }
+        nextIndex();
+    }
 
     const toggleDarkMode = () => {
         setDarkMode(!darkMode);
     }
-    // ------------------
-    const router = useRouter();
 
-    const deck_name = router.query.deck_name;
-
-    const [cards, setCards] = useState<CardInterface[]>([]);
-
+    /* 
+        This useEffect hook is executing the getCards function when the component mounts and whenever 
+        the router or deck_name dependencies change. The getCards function makes a POST request to the 
+        /api/getCards endpoint with a JSON payload containing the deck_name property. If the request is 
+        successful, the response data is set to the cards state using the setCards function. 
+    */
     useEffect(() => {
         async function getCards() {
             try {
@@ -72,30 +81,19 @@ export default function CardsPage() {
         getCards()
     }, [router, deck_name])
 
-    // ----------------
 
     return (
 
         <main className="bg-gray-400 h-full w-full flex-col items-center justify-center">
             
-            <AnimatePresence initial={false}>
-                {commentBox ? (
-                <motion.div
-                    className="w-fit h-fit flex justify-center items-center absolute z-20 bg-black/50"
-                    initial={{ opacity: 0, x: '100%' }}
-                    animate={{ opacity: 1, x: '0%' }}
-                    exit={{ opacity: 0, x: '100%' }}
-                    transition={{ duration: 1, ease: 'easeInOut' }}
-                    style={{
-                    position: 'absolute',
-                    }}
-                >
-                    {/* Caixa de perfil */}
-                    <CommentsPage onToggle={toggleCommentBox} style={{ visibility: commentBox ? 'visible' : 'hidden' }} />
-
-                </motion.div>
-                ) : null}
-            </AnimatePresence>
+            {commentBox && (<div className='w-full h-full top-0 left-0 opacity-50 fixed bg-black z-20'></div>)}
+    
+            {commentBox && (
+                    <div className='h-[60%] w-[60%] flex justify-center fixed z-30 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+                    <CommentsPage onToggle={toggleCommentBox} style={{ visibility: commentBox ? 'visible' : 'hidden' }}/>
+                    </div>
+                
+            )} 
             
             <button
                 className={`overflow-hidden bg-[#D9D9D9] border-${darkMode ? 'white' : 'black'} border-2 hover:bg-gray-600 text-${darkMode ? 'white' : 'black'} font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group`}
@@ -126,7 +124,7 @@ export default function CardsPage() {
 
             <div className='relative mt-10 flex space-x-24 justify-center items-center'>
 
-                <button onClick={toggleConfig} className="overflow-hidden bg-[#D9D9D9] border-black border-2 hover:bg-gray-600 text-white font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group">
+                <button onClick={toggleAnswer} className="overflow-hidden bg-[#D9D9D9] border-black border-2 hover:bg-gray-600 text-white font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group">
                     < AiOutlineQuestionCircle size={40} className="fill-black"/>
                     <span className="absolute rounded-full inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-gray-300 group-hover:translate-x-0 ease">
                         <h1 className='text-black font-bold'>Answer</h1>
@@ -134,7 +132,7 @@ export default function CardsPage() {
                 </button>
 
 
-                <button onClick={nextIndex} className="overflow-hidden bg-[#D9D9D9] hover:bg-gray-600 border-black border-2 text-white font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group">
+                <button onClick={toggleNext} className="overflow-hidden bg-[#D9D9D9] hover:bg-gray-600 border-black border-2 text-white font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group">
                     
                     < MdNavigateNext size={50} className="fill-black"/>
                     <span className="absolute rounded-full inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-gray-300 group-hover:translate-x-0 ease">
@@ -142,11 +140,19 @@ export default function CardsPage() {
                     </span>
                 </button>
 
+                <Link 
+                    className="overflow-hidden bg-[#D9D9D9] hover:bg-gray-600 border-black border-2 text-white font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group"
+                    href={`/cards?deck_name=${deck_name}`}
+                >
+                    
+                    < PiCards size={50} className="fill-black"/>
+                    <span className="absolute rounded-full inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-gray-300 group-hover:translate-x-0 ease">
+                        <h1 className='text-black font-bold'>All</h1>
+                    </span>
+                </Link>
+
             </div>
 
-
-
-        
         </main>
 
     )
