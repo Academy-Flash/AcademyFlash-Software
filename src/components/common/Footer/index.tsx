@@ -1,5 +1,6 @@
 import { PiHouseSimpleFill } from 'react-icons/pi'
 import { BsFillPeopleFill } from 'react-icons/bs'
+import { RiArrowGoBackFill } from 'react-icons/ri'
 import { AiOutlinePlusSquare } from 'react-icons/ai'
 import { VscFileSymlinkDirectory } from 'react-icons/vsc'
 import { AiFillSmile } from 'react-icons/ai'
@@ -12,6 +13,10 @@ interface Icons {
 }
 
 const actions = [
+    {
+        title: 'Back',
+        icon: RiArrowGoBackFill,
+    },
     {
         title: 'Community',
         icon: AiOutlinePlusSquare,
@@ -71,6 +76,11 @@ export const Footer = () => {
     }
 
     const handleAddAction = (item: Icons) => {
+        if (item.title === "Back") {
+            setShowAddMenu(false);
+            return;
+        }
+        
         setShowAddMenu(false)
         router.push("/add/" + item.title.toLowerCase());
     }
