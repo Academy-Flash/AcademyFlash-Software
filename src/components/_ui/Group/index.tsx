@@ -39,13 +39,24 @@ export const Group = () => {
 
     return (
         <>
-            <section className="flex justify-between bg-green-700 text-white font-bold py-2 px-4 rounded-md dark:bg-black">
+            <section 
+                className="flex justify-between text-white font-bold py-2 px-4 rounded-md dark:bg-black"
+                style={{ backgroundColor: '#215A36' }}
+            >
                 <div>
                     <span className="font-bold text-left block">CURRENT GROUP</span>
-                    <span className="bg-green-700 text-white font-bold block">{currentCommunity}</span>
+                    <span className="bg-green-700 text-white font-bold block" style={{ backgroundColor: '#215A36' }} >
+                        {currentCommunity}
+                    </span>
                 </div>
 
-                <button className='bg-green-900 text-white font-bold p-2 rounded-md flex items-center justify-center' onClick={handleButtonClick}>Choose Other</button>
+                <button 
+                    className='bg-green-900 text-white font-bold p-2 rounded-md flex items-center justify-center' 
+                    onClick={handleButtonClick}
+                    style={{ backgroundColor: '#11301C' }}
+                >
+                        Choose Other
+                </button>
             
             </section>
 

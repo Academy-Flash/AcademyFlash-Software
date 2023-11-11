@@ -76,7 +76,7 @@ export const Footer = () => {
     }
 
     return (
-        <footer className="bg-red-700 dark:bg-red-900 flex p-2 w-[80%] h-16 fixed bottom-0 left-[10%]">
+        <footer className="flex p-2 w-[80%] h-16 fixed bottom-0 left-[10%]" style={{backgroundColor : '#1F1640'}}>
 
             {showAddMenu ?
                 (

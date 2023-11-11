@@ -42,7 +42,7 @@ export const Decks = () => {
         }, [currentCommunity]);
 
     return (
-        <section className="flex bg-neutral-500 w-full font-bold p-2 rounded-md flex-col gap-3">
+        <section className="flex w-full font-bold p-2 rounded-md flex-col gap-3" style={{ backgroundColor: '#575369'}}>
             {decks.length > 0 ? (
                 decks.map((deck, index) => (
                     <Link
@@ -50,7 +50,7 @@ export const Decks = () => {
                         key={index}
                         href={`/cardspage?deck_name=${deck.deck_name}`}
                     >
-                        <VscCircleLargeFilled size={30} className="fill-green-300" />
+                        <VscCircleLargeFilled size={30} style={{ color : '#933E1F'}} />
                         {deck.deck_name}
                     </Link>
                 ))
