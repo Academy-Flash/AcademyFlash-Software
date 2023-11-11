@@ -54,9 +54,9 @@ const AddCardPage = () => {
     return (
         <div className="flex flex-col h-full w-full justify-center items-center gap-6">
             <h1 className="text-3xl font-bold mb-4">Add Card</h1>
-            <form onSubmit={handleSubmit} className="w-full max-w-md bg-white p-6 rounded-md shadow-md">
+            <form onSubmit={handleSubmit} className="w-full max-w-md p-6 rounded-md shadow-md" style={{backgroundColor : '#575369'}}>
                 <div className="mb-4">
-                    <label htmlFor="front" className="text-gray-600">Question:</label>
+                    <label htmlFor="front" className="text-white">Question:</label>
                     <input
                         type="text"
                         id="front"
@@ -66,7 +66,7 @@ const AddCardPage = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="back" className="text-gray-600">Answer:</label>
+                    <label htmlFor="back" className="text-white">Answer:</label>
                     <input
                         type="text"
                         id="back"
@@ -76,7 +76,7 @@ const AddCardPage = () => {
                     />
                 </div>
                 <div className="flex items-center gap-3">
-                    <label htmlFor="deck" className="text-gray-600">Deck:</label>
+                    <label htmlFor="deck" className="text-white">Deck:</label>
                     <select
                         id="deck"
                         value={selectedDeck}
@@ -91,7 +91,7 @@ const AddCardPage = () => {
                         ))}
                     </select>
                 </div>
-                <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue mt-4">
+                <button type="submit" className="w-full bg-violet-900 text-white py-2 px-4 rounded-md hover:bg-violet-950 focus:outline-none focus:shadow-outline-blue mt-4">
                     Save
                 </button>
             </form>
