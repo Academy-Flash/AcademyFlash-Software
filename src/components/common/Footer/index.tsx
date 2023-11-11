@@ -89,20 +89,19 @@ export const Footer = () => {
         <footer className="flex p-2 w-[80%] h-16 fixed bottom-0 left-[10%]" style={{backgroundColor : '#1F1640'}}>
 
             {showAddMenu ?
-                (
-                    <div className='flex justify-around w-full'>
-                        {actions.map((item) => (
-                            <button
-                                className='hover:bg-white/10 transition duration-200 rounded-3xl'
-                                key={item.title}
-                                onClick={() => handleAddAction(item)}
-                            >
-                                <div><item.icon size={25} className=' fill-yellow-500 border-black ' /> </div>
-                                <div className="text-yellow-500"> {item.title} </div>
-                            </button>
-                        ))}
-                    </div>
-                )
+                
+
+                (actions.map((item) => (
+                    <button
+                        className='hover:bg-white/10 transition duration-200 rounded-3xl flex flex-col items-center justify-center w-1/4'
+                        key={item.title}
+                        onClick={() => handleAddAction(item)}
+                    >
+                        <div><item.icon size={25} className=' fill-yellow-500 border-black ' /> </div>
+                        <div className="text-yellow-500"> {item.title} </div>
+                    </button>
+                )))
+                
 
                 :
 
