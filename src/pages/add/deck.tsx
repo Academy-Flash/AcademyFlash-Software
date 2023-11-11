@@ -4,7 +4,7 @@ import { useCurrentCommunity } from "@/pages/context/CurrentCommunityContext";
 
 const AddDeckPage = () => {
     const { currentCommunity } = useCurrentCommunity();
-
+    const [error, setError] = useState('');
     const [name, setName] = useState("");
     const [category, setCategory] = useState("");
     const [description, setDescription] = useState("");
@@ -12,6 +12,10 @@ const AddDeckPage = () => {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        if (!name || !description) {
+            setError('Please fill in all fields');
+            return;
+        }
         await createDeck({ newDeckName: name, newDeckCategory: category, newDeckDescription: description, newDeckCommunity: currentCommunity });
         router.push('/');
     };
@@ -51,7 +55,8 @@ const AddDeckPage = () => {
                         className="w-full px-3 py-2 border text-black border-gray-300 rounded-md"
                     />
                 </div>
-                <button type="submit" className="w-full bg-violet-950 text-white py-2 px-4 rounded-md hover:bg-violet-950/70 focus:outline-none focus:shadow-outline-blue">
+                {error && <p className="flex pb-5 justify-center text-purple-300">{error}</p>}
+                <button type="submit" className="w-full bg-violet-950 text-white py-2 px-4 rounded-md hover:bg-violet-950/70">
                     Create Deck
                 </button>
             </form>

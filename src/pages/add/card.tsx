@@ -16,7 +16,8 @@ const AddCardPage = () => {
     const [decks, setDecks] = useState<Deck[]>([]);
     const [selectedDeck, setSelectedDeck] = useState('');
     const [isPopupOpen, setIsPopupOpen] = useState(false);
-    
+    const [error, setError] = useState('');
+
     const router = useRouter();
 
     useEffect(() => {
@@ -34,6 +35,10 @@ const AddCardPage = () => {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        if (!front || !back || !selectedDeck) {
+            setError('Please fill in all fields');
+            return;
+        }
         const card = { front, back, deck: selectedDeck };
         await createCard(card);
         router.push('/');
@@ -91,7 +96,10 @@ const AddCardPage = () => {
                         ))}
                     </select>
                 </div>
-                <button type="submit" className="w-full bg-violet-950 text-white py-2 px-4 rounded-md hover:bg-violet-950/70 focus:outline-none focus:shadow-outline-blue mt-4">
+
+                {error && <p className="pt-5 flex justify-center text-purple-300">{error}</p>}
+
+                <button type="submit" className="w-full bg-violet-950 text-white py-2 px-4 rounded-md hover:bg-violet-950/70 mt-4">
                     Save
                 </button>
             </form>
