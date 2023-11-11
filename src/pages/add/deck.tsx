@@ -29,29 +29,31 @@ const AddDeckPage = () => {
     }
 
     return (
-        <div className="flex flex-col w-full h-full justify-center items-center gap-3">
-            <h1>Add Deck to {currentCommunity}</h1>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-                <div>
-                    <label htmlFor="name">Name: </label>
+        <div className="flex flex-col w-full h-full justify-center items-center gap-6">
+            <h1 className="text-3xl font-bold mb-4">Add Deck to {currentCommunity}</h1>
+            <form onSubmit={handleSubmit} className="w-full max-w-md bg-white p-6 rounded-md shadow-md">
+                <div className="mb-4">
+                    <label htmlFor="name" className="text-gray-600">Name:</label>
                     <input
                         type="text"
                         id="name"
                         value={name}
                         onChange={(event) => setName(event.target.value)}
-                        className="text-black"
+                        className="w-full px-3 py-2 text-black border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     />
                 </div>
-                <div>
-                    <label htmlFor="description">Description: </label>
+                <div className="mb-4">
+                    <label htmlFor="description" className="text-gray-600">Description:</label>
                     <textarea
                         id="description"
                         value={description}
                         onChange={(event) => setDescription(event.target.value)}
-                        className="text-black"
+                        className="w-full px-3 py-2 border text-black border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     />
                 </div>
-                <button type="submit">Create Deck</button>
+                <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue">
+                    Create Deck
+                </button>
             </form>
         </div>
     );
