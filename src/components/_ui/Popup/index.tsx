@@ -33,7 +33,7 @@ const Popup: React.FC<PopupProps> = ({ isOpen, setIsOpen }) => {
     <>
       <button
           type="button"
-          className="bg-violet-900 text-white rounded-md py-2 px-4 hover:bg-violet-950 focus:outline-none focus:shadow-outline-blue"
+          className="bg-violet-950 text-white rounded-md py-2 px-4 hover:bg-violet-950/70 focus:outline-none focus:shadow-outline-blue"
           onClick={() => setIsOpen(true)}
       >
           Create a new deck

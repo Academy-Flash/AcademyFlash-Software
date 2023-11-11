@@ -39,7 +39,7 @@ const AddDeckPage = () => {
                         id="name"
                         value={name}
                         onChange={(event) => setName(event.target.value)}
-                        className="w-full px-3 py-2 text-black border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                        className="w-full px-3 py-2 text-black border border-gray-300 rounded-md "
                     />
                 </div>
                 <div className="mb-4">
@@ -48,10 +48,10 @@ const AddDeckPage = () => {
                         id="description"
                         value={description}
                         onChange={(event) => setDescription(event.target.value)}
-                        className="w-full px-3 py-2 border text-black border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                        className="w-full px-3 py-2 border text-black border-gray-300 rounded-md"
                     />
                 </div>
-                <button type="submit" className="w-full bg-violet-900 text-white py-2 px-4 rounded-md hover:bg-violet-950 focus:outline-none focus:shadow-outline-blue">
+                <button type="submit" className="w-full bg-violet-950 text-white py-2 px-4 rounded-md hover:bg-violet-950/70 focus:outline-none focus:shadow-outline-blue">
                     Create Deck
                 </button>
             </form>
