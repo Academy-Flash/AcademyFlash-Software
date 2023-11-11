@@ -1,4 +1,6 @@
-import { Card, CardContent, Typography } from '@mui/material';
+
+import { Button, Card, CardContent, Typography } from '@mui/material';
+import { AiFillEdit } from 'react-icons/ai';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -33,39 +35,34 @@ const CardsPage = () => {
         getCards()
     }, [cards])
 
-    const [flippedCards, setFlippedCards] = useState<number[]>([]);
-
-    const handleCardClick = (index: number) => {
-        if (flippedCards.includes(index)) {
-            setFlippedCards(flippedCards.filter((i) => i !== index));
-        } else {
-            setFlippedCards([...flippedCards, index]);
-        }
-    };
+    const handleEdit = (cardId: number) => {
+        // Implement the edit logic here
+        console.log('Edit card with id:', cardId);
+    }
 
     return (
-        <div className='flex flex-col h-full w-full gap-3 p-10'>
+        <div>
             {cards.map((card, index) => (
-                <Card 
-                    key={index} 
-                    onClick={() => handleCardClick(index)} 
-                    sx={{ cursor: 'pointer', transform: flippedCards.includes(index) ? 'rotateY(180deg)' : 'none' }} 
-                >
+                <Card key={index} sx={{ minWidth: 275, boxShadow: 3, '&:hover': { boxShadow: 6 }, borderRadius: 2, mb: 2 }}>
                     <CardContent>
-                        <Typography variant="h5" component="h2">
+                        <Typography variant="h5" component="div">
                             {card.question}
                         </Typography>
-                    </CardContent>
-                    <CardContent sx={{ transform: 'rotateY(180deg)' }}>
-                        <Typography color="textSecondary">
+                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
                             {card.answer}
                         </Typography>
+                        <Button
+                            startIcon={<AiFillEdit />}
+                            size="small"
+                            onClick={() => handleEdit(card.id_deck)}
+                        >
+                            Editar
+                        </Button>
                     </CardContent>
                 </Card>
             ))}
         </div>
     );
-};
-
+}
 
 export default CardsPage;
