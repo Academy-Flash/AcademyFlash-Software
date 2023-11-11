@@ -52,36 +52,36 @@ const AddCardPage = () => {
     }
 
     return (
-        <div className='flex flex-col h-full w-full justify-center items-center gap-3'>
-            <h1>Add Card</h1>
-            <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
-                <div>
-                    <label htmlFor="front">Front: </label>
+        <div className="flex flex-col h-full w-full justify-center items-center gap-6">
+            <h1 className="text-3xl font-bold mb-4">Add Card</h1>
+            <form onSubmit={handleSubmit} className="w-full max-w-md bg-white p-6 rounded-md shadow-md">
+                <div className="mb-4">
+                    <label htmlFor="front" className="text-gray-600">Question:</label>
                     <input
                         type="text"
                         id="front"
                         value={front}
-                        className='text-black'
                         onChange={(event) => setFront(event.target.value)}
+                        className="w-full px-3 py-2 border text-black border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     />
                 </div>
-                <div>
-                    <label htmlFor="back">Back: </label>
+                <div className="mb-4">
+                    <label htmlFor="back" className="text-gray-600">Answer:</label>
                     <input
                         type="text"
                         id="back"
                         value={back}
-                        className='text-black'
                         onChange={(event) => setBack(event.target.value)}
+                        className="w-full px-3 py-2 border text-black border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                     />
                 </div>
-                <div className='flex gap-3'>
-                    <label htmlFor="deck">Deck: </label>
+                <div className="flex items-center gap-3">
+                    <label htmlFor="deck" className="text-gray-600">Deck:</label>
                     <select
                         id="deck"
                         value={selectedDeck}
                         onChange={(event) => setSelectedDeck(event.target.value)}
-                        className='text-black'
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-black"
                     >
                         <option value="">Select a deck</option>
                         {decks.map((deck) => (
@@ -91,10 +91,13 @@ const AddCardPage = () => {
                         ))}
                     </select>
                 </div>
-                <button type="submit">Save</button>
+                <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue mt-4">
+                    Save
+                </button>
             </form>
             <Popup isOpen={isPopupOpen} setIsOpen={setIsPopupOpen} />
         </div>
+
     );
 };
 
