@@ -31,11 +31,27 @@ export const Group = () => {
     
     useEffect(() => {
         fetch('/api/getCommunities')
-          .then((response) => response.json())
+          .then((response) => {
+            // Verifica se a resposta da API é bem-sucedida
+            if (!response.ok) {
+              throw new Error(`Erro: ${response.status}`); // Lança um erro se a resposta não for bem-sucedida
+            }
+            return response.json();
+          })
           .then((data) => {
-            setCommunities(data)
+            // Verifica se os dados estão no formato esperado
+            if (Array.isArray(data)) {
+              setCommunities(data);
+            } else {
+              console.error('Formato de dados inesperado:', data);
+            }
+          })
+          .catch((error) => {
+            // Captura erros de rede e erros durante o processamento da resposta
+            console.error('Falha ao buscar comunidades:', error);
           });
       }, []);
+      
 
     return (
         <>

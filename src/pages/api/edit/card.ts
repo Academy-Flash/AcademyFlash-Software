@@ -19,7 +19,6 @@ export default async function handler(
         rating: req.body.rating
       };
       
-
     const updatedCard = await prisma.cards.update({
       where: { id: cardId },
       data: updatedData,

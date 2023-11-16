@@ -25,18 +25,29 @@ const CardsPage = () => {
     useEffect(() => {
         async function getCards() {
             try {
-                await fetch('/api/getCards', {
+                const response = await fetch('/api/getCards', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({deck_name: deck_name}),
-                }).then((response) => response.json())
-                .then((data) => setCards(data));
+                    body: JSON.stringify({ deck_name: deck_name }),
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    // Certifique-se de que data é uma array antes de definir o estado
+                    if (Array.isArray(data)) {
+                        setCards(data);
+                    } else {
+                        console.error('Os dados recebidos não são uma array');
+                    }
+                } else {
+                    console.error('Falha ao buscar os cards');
+                }
             } catch (error) {
-                console.error(error);
+                console.error('Erro ao buscar os cards:', error);
             }
         }
-        getCards()
-    }, [cards])
+        getCards();
+    }, [deck_name]);
 
     const handleEditClick = (card: CardInterface) => {
         setCurrentCard(card);
@@ -103,7 +114,7 @@ const CardsPage = () => {
                         fullWidth
                         variant="standard"
                         value={currentCard?.question || ''}
-                        onChange={(e) => setCurrentCard(currentCard ? { ...currentCard, answer: e.target.value } : null)}
+                        onChange={(e) => setCurrentCard(currentCard ? { ...currentCard, question: e.target.value } : null)}
 
 
                     />
