@@ -12,66 +12,72 @@ interface Deck {
     description: string;
 }
 
-export const Search = () => {
+interface SearchProps {
+    onSearch: (data: string) => void;
+}
+
+export const Search: React.FC<SearchProps> = ({onSearch}) => {
     const [input, setInput] = useState('');
+
     const [decks, setDecks] = useState<Deck[]>([]);
     const { currentCommunity, setCurrentCommunity  } = useCurrentCommunity();
 
     const router = useRouter();
     const search = useSearchParams();
 
-    useEffect(() => {
-        async function getDecks() {
-            try {
-            const response = await fetch('/api/getCommunityDecks', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ com_name: currentCommunity}), // Use get_current_community() here
-            });
-    
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-    
-            const data = await response.json();
-            setDecks(data);
-            console.log(data)
-            } catch (error) {
-                console.error('Error fetching decks:', error);
-            }
-        }
-        getDecks();
-        }, [currentCommunity]);
-
-    // async function handleSearch(event: React.FormEvent) {
-    //     if (input === '') {
-    //         alert('Digite alguma coisa')
-    //         return
-    //     } else {
+    // useEffect(() => {
+    //     async function getDecks() {
     //         try {
-    //             const encodedInput = encodeURIComponent(input);
-    //             router.push(`/index?q=${encodedInput}`)
-
-    //             const searchQuery = search ? search.get("q") : null;
-
-    //             const endodedSearchQuery = encodeURIComponent(searchQuery || '');
-                
-
-    //             event.preventDefault();
-    //             setInput('')
+    //         const response = await fetch('/api/getCommunityDecks', {
+    //             method: 'POST',
+    //             headers: { 'Content-Type': 'application/json' },
+    //             body: JSON.stringify({ com_name: currentCommunity}), // Use get_current_community() here
+    //         });
+    
+    //         if (!response.ok) {
+    //             throw new Error('Network response was not ok');
+    //         }
+    
+    //         const data = await response.json();
+    //         setDecks(data);
+    //         console.log(data)
     //         } catch (error) {
-    //             alert('Card não encontrado')
-    //             setInput('') /* Limpa o campo */
+    //             console.error('Error fetching decks:', error);
     //         }
     //     }
-    // }
+    //     getDecks();
+    //     }, [currentCommunity]);
+
+    async function handleSearch(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        
+        if (input === '') {
+            alert('Digite alguma coisa')
+            return
+        } else {
+            try {
+                // const encodedInput = encodeURIComponent(input);
+                // const response = await fetch(`/api/search?query=${encodedInput}`);
+                // router.push(`/index?q=${encodedInput}`)
+
+                // const searchQuery = search ? search.get("q") : null;
+
+                // const endodedSearchQuery = encodeURIComponent(searchQuery || '');
+                
+
+                onSearch(input)
+            } catch (error) {
+                alert('Card não encontrado')
+                setInput('') /* Limpa o campo */
+            }
+        }
+    }
 
     return (
 
         <section className='bg-blue-400 text-white font-bold p-2 rounded-md'>
             
-            {/* <form className="flex" onSubmit={handleSearch}></form> */}
-            <form className="flex" >
+            <form className="flex" onSubmit={handleSearch}>
             {/* <button className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mx-2' onClick={handleSearch}> */}
                 <button className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mx-2' >
                     <FiSearch size={20} />

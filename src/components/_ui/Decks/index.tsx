@@ -4,7 +4,7 @@ import Link from "next/link"
 import useCommunity from '@/pages/api/getCurrentCommunity';
 import { useCurrentCommunity } from '@/pages/context/CurrentCommunityContext';
 
-interface Deck {
+export interface Deck {
     id: number;
     deck_name: string;
     rating: number;
