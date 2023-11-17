@@ -69,6 +69,9 @@ export const Footer = () => {
             case "Menu":
                 router.push("/");
                 break;
+            case "Community":
+                router.push("/comunidades");
+                break;
             default:
                 router.push("/" + item.title.toLowerCase());
                 break;
