@@ -17,6 +17,7 @@ interface Community {
     date_creation: Date;
     user_count: number;
     card_count: number;
+    URL_image: string;
 }
 
 interface Deck {

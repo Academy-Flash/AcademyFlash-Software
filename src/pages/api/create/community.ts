@@ -9,11 +9,12 @@ export default async function handler(
     try {
         const community = await prisma.communities.create({
             data: {
-                community_name: req.body.community_name,
+                community_name: req.body.communityName,
                 description: req.body.description,
                 date_creation: new Date(),
                 user_count: 1,
-                card_count: 0
+                card_count: 0,
+                // URL_image: req.body.image,
             }
         })    
     
