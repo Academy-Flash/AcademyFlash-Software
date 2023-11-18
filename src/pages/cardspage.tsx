@@ -6,7 +6,6 @@ import { BiSolidCommentDetail } from 'react-icons/bi'
 import { useState } from 'react';
 import Link from "next/link"
 import CommentsPage from '@/components/_ui/Comments'
-import { motion, AnimatePresence } from "framer-motion"
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { PiCards } from 'react-icons/pi';
@@ -79,12 +78,12 @@ export default function CardsPage() {
             }
         }
         getCards()
-    }, [router, deck_name])
+    }, [deck_name])
 
 
     return (
 
-        <main className="bg-gray-400 h-full w-full flex-col items-center justify-center">
+        <main className="h-full w-full flex-col items-center justify-center">
             
             {commentBox && (<div className='w-full h-full top-0 left-0 opacity-50 fixed bg-black z-20'></div>)}
     
@@ -95,17 +94,6 @@ export default function CardsPage() {
                 
             )} 
             
-            <button
-                className={`overflow-hidden bg-[#D9D9D9] border-${darkMode ? 'white' : 'black'} border-2 hover:bg-gray-600 text-${darkMode ? 'white' : 'black'} font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group`}
-                onClick={toggleDarkMode}
-            >
-                <AiOutlineQuestionCircle size={40} className={`fill-${darkMode ? 'white' : 'black'}`} />
-                <span className={`absolute rounded-full inset-0 flex items-center justify-center w-full h-full text-${darkMode ? 'white' : 'black'} duration-300 -translate-x-full bg-gray-300 group-hover:translate-x-0 ease`}>
-                    <h1 className={`text-${darkMode ? 'black' : 'white'} font-bold`}>Toggle</h1>
-                </span>
-            </button>
-
-
             <div className='pt-20 flex justify-center items-center'>
                 <div className="overflow-hidden flex-row rounded-[40px] border-black border-4 bg-gray-100 drop-shadow-lg p-[30px] w-[70%] h-fit items-center">
                     <Cards showAnswer={answer} index={index} cards={cards}/>

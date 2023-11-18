@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { useCurrentCommunity } from "@/pages/context/CurrentCommunityContext";
+import { useCurrentCommunity } from "@/context/CurrentCommunityContext";
 
 const AddDeckPage = () => {
     const { currentCommunity } = useCurrentCommunity();

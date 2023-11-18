@@ -8,8 +8,6 @@ export default async function handler(
 ) {
 
   try {
-    console.log(req.body);
-
     const deck = await prisma.decks.create({
         data: {
             deck_name: req.body.newDeckName,
@@ -18,8 +16,6 @@ export default async function handler(
             rating: 1,
         }
     })    
-
-    console.log(deck);
 
     const community = await prisma.communities.findFirst({
         where: {
@@ -31,16 +27,12 @@ export default async function handler(
       return res.status(404).json({ error: 'Community not found' });
     }
 
-    console.log(community);
-
     const community_deck = await prisma.community_decks.create({
         data: {
             id_decks : deck.id,
             id_community: community.id,
         }
     })
-
-    console.log(community_deck);
 
     res.status(200).json( {ok: true} );
   } catch (error) {

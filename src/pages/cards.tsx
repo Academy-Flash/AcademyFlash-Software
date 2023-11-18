@@ -69,7 +69,6 @@ const CardsPage = () => {
             if (response.ok) {
                 const updatedCard = await response.json();
                 setCards(cards.map(card => card.id === updatedCard.id ? updatedCard : card));
-                console.log('Card atualizado com sucesso!');
             } else {
                 console.error('Falha ao atualizar o card');
             }

@@ -1,8 +1,6 @@
 import { VscCircleLargeFilled } from 'react-icons/vsc'
-import { useEffect, useState } from "react";
 import Link from "next/link"
-import useCommunity from '@/pages/api/getCurrentCommunity';
-import { useCurrentCommunity } from '@/pages/context/CurrentCommunityContext';
+import { useCurrentCommunity } from '@/context/CurrentCommunityContext';
 
 export interface Deck {
     id: number;
@@ -13,38 +11,12 @@ export interface Deck {
 }
 
 export const Decks = () => {
-
-    const [decks, setDecks] = useState<Deck[]>([]);
-    const { currentCommunity, setCurrentCommunity  } = useCurrentCommunity();
-    
-    useEffect(() => {
-        async function getDecks() {
-            try {
-            const response = await fetch('/api/getCommunityDecks', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ com_name: currentCommunity}), // Use get_current_community() here
-            });
-    
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-    
-            const data = await response.json();
-            setDecks(data);
-            console.log(data)
-            } catch (error) {
-                console.error('Error fetching decks:', error);
-            }
-        }
-    
-        getDecks();
-        }, [currentCommunity]);
+    const { communityDecks } = useCurrentCommunity();
 
     return (
         <section className="flex w-full font-bold p-2 rounded-md flex-col gap-3" style={{ backgroundColor: '#575369'}}>
-            {decks.length > 0 ? (
-                decks.map((deck, index) => (
+            {communityDecks.length > 0 ? (
+                communityDecks.map((deck, index) => (
                     <Link
                         className="hover:bg-white/10 transition duration-200 rounded-3xl w-full flex items-center justify-left gap-2 p-1 text-white"
                         key={index}
