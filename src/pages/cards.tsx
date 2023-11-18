@@ -1,104 +1,141 @@
-import { AiOutlineQuestionCircle } from 'react-icons/ai'
-import { MdNavigateNext } from 'react-icons/md'
-import FeedbackCards from '@/components/_ui/FeedbackCard'
-import { Cards } from '@/components/_ui/Cards'
-import { BiSolidCommentDetail } from 'react-icons/bi'
-import { useState } from 'react';
-import ProfileBox from "@/components/_ui/ProfileBox";
-import CommentsPage from '@/components/Comments'
-import { motion, AnimatePresence } from "framer-motion"
 
+import { Button, Card, CardContent, Typography, Dialog, DialogTitle, DialogContent, TextField, DialogActions } from '@mui/material';
+import { MdEdit } from 'react-icons/md';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
+interface CardInterface {
+    id: any;
+    question: string
+    answer: string
+    rating: number
+    difficulty: number
+    id_deck: number
+}
 
-export default function CardsPage() {
+const CardsPage = () => {
+    const router = useRouter();
 
-    const [commentBox, setCommentBox] = useState(false); // Use useState for profile box
+    const deck_name = router.query.deck_name;
 
-    function toggleCommentBox() {
-        setCommentBox(prevCommentBox => !prevCommentBox);
+    const [cards, setCards] = useState<CardInterface[]>([]);
+    const [editModalOpen, setEditModalOpen] = useState(false);
+    const [currentCard, setCurrentCard] = useState<CardInterface | null>(null);
+
+    useEffect(() => {
+        async function getCards() {
+            try {
+                const response = await fetch('/api/getCards', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ deck_name: deck_name }),
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    // Certifique-se de que data é uma array antes de definir o estado
+                    if (Array.isArray(data)) {
+                        setCards(data);
+                    } else {
+                        console.error('Os dados recebidos não são uma array');
+                    }
+                } else {
+                    console.error('Falha ao buscar os cards');
+                }
+            } catch (error) {
+                console.error('Erro ao buscar os cards:', error);
+            }
+        }
+        getCards();
+    }, [deck_name]);
+
+    const handleEditClick = (card: CardInterface) => {
+        setCurrentCard(card);
+        setEditModalOpen(true);
     }
 
-    const [darkMode, setDarkMode] = useState(false);
-
-    const toggleDarkMode = () => {
-        setDarkMode(!darkMode);
+    const handleClose = () => {
+        setEditModalOpen(false);
+        setCurrentCard(null);
     }
+    const handleSave = async () => {
+        try {
+            const response = await fetch('/api/edit/card', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(currentCard),
+            });
 
+            if (response.ok) {
+                const updatedCard = await response.json();
+                setCards(cards.map(card => card.id === updatedCard.id ? updatedCard : card));
+            } else {
+                console.error('Falha ao atualizar o card');
+            }
+        } catch (error) {
+            console.error('Erro ao atualizar o card:', error);
+        } finally {
+            handleClose();
+        }
+    };
 
     return (
+        <div>
+            {cards.map((card, index) => (
+                <Card key={index} sx={{ minWidth: 275, boxShadow: 3, '&:hover': { boxShadow: 6 }, borderRadius: 2, mb: 2 }}>
+                    <CardContent>
+                        <Typography variant="h5" component="div">
+                            {card.question}
+                        </Typography>
+                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                            {card.answer}
+                        </Typography>
+                        <Button
+                            startIcon={<MdEdit />}
+                            size="small"
+                            onClick={() => handleEditClick(card)}
+                        >
+                            Editar
+                        </Button>
+                    </CardContent>
+                </Card>
+            ))}
 
-        <main className="bg-gray-400 h-full w-full flex-col items-center justify-center">
-            
-            <AnimatePresence initial={false}>
-                {commentBox ? (
-                <motion.div
-                    className="w-fit h-fit flex justify-center items-center absolute z-20 bg-black/50"
-                    initial={{ opacity: 0, x: '100%' }}
-                    animate={{ opacity: 1, x: '0%' }}
-                    exit={{ opacity: 0, x: '100%' }}
-                    transition={{ duration: 1, ease: 'easeInOut' }}
-                    style={{
-                    position: 'absolute',
-                    }}
-                >
-                    {/* Caixa de perfil */}
-                    <CommentsPage onToggle={toggleCommentBox} style={{ visibility: commentBox ? 'visible' : 'hidden' }} />
-
-                </motion.div>
-                ) : null}
-            </AnimatePresence>
-            
-            <button
-                className={`overflow-hidden bg-[#D9D9D9] border-${darkMode ? 'white' : 'black'} border-2 hover:bg-gray-600 text-${darkMode ? 'white' : 'black'} font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group`}
-                onClick={toggleDarkMode}
-            >
-                <AiOutlineQuestionCircle size={40} className={`fill-${darkMode ? 'white' : 'black'}`} />
-                <span className={`absolute rounded-full inset-0 flex items-center justify-center w-full h-full text-${darkMode ? 'white' : 'black'} duration-300 -translate-x-full bg-gray-300 group-hover:translate-x-0 ease`}>
-                    <h1 className={`text-${darkMode ? 'black' : 'white'} font-bold`}>Toggle</h1>
-                </span>
-            </button>
-
-
-            <div className='pt-20 flex justify-center items-center'>
-                <div className="overflow-hidden flex-row rounded-[40px] border-black border-4 bg-gray-100 drop-shadow-lg p-[30px] w-[70%] h-[70%] items-center">
-                    <Cards />
-                </div>
-            </div>
-            
-            <div className='flex justify-center items-center space-x-2'>
-                <div className='bg-[#D9D9D9] mt-5 w-fit h-fit rounded-full shadow-lg shadow-black/60 border-black border-2'>
-                    <FeedbackCards />
-                </div>
-                <button onClick={toggleCommentBox} className='mt-5 bg-[#D9D9D9] rounded-full hover:bg-white/30 p-2 cursor-pointer transition duration-200 border-black border-2' >
-                    <BiSolidCommentDetail className='fill-black' size={20} />
-                </button>
-            </div>
+            <Dialog open={editModalOpen} onClose={handleClose}>
+                <DialogTitle>Edit Card</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="question"
+                        label="Question"
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        value={currentCard?.question || ''}
+                        onChange={(e) => setCurrentCard(currentCard ? { ...currentCard, question: e.target.value } : null)}
 
 
-            <div className='relative mt-10 flex space-x-24 justify-center items-center'>
+                    />
+                    <TextField
+                        margin="dense"
+                        id="answer"
+                        label="Answer"
+                        type="text"
+                        fullWidth
+                        variant="standard"
+                        value={currentCard?.answer || ''}
+                        onChange={(e) => setCurrentCard(currentCard ? { ...currentCard, answer: e.target.value } : null)}
 
-                <button className="overflow-hidden bg-[#D9D9D9] border-black border-2 hover:bg-gray-600 text-white font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group">
-                    < AiOutlineQuestionCircle size={40} className="fill-black"/>
-                    <span className="absolute rounded-full inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-gray-300 group-hover:translate-x-0 ease">
-                        <h1 className='text-black font-bold'>Answer</h1>
-                    </span>
-                </button>
-
-
-                <button className="overflow-hidden bg-[#D9D9D9] hover:bg-gray-600 border-black border-2 text-white font-semibold rounded-full w-16 h-16 flex justify-center items-center relative transition duration-300 ease-out shadow-md group">
-                    
-                    < MdNavigateNext size={50} className="fill-black"/>
-                    <span className="absolute rounded-full inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-gray-300 group-hover:translate-x-0 ease">
-                        <h1 className='text-black font-bold'>Next</h1>
-                    </span>
-                </button>
-
-            </div>
-
-
-
-        
-        </main>
-
-    )
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={handleSave}>Save</Button>
+                </DialogActions>
+            </Dialog>
+        </div>
+    );
 }
+
+export default CardsPage;

@@ -9,19 +9,17 @@ interface CommentBoxProps {
 
 export default function CommentsPage({ onToggle, style }: CommentBoxProps) {
     return (
-            <div className={`w-[78%] h-[90%] rounded-3xl bg-gray-500 ${style?.visibility ?? 'hidden'}`}>
+            <div className={`px-10 py-5 rounded-3xl bg-gray-500 overflow-auto ${style?.visibility ?? 'hidden'}`}>
 
-                <div className='w-full items-start justify-start pt-3 pl-10' > 
-                    <button className='cursor-pointer hover:bg-black/20 transition duration-200 rounded-full' onClick={onToggle}>
-                    <AiFillCloseCircle 
-                        size={50} 
-                        className='' 
-                        style={{
-                        color: '#f2be5c',
-                        }}
-                    />
-                    </button>
-                </div>
+                <button className='cursor-pointer hover:bg-black/20 transition duration-200 rounded-full fixed right-3 -top-0   ' onClick={onToggle}>
+                <AiFillCloseCircle 
+                    size={50} 
+                    className='' 
+                    style={{
+                    color: '#f2be5c',
+                    }}
+                />
+                </button>
 
                 <div className='space-y-3'>
 

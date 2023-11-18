@@ -57,18 +57,18 @@ interface ConfigGearProps {
 }
 
 export default function ConfigMenuBackground({ onToggle }: ConfigGearProps) {
-  const [musicVolume, setMusicVolume] = useState(50); // Valor inicial do volume da música (50%)
-  const [soundVolume, setSoundVolume] = useState(50); // Valor inicial do volume do som geral (50%)
+  // const [musicVolume, setMusicVolume] = useState(50); // Valor inicial do volume da música (50%)
+  // const [soundVolume, setSoundVolume] = useState(50); // Valor inicial do volume do som geral (50%)
 
-  const handleMusicVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMusicVolume(Number(e.target.value));
-    // Aqui você pode adicionar a lógica para ajustar o volume da música na sua aplicação
-  };
+  // const handleMusicVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setMusicVolume(Number(e.target.value));
+  //   // Aqui você pode adicionar a lógica para ajustar o volume da música na sua aplicação
+  // };
 
-  const handleSoundVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSoundVolume(Number(e.target.value));
-    // Aqui você pode adicionar a lógica para ajustar o volume do som geral na sua aplicação
-  };
+  // const handleSoundVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSoundVolume(Number(e.target.value));
+  //   // Aqui você pode adicionar a lógica para ajustar o volume do som geral na sua aplicação
+  // };
 
   return (
     /* Container flexbox para centralizar o conteúdo */
@@ -90,7 +90,7 @@ export default function ConfigMenuBackground({ onToggle }: ConfigGearProps) {
         </button>
       </div>
 
-      <div className='p-10 w-full'>
+      {/* <div className='p-10 w-full'>
         <label htmlFor="musicVolume" style={{ color: 'black' }}>Volumes:</label>
         <div className='p-5 w-full'>
           <label htmlFor="musicVolume" style={{ color: 'black' }}>Música:</label>
@@ -110,7 +110,7 @@ export default function ConfigMenuBackground({ onToggle }: ConfigGearProps) {
             sx={{ color: '#8433F5'}}
           />
         </div>
-      </div>
+      </div> */}
 
       <div className='w-full flex justify-end pr-10'>
         <FormControlLabel

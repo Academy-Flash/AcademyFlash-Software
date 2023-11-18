@@ -18,13 +18,11 @@ export const Layout = ({ children }: LayoutInterface) => {
   const pageName = router.pathname;
 
   return (
-    <div className="w-[80%] m-auto h-[calc(100vh-64px)] relative overflow-y-auto px-2 bg-orange-100 dark:bg-gray-700 text-black dark:text-white">
-      {/* {pageName !== 'Signup' ? <Header /> : ''}
-      */}
+    <div className="w-[80%] m-auto h-[calc(100vh-64px)] relative overflow-hidden px-2 text-white layout-principal" style={{backgroundColor: '#1D1F21'}}>
       
       {children}
 
-      {pageName !== '/signup' ? <Footer /> : ''}
+      {!['/signup', '/signin'].includes(pageName) ? <Footer /> : ''}
     </div>
 
   )

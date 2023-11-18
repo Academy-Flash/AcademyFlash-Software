@@ -113,23 +113,3 @@ $ npx prisma init
 $ npx prisma migrate dev --name init
 $ npx prisma studio
 ```
-
-## Docker  
-```
-$ docker images
-$ docker start <container ID>       => Inicia um container
-$ docker stop <container ID>        => Para um container
-$ docker stop $(docker ps -a -q)    => Para todos os containers
-$ docker ps -a                      => Lista todos os containers rodando
-$ docker run -i -t ubuntu           => Exemplo de execução Ubuntu
-$ docker pause <ID container>       => Pausa a execução
-$ docker unpause <ID container>     => Despausa a execução
-$ docker image ls                   => Lista as imagens instaladas
-$ docker pull postgres
-```
-**Docker Compose**  
-```
-$ docker-compose up       => Sobe os containers, deve ser executado dentro da pasta que contém o arquivo .yml
-$ docker-compose up -d    => Sobe os containers em background (terminal limpo)
-$ docker-compose down     => Para os containers
-```

@@ -11,9 +11,9 @@ model cards {
   id               Int                @id(map: "card_pkey") @default(autoincrement())
   question         String?            @db.VarChar(255)
   answer           String?            @db.VarChar(255)
-  rating           Int
-  difficulty       Int
   id_deck          Int
+  difficulty       Int
+  rating           Int
   decks            decks              @relation(fields: [id_deck], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "card_id_deck_fkey")
   cards_history    cards_history[]
   edits_logs_cards edits_logs_cards[]
@@ -39,6 +39,7 @@ model communities {
   user_count             Int
   card_count             Int
   communities_acess_logs communities_acess_logs[]
+  community_decks        community_decks?
   community_folders      community_folders[]
   community_users        community_users[]
   edits_logs_communities edits_logs_communities[]
@@ -79,6 +80,7 @@ model decks {
   category         String?            @db.VarChar(255)
   description      String?            @db.VarChar(255)
   cards            cards[]
+  community_decks  community_decks[]
   decks_history    decks_history[]
   edits_logs_decks edits_logs_decks[]
   folder_deck      folder_deck[]
@@ -221,4 +223,12 @@ model users_acess_logs {
   id_user   Int
   time_date DateTime @db.Timestamp(6)
   users     users    @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "acess_log_id_user_fkey")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model community_decks {
+  id_community Int         @id @default(autoincrement())
+  id_decks     Int?
+  communities  communities @relation(fields: [id_community], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  decks        decks?      @relation(fields: [id_decks], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }

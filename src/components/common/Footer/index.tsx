@@ -1,9 +1,35 @@
 import { PiHouseSimpleFill } from 'react-icons/pi'
 import { BsFillPeopleFill } from 'react-icons/bs'
+import { RiArrowGoBackFill } from 'react-icons/ri'
 import { AiOutlinePlusSquare } from 'react-icons/ai'
-import { VscFileSymlinkDirectory} from 'react-icons/vsc'
+import { VscFileSymlinkDirectory } from 'react-icons/vsc'
 import { AiFillSmile } from 'react-icons/ai'
-import Link from "next/link"
+import { useRouter } from 'next/router';
+import { useState } from 'react'
+
+interface Icons {
+    title: string,
+    icon: any
+}
+
+const actions = [
+    {
+        title: 'Back',
+        icon: RiArrowGoBackFill,
+    },
+    {
+        title: 'Community',
+        icon: AiOutlinePlusSquare,
+    }, 
+    {
+        title: 'Card',
+        icon: AiOutlinePlusSquare,
+    },
+    {
+        title: 'Deck',
+        icon: AiOutlinePlusSquare,
+    },
+]
 
 const FOOTER_ICONS = [
     {
@@ -28,34 +54,74 @@ const FOOTER_ICONS = [
     },
 ]
 
-// Function for choosing the page to be displayed after clicking on the footer icon
-function handleFooterClick(FOOTER_ICONS: any) {
-    if(FOOTER_ICONS.title.toLowerCase() === 'menu') {
-        return '/'
-    }
-    else {
-        return `/${FOOTER_ICONS.title.toLowerCase()}`
-    }
-}
-
-
 export const Footer = () => {
+
+    const [showAddMenu, setShowAddMenu] = useState(false);
+    const router = useRouter();
+
+    function handleFooterClick(item: Icons) {
+        if (item.title === "Add") {
+            setShowAddMenu(true);
+            return;
+        }
+
+        switch (item.title) {
+            case "Menu":
+                router.push("/");
+                break;
+            case "Community":
+                router.push("/comunidades");
+                break;
+            default:
+                router.push("/" + item.title.toLowerCase());
+                break;
+        }
+    }
+
+    const handleAddAction = (item: Icons) => {
+        if (item.title === "Back") {
+            setShowAddMenu(false);
+            return;
+        }
+        
+        setShowAddMenu(false)
+        router.push("/add/" + item.title.toLowerCase());
+    }
+
     return (
-        <footer className="bg-red-700 dark:bg-red-900 flex p-2 w-[80%] h-16 fixed bottom-0 left-[10%]">
+        <footer className="flex p-2 w-[80%] h-16 fixed bottom-0 left-[10%]" style={{backgroundColor : '#1F1640'}}>
 
-            {FOOTER_ICONS.map((item) => (
-    
-                <Link
-                    className="hover:bg-white/10 transition duration-200 rounded-3xl flex flex-col items-center justify-center w-1/5"
-                    key={item.title}
-                    href={`${handleFooterClick(item)}`}
-                >
-                    <div> <item.icon size={25} className=' fill-yellow-500 border-black ' /> </div>
-                    <div className="text-yellow-500"> {item.title} </div>
-                </Link>
-            
-             ))}
+            {showAddMenu ?
+                
 
-         </footer>
+                (actions.map((item) => (
+                    <button
+                        className='hover:bg-white/10 transition duration-200 rounded-3xl flex flex-col items-center justify-center w-1/4'
+                        key={item.title}
+                        onClick={() => handleAddAction(item)}
+                    >
+                        <div><item.icon size={25} className=' fill-yellow-500 border-black ' /> </div>
+                        <div className="text-yellow-500"> {item.title} </div>
+                    </button>
+                )))
+                
+
+                :
+
+                (FOOTER_ICONS.map((item) => (
+
+                    <button
+                        className='hover:bg-white/10 transition duration-200 rounded-3xl flex flex-col items-center justify-center w-1/5'
+                        key={item.title}
+                        onClick={() => handleFooterClick(item)}
+                    >
+                        <div><item.icon size={25} className=' fill-yellow-500 border-black ' /> </div>
+                        <div className="text-yellow-500"> {item.title} </div>
+                    </button>
+
+                )))
+            }
+
+        </footer>
     )
 }
