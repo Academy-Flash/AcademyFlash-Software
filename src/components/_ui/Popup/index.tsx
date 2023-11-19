@@ -1,11 +1,9 @@
 import React, { useState } from "react";
+import { useCurrentCommunity } from "@/context/CurrentCommunityContext";
 
-interface PopupProps {
-    isOpen: boolean;
-    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const Popup: React.FC<PopupProps> = ({ isOpen, setIsOpen }) => {
+const Popup = () => {
+    const {getDecks} = useCurrentCommunity();
+    const [isOpen, setIsOpen] = useState(false);
     const [newDeckName, setNewDeckName] = useState('');
     const [newDeckCategory, setNewDeckCategory] = useState('');
     const [newDeckDescription, setNewDeckDescription] = useState('');
@@ -28,6 +26,8 @@ const Popup: React.FC<PopupProps> = ({ isOpen, setIsOpen }) => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(deck),
+            }).then(() => {
+                getDecks()
             });
         } catch (error) {
             console.error(error);

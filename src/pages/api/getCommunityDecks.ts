@@ -8,12 +8,17 @@ export default async function handler(
 ) {
   try {
 
-    const decks = await prisma.$queryRaw`
-      SELECT * 
-      FROM decks, community_decks, communities 
-      WHERE decks.id = community_decks.id_decks and communities.id = community_decks.id_community 
-      and community_name = ${req.body.com_name}
-      `
+    const decks = await prisma.decks.findMany({
+      where: {
+        community_decks: {
+          some: {
+            communities: {
+              community_name: req.body.com_name,
+            },
+          },
+        },
+      }
+    });
 
     res.status(200).json( decks );
   } catch (error) {
