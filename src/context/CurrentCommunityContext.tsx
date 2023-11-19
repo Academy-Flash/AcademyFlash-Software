@@ -5,7 +5,7 @@ interface CurrentCommunityContextType {
   setCurrentCommunity: Dispatch<SetStateAction<string>>;
   setCommunities: Dispatch<SetStateAction<Community[]>>;
   setDecks: Dispatch<SetStateAction<Deck[]>>;
-  getDecks: () => Promise<Deck[]>; // Add the getDecks function
+  getDecks: () => Promise<Deck[]>;
   communities: Community[];
   communityDecks: Deck[];
 }
@@ -48,34 +48,42 @@ export function CurrentCommunityProvider({ children }: { children: ReactNode }) 
       }
 
       const data = await response.json();
-      setDecks(data);
+
+      if (JSON.stringify(data) !== JSON.stringify(communityDecks)) {
+        setDecks(data);
+      }
+
       return data;
     } catch (error) {
       console.error('Error fetching decks:', error);
-      return []; // Return an empty array as a default value
+      return [];
     }
   }
 
-  useEffect(() => {
-    async function getCommunities() {
-      fetch('/api/getCommunities')
-          .then((response) => {
-              if (!response.ok) {
-                  throw new Error('Network response was not ok');
-              }
-              return response.json();
-          })
-          .then((data) => {
+  async function getCommunities() {
+    fetch('/api/getCommunities')
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then((data) => {
+            if (JSON.stringify(data) !== JSON.stringify(communities)) {
               setCommunities(data)
-          })
-          .catch((error) => {
-              console.error('Error fetching communities:', error);
-          });
-    }
+            }
+        })
+        .catch((error) => {
+            console.error('Error fetching communities:', error);
+        });
+  }
 
+
+  useEffect(() => {
+    console.log("use1")
     getDecks();
     getCommunities();
-  }, [currentCommunity]);
+  }, [currentCommunity, communities, communityDecks]);
 
   return (
     <CurrentCommunityContext.Provider value={{ currentCommunity, setCurrentCommunity, communities, setCommunities, communityDecks, setDecks, getDecks }}>

@@ -1,23 +1,15 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {useRouter} from 'next/router';
-import Popup from '@/components/_ui/Popup';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import * as React from 'react';
-
-interface Community {
-    id: number;
-    community_name: string;
-    description: string;
-    date_creation: string;
-    user_count: number;
-    card_count: number;
-}
+import { useCurrentCommunity } from "@/context/CurrentCommunityContext";
 
 const AddCommunityPage = () => {
+    const {setCommunities} = useCurrentCommunity();
     const [communityName, setCommunityName] = useState('');
     const [description, setDescription] = useState('');
-    const [image, setImage] = useState<File | null>(null); // Step 2
+    // const [image, setImage] = useState<File | null>(null);
     const [error, setError] = useState('');
 
     const router = useRouter();
@@ -61,6 +53,15 @@ const AddCommunityPage = () => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(community),
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                setCommunities(data)
             });
         } catch (error) {
             console.error(error);
@@ -70,61 +71,52 @@ const AddCommunityPage = () => {
     return (
         <div className="flex flex-col h-full w-full justify-center items-center gap-6">
             <h1 className="text-3xl font-semibold mb-4">Add Community</h1>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                <Box
-                    component="form"
-                    sx={{
-                        '& .MuiTextField-root': { m: 0, width: '50ch' },
-                    }}
-                    noValidate
-                    autoComplete="off"
-                >
-                    <div>
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Community Name"
-                            defaultValue="Community Name"
-                            className='bg-white border border-gray-3'
-                            variant="filled"
-                            value={communityName}
-                            onChange={(event) => setCommunityName(event.target.value)}
-                        />
-                    </div>
+            <Box
+                component="form"
+                sx={{
+                    '& .MuiTextField-root': { m: 0, width: '50ch' },
+                }}
+                className='flex flex-col gap-4'
+                noValidate
+                autoComplete="off"
+                onSubmit={handleSubmit}
+            >
+                <TextField
+                    required
+                    id="outlined-required"
+                    label="Community Name"
+                    className='bg-white border border-gray-3'
+                    variant="filled"
+                    value={communityName}
+                    onChange={(event) => setCommunityName(event.target.value)}
+                />
+                <TextField
+                    id="filled-multiline-static"
+                    label="Description"
+                    multiline={true}
+                    rows={4}
+                    variant='filled'
+                    className='bg-white border border-gray-3'
+                    value={description}
+                    onChange={(event) => setDescription(event.target.value)}
+                />
 
-                </Box>
-                <Box component="form"
-                    sx={{
-                        '& .MuiTextField-root': { m: 0, width: '50ch' },
-                    }}
-                    noValidate autoComplete="off"
-                >
-                    <div>
-                        <TextField
-                            id="filled-multiline-static"
-                            label="Description"
-                            multiline
-                            rows={4}
-                            defaultValue="Default Value"
-                            variant='filled'
-                            className='bg-white border border-gray-3'
-                            value={description}
-                            onChange={(event) => setDescription(event.target.value)}
-                        />
-                    </div>
-                </Box>
-                {/* <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(event) => setImage(event.target.files?.[0] || null)} // Step 3
-                /> */}
+                {error && <p className="flex justify-center text-white">{error}</p>}
+
                 <button
                     type="submit"
                     className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500 transition-colors"
                 >
                     Add Community
                 </button>
-            </form>
+            </Box>
+            
+
+            {/* <input
+                type="file"
+                accept="image/*"
+                onChange={(event) => setImage(event.target.files?.[0] || null)} // Step 3
+            /> */}
         </div>
     );
 };

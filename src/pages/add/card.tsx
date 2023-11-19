@@ -1,37 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Popup from '@/components/_ui/Popup';
-
-interface Deck {
-    id: number;
-    deck_name: string;
-    rating: number;
-    category: string;
-    description: string;
-}
+import { useCurrentCommunity } from "@/context/CurrentCommunityContext";
 
 const AddCardPage = () => {
+    const {communityDecks } = useCurrentCommunity();
     const [front, setFront] = useState('');
     const [back, setBack] = useState('');
-    const [decks, setDecks] = useState<Deck[]>([]);
     const [selectedDeck, setSelectedDeck] = useState('');
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [error, setError] = useState('');
 
     const router = useRouter();
-
-    useEffect(() => {
-        const fetchDecks = async () => {
-            try {
-                const response = await fetch('/api/getDecks');
-                const data = await response.json();
-                setDecks(data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        fetchDecks();
-    }, [isPopupOpen]);
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -50,7 +29,7 @@ const AddCardPage = () => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(card),
-            });
+            })
         } catch (error) {
             console.error(error);
         }
@@ -89,7 +68,7 @@ const AddCardPage = () => {
                         className="w-full px-3 py-2 border border-gray-300 rounded-md text-black"
                     >
                         <option value="">Select a deck</option>
-                        {decks.map((deck) => (
+                        {communityDecks.map((deck) => (
                             <option key={deck.id} value={deck.id}>
                                 {deck.deck_name}
                             </option>
@@ -103,7 +82,7 @@ const AddCardPage = () => {
                     Save
                 </button>
             </form>
-            <Popup isOpen={isPopupOpen} setIsOpen={setIsPopupOpen} />
+            <Popup />
         </div>
 
     );

@@ -13,10 +13,7 @@ export default async function handler(
         decks: {
           deck_name: deck_name,
         },
-      },
-      include: {
-        decks: true, // apenas se você também quiser incluir os detalhes do deck na resposta
-      },
+      }
     });
 
     res.status(200).json(cards);
