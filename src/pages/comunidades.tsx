@@ -27,19 +27,21 @@ export default function Comunidades() {
   }, []);
 
   return (
-    <main className="container mx-auto my-8">
+    <main className="flex-col mx-auto my-8 ">
       <section className='flex items-center justify-center'>
         <div className="flex items-center justify-center m-5 mt-16 bg-[#77C3F2] rounded-full w-1/4 h-24">
           <h1 className="text-3/4 text-lg font-semibold">Comunidades</h1>
         </div>
       </section>
 
-      <div className="grid grid-cols-0 gap-4 justify-stretch justify-items-center overflow-auto overflow-y-scroll">
-        {communities.map((community) => (
-          <div key={community.id} className="bg-white p-4 rounded-3xl shadow w-[80%] h-24">
-            <h2 className="text-lg font-semibold mb-2 text-black">{community.community_name}</h2>
-          </div>
-        ))}
+      <div className="flex items-center justify-center">
+        <div className="flex flex-wrap items-center justify-center overflow-y-auto max-h-96 w-full">
+          {communities.map((community) => (
+            <div key={community.id} className="bg-white p-4 rounded-3xl shadow w-[80%] h-24 mb-5">
+              <h2 className="text-lg font-semibold mb-2 text-black">{community.community_name}</h2>
+            </div>
+          ))}
+        </div>
       </div>
     </main>
   );
