@@ -8,9 +8,10 @@ interface CurrentCommunityContextType {
   getDecks: () => Promise<Deck[]>;
   communities: Community[];
   communityDecks: Deck[];
+  getCommunities: () => Promise<Community[]>;
 }
 
-interface Community {
+export interface Community {
     id: number;
     community_name: string;
     description: string;
@@ -60,7 +61,7 @@ export function CurrentCommunityProvider({ children }: { children: ReactNode }) 
     }
   }
 
-  async function getCommunities() {
+  async function getCommunities(): Promise<Community[]> {
     fetch('/api/getCommunities')
         .then((response) => {
             if (!response.ok) {
@@ -76,17 +77,29 @@ export function CurrentCommunityProvider({ children }: { children: ReactNode }) 
         .catch((error) => {
             console.error('Error fetching communities:', error);
         });
+
+    return communities;
   }
 
 
   useEffect(() => {
-    console.log("use1")
     getDecks();
     getCommunities();
   }, [currentCommunity, communities, communityDecks]);
 
   return (
-    <CurrentCommunityContext.Provider value={{ currentCommunity, setCurrentCommunity, communities, setCommunities, communityDecks, setDecks, getDecks }}>
+    <CurrentCommunityContext.Provider
+      value={{
+        currentCommunity,
+        setCurrentCommunity,
+        setCommunities,
+        setDecks,
+        getDecks,
+        getCommunities,
+        communities,
+        communityDecks
+      }}
+    >
       {children}
     </CurrentCommunityContext.Provider>
   );
