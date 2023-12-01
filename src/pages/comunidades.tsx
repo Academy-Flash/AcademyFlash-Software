@@ -3,11 +3,27 @@
 import React, { useEffect, useState } from 'react';
 import { SearchCommunities } from '@/components/_ui/SearchCommunities';
 import { Community, useCurrentCommunity } from '@/context/CurrentCommunityContext';
+import { useRouter } from 'next/router';
 
 export default function Comunidades() {
   const [searchedCommunities, setSearchedCommunities] = useState<Community[]>([]);
-  const { getCommunities, communities } = useCurrentCommunity();
+  const { getCommunities, communities, setCurrentCommunity } = useCurrentCommunity();
   const colors = [ '#2A37A3', '#592386', '#284875', '#6A2875', '#382875']
+
+  const router = useRouter();
+
+  function handleFooterClick(item:  Community ) {
+
+      switch (item.community_name) {
+          case "Menu":
+              router.push("/" + item.community_name.toLowerCase());
+              break;
+          default:
+              setCurrentCommunity(item.community_name);
+              router.push("/");
+              break;
+      }
+  }
   
   useEffect(() => {
     /* async function fetchCommunities() {
@@ -40,13 +56,14 @@ export default function Comunidades() {
           <div className="flex items-start justify-center overflow-y-auto h-[95%]">
             <div className="flex flex-wrap justify-center w-full">
               {searchedCommunities.map((community, index) => (
-                <div 
+                <button 
                   key={community.id} 
                   className="p-4 rounded-3xl shadow w-[80%] h-24 mb-5 border-2 border-white"
                   style={{backgroundColor: `${colors[index % colors.length]}`}}
+                  onClick={() => handleFooterClick(community)}
                 >
                   <h2 className="text-lg font-semibold mb-2 text-white">{community.community_name}</h2>
-                </div>
+                </button>
               ))}
         </div>
       </div>

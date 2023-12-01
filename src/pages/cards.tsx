@@ -80,26 +80,29 @@ const CardsPage = () => {
     };
 
     return (
-        <div>
-            {cards.map((card, index) => (
-                <Card key={index} sx={{ minWidth: 275, boxShadow: 3, '&:hover': { boxShadow: 6 }, borderRadius: 2, mb: 2 }}>
-                    <CardContent>
-                        <Typography variant="h5" component="div">
-                            {card.question}
-                        </Typography>
-                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                            {card.answer}
-                        </Typography>
-                        <Button
-                            startIcon={<MdEdit />}
-                            size="small"
-                            onClick={() => handleEditClick(card)}
-                        >
-                            Editar
-                        </Button>
-                    </CardContent>
-                </Card>
-            ))}
+        <div className="flex flex-wrap justify-center overflow-y-auto h-[95%]">
+            <div>         
+                {cards.map((card, index) => (
+                    <Card key={index} sx={{ minWidth: 275, boxShadow: 3, '&:hover': { boxShadow: 6 }, borderRadius: 2, mb: 2 }}>
+                        <CardContent>
+                            <Typography variant="h5" component="div">
+                                {card.question}
+                            </Typography>
+                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                {card.answer}
+                            </Typography>
+                            <Button
+                                startIcon={<MdEdit />}
+                                size="small"
+                                onClick={() => handleEditClick(card)}
+                            >
+                                Editar
+                            </Button>
+                        </CardContent>
+                    </Card>
+                ))}
+            </div>
+            
 
             <Dialog open={editModalOpen} onClose={handleClose}>
                 <DialogTitle>Edit Card</DialogTitle>
@@ -134,6 +137,8 @@ const CardsPage = () => {
                     <Button onClick={handleSave}>Save</Button>
                 </DialogActions>
             </Dialog>
+
+            
         </div>
     );
 }
