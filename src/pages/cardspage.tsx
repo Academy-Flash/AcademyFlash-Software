@@ -12,6 +12,7 @@ import { PiCards } from 'react-icons/pi';
 
 
 interface CardInterface {
+    id:any
     question: string
     answer: string
     rating: number
@@ -102,7 +103,7 @@ export default function CardsPage() {
             
             <div className='flex justify-center items-center space-x-2'>
                 <div className='bg-[#D9D9D9] mt-5 w-fit h-fit rounded-full shadow-lg shadow-black/60 border-black border-2'>
-                    <FeedbackCards />
+                    <FeedbackCards index={index} cards={cards} />
                 </div>
                 <button onClick={toggleCommentBox} className='mt-5 bg-[#D9D9D9] rounded-full hover:bg-white/30 p-2 cursor-pointer transition duration-200 border-black border-2' >
                     <BiSolidCommentDetail className='fill-black' size={20} />
