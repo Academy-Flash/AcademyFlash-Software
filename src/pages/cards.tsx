@@ -80,20 +80,24 @@ const CardsPage = () => {
     };
 
     return (
-        <div className="flex flex-wrap justify-center overflow-y-auto h-[95%]">
+        <div className="flex flex-wrap justify-center overflow-y-auto h-[95%] p-5">
             <div>         
                 {cards.map((card, index) => (
-                    <Card key={index} sx={{ minWidth: 275, boxShadow: 3, '&:hover': { boxShadow: 6 }, borderRadius: 2, mb: 2 }}>
+                    <Card className="p-5 border-2" key={index} 
+                        sx={{ minWidth: 275, boxShadow: 3, '&:hover': { boxShadow: 6 }, borderRadius: 2, mb: 2, backgroundColor: '#575369' }}>
                         <CardContent>
-                            <Typography variant="h5" component="div">
+                            <Typography variant="h5" component="div" className="text-white">
                                 {card.question}
                             </Typography>
-                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                            <Typography sx={{ mb: 1.5}} className="text-gray-200">
                                 {card.answer}
                             </Typography>
                             <Button
                                 startIcon={<MdEdit />}
                                 size="small"
+                                variant="outlined"
+                                sx={{ color: '#c3b5fd', borderColor: '#c3b5fd', '&:hover': { borderColor: '#c3b5fd', color: '#8a5cf6', backgroundColor: '#2e1065' }, borderRadius: '2rem'}}
+                                className=" hover:bg-violet-950/20"
                                 onClick={() => handleEditClick(card)}
                             >
                                 Editar
@@ -104,10 +108,32 @@ const CardsPage = () => {
             </div>
             
 
-            <Dialog open={editModalOpen} onClose={handleClose}>
+            <Dialog 
+                open={editModalOpen} onClose={handleClose}
+                sx={{ 
+                    '& .MuiDialog-paper': { 
+                        backgroundColor: '#575369', 
+                        color: '#ffffff',
+                    },
+                }}
+            >
                 <DialogTitle>Edit Card</DialogTitle>
                 <DialogContent>
                     <TextField
+                        sx={{
+                            '& .MuiInputBase-root': {
+                                color: '#ffffff',
+                            },
+                            '.MuiInputLabel-root': {
+                                color: '#ffffff',
+                            },
+                            '.MuiInput-underline:before': {
+                                borderBottomColor: '#ffffff',
+                            },
+                            '.MuiInput-underline:after': {
+                                borderBottomColor: '#ffffff',
+                            },
+                        }}
                         autoFocus
                         margin="dense"
                         id="question"
@@ -121,6 +147,20 @@ const CardsPage = () => {
 
                     />
                     <TextField
+                        sx={{
+                            '& .MuiInputBase-root': {
+                                color: '#ffffff',
+                            },
+                            '.MuiInputLabel-root': {
+                                color: '#ffffff',
+                            },
+                            '.MuiInput-underline:before': {
+                                borderBottomColor: '#ffffff',
+                            },
+                            '.MuiInput-underline:after': {
+                                borderBottomColor: '#ffffff',
+                            },
+                        }}
                         margin="dense"
                         id="answer"
                         label="Answer"
@@ -132,7 +172,13 @@ const CardsPage = () => {
 
                     />
                 </DialogContent>
-                <DialogActions>
+                <DialogActions
+                    sx={{
+                        '& .MuiButton-root': {
+                            color: '#ffffff',
+                        },
+                    }}
+                >
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={handleSave}>Save</Button>
                 </DialogActions>
