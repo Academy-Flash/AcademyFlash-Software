@@ -79,7 +79,7 @@ const AddCardPage = () => {
                 {error && <p className="pt-5 flex justify-center text-purple-300">{error}</p>}
 
                 <button type="submit" className="w-full bg-violet-950 text-white py-2 px-4 rounded-md hover:bg-violet-950/70 mt-4">
-                    Save
+                    Create Card
                 </button>
             </form>
             <Popup />
