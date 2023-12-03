@@ -70,47 +70,49 @@ const AddCommunityPage = () => {
 
     return (
         <div className="flex flex-col h-full w-full justify-center items-center gap-6">
-            <h1 className="text-3xl font-semibold mb-4">Add Community</h1>
-            <Box
-                component="form"
-                sx={{
-                    '& .MuiTextField-root': { m: 0, width: '50ch' },
-                }}
-                className='flex flex-col gap-4'
-                noValidate
-                autoComplete="off"
-                onSubmit={handleSubmit}
-            >
-                <TextField
-                    required
-                    id="outlined-required"
-                    label="Community Name"
-                    className='bg-white border border-gray-3'
-                    variant="filled"
-                    value={communityName}
-                    onChange={(event) => setCommunityName(event.target.value)}
-                />
-                <TextField
-                    id="filled-multiline-static"
-                    label="Description"
-                    multiline={true}
-                    rows={4}
-                    variant='filled'
-                    className='bg-white border border-gray-3'
-                    value={description}
-                    onChange={(event) => setDescription(event.target.value)}
-                />
-
-                {error && <p className="flex justify-center text-white">{error}</p>}
-
-                <button
-                    type="submit"
-                    className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500 transition-colors"
-                >
-                    Add Community
-                </button>
-            </Box>
+            <h1 className="text-3xl font-bold mb-4">Add Community</h1>
             
+            <div className="bg-[#575369] p-6 rounded-md shadow-md">
+                <Box
+                    component="form"
+                    sx={{
+                        '& .MuiTextField-root': { m: 0, width: '50ch' },
+                    }}
+                    className='flex flex-col gap-4'
+                    noValidate
+                    autoComplete="off"
+                    onSubmit={handleSubmit}
+                    >
+                    <TextField
+                        required
+                        id="outlined-required"
+                        label="Community Name"
+                        className='bg-white border border-gray-3'
+                        variant="filled"
+                        value={communityName}
+                        onChange={(event) => setCommunityName(event.target.value)}
+                        />
+                    <TextField
+                        id="filled-multiline-static"
+                        label="Description"
+                        multiline={true}
+                        rows={4}
+                        variant='filled'
+                        className='bg-white border border-gray-3'
+                        value={description}
+                        onChange={(event) => setDescription(event.target.value)}
+                        />
+
+                    {error && <p className="flex justify-center text-white">{error}</p>}
+
+                    <button
+                        type="submit"
+                        className="bg-violet-950 text-white px-4 py-2 rounded-md hover:bg-violet-950/70"
+                        >
+                        Add Community
+                    </button>
+                </Box>     
+            </div>
 
             {/* <input
                 type="file"
