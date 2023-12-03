@@ -87,7 +87,7 @@ const AddCommunityPage = () => {
                         required
                         id="outlined-required"
                         label="Community Name"
-                        className='bg-white border border-gray-3'
+                        className='bg-white border border-gray-50 rounded-md' 
                         variant="filled"
                         value={communityName}
                         onChange={(event) => setCommunityName(event.target.value)}
@@ -98,7 +98,7 @@ const AddCommunityPage = () => {
                         multiline={true}
                         rows={4}
                         variant='filled'
-                        className='bg-white border border-gray-3'
+                        className='bg-white border border-gray-3 rounded-md'
                         value={description}
                         onChange={(event) => setDescription(event.target.value)}
                         />
