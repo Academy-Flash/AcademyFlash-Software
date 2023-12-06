@@ -1,4 +1,5 @@
 import { createContext, useContext, ReactNode, useState, Dispatch, SetStateAction, useEffect } from 'react';
+import { useCurrentUser } from '@/context/CurrentUserContext';
 
 interface CurrentCommunityContextType {
   currentCommunity: string;
@@ -35,13 +36,14 @@ export function CurrentCommunityProvider({ children }: { children: ReactNode }) 
   const [currentCommunity, setCurrentCommunity] = useState<string>('UNIFESP'); 
   const [communities, setCommunities] = useState<Community[]>([]);
   const [communityDecks, setDecks] = useState<Deck[]>([]);
+  const { currentUser } = useCurrentUser()
 
   async function getDecks(): Promise<Deck[]> {
     try {
       const response = await fetch('/api/getCommunityDecks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ com_name: currentCommunity }),
+        body: JSON.stringify({ com_name: currentCommunity, user_id: currentUser.id }),
       });
 
       if (!response.ok) {
@@ -62,7 +64,11 @@ export function CurrentCommunityProvider({ children }: { children: ReactNode }) 
   }
 
   async function getCommunities(): Promise<Community[]> {
-    fetch('/api/getCommunities')
+    fetch('/api/getCommunities', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({user_id: currentUser.id}),
+            })
         .then((response) => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -83,9 +89,10 @@ export function CurrentCommunityProvider({ children }: { children: ReactNode }) 
 
 
   useEffect(() => {
+    console.log("aqui")
     getDecks();
     getCommunities();
-  }, [currentCommunity, communities, communityDecks]);
+  }, [currentCommunity, communities, communityDecks, currentUser]);
 
   return (
     <CurrentCommunityContext.Provider

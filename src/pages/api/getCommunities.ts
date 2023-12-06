@@ -9,7 +9,17 @@ export default async function handler(
     
   try {
 
-    const communities = await prisma.communities.findMany();
+    const communities = await prisma.communities.findMany({
+      where: {
+        community_users: {
+          some: {
+            users: {
+              id: req.body.user_id
+            }
+          }
+        }
+      }
+    });
     res.status(200).json( communities );
 
   } catch (error) {

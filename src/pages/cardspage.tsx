@@ -58,6 +58,19 @@ export default function CardsPage() {
         setDarkMode(!darkMode);
     }
 
+    async function getCards() {
+        try {
+            const response = await fetch('/api/getCards', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({deck_name: deck_name}),
+            });
+            const data = await response.json();
+            setCards(data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
     /* 
         This useEffect hook is executing the getCards function when the component mounts and whenever 
         the router or deck_name dependencies change. The getCards function makes a POST request to the 
@@ -65,19 +78,6 @@ export default function CardsPage() {
         successful, the response data is set to the cards state using the setCards function. 
     */
     useEffect(() => {
-        async function getCards() {
-            try {
-                const response = await fetch('/api/getCards', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({deck_name: deck_name}),
-                });
-                const data = await response.json();
-                setCards(data);
-            } catch (error) {
-                console.error(error);
-            }
-        }
         getCards()
     }, [deck_name])
 

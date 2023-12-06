@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import * as React from 'react';
 import { useCurrentCommunity } from "@/context/CurrentCommunityContext";
+import { useCurrentUser } from '@/context/CurrentUserContext';
 
 const AddCommunityPage = () => {
     const {setCommunities} = useCurrentCommunity();
@@ -11,6 +12,8 @@ const AddCommunityPage = () => {
     const [description, setDescription] = useState('');
     // const [image, setImage] = useState<File | null>(null);
     const [error, setError] = useState('');
+  const { currentUser } = useCurrentUser()
+
 
     const router = useRouter();
 
@@ -36,7 +39,7 @@ const AddCommunityPage = () => {
             setError('Please fill in all fields');
             return;
         }
-        const community = { communityName, description, URL_image: ''};
+        const community = { communityName, description, URL_image: '', user_id: currentUser.id};
 
         // if (image) {
         //     const imageURL = await uploadImage(image); // Step 4
@@ -47,7 +50,7 @@ const AddCommunityPage = () => {
         router.push('/');
     };
 
-    const createCommunity = async (community: { communityName: string; description: string; URL_image: string }) => {
+    const createCommunity = async (community: { communityName: string; description: string; URL_image: string, user_id: number }) => {
         try {
             await fetch('/api/create/community', {
                 method: 'POST',

@@ -38,8 +38,9 @@ model communities {
   date_creation          DateTime                 @db.Timestamp(6)
   user_count             Int
   card_count             Int
+  URL_image              String?
   communities_acess_logs communities_acess_logs[]
-  community_decks        community_decks?
+  community_decks        community_decks[]
   community_folders      community_folders[]
   community_users        community_users[]
   edits_logs_communities edits_logs_communities[]
@@ -84,6 +85,7 @@ model decks {
   decks_history    decks_history[]
   edits_logs_decks edits_logs_decks[]
   folder_deck      folder_deck[]
+  user_decks       user_decks[]
 }
 
 model decks_history {
@@ -212,6 +214,7 @@ model users {
   edits_logs_communities edits_logs_communities[]
   edits_logs_decks       edits_logs_decks[]
   reviews                reviews[]
+  user_decks             user_decks[]
   user_folders           user_folders[]
   user_notifications     user_notifications[]
   user_ranks             user_ranks[]
@@ -227,8 +230,19 @@ model users_acess_logs {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model community_decks {
-  id_community Int         @id @default(autoincrement())
-  id_decks     Int?
+  id_community Int         @default(autoincrement())
+  id_decks     Int
   communities  communities @relation(fields: [id_community], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  decks        decks?      @relation(fields: [id_decks], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  decks        decks       @relation(fields: [id_decks], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([id_community, id_decks])
+}
+
+model user_decks {
+  id_user Int   @default(autoincrement())
+  id_deck Int
+  decks   decks @relation(fields: [id_deck], references: [id], onDelete: Cascade)
+  users   users @relation(fields: [id_user], references: [id], onDelete: Cascade)
+
+  @@id([id_user, id_deck])
 }

@@ -17,6 +17,13 @@ export default async function handler(
             },
           },
         },
+        user_decks: {
+          some: {
+            users: {
+              id: req.body.user_id
+            }
+          }
+        }
       }
     });
 

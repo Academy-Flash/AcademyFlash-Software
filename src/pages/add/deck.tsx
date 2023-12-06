@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useCurrentCommunity } from "@/context/CurrentCommunityContext";
+import { useCurrentUser } from '@/context/CurrentUserContext';
 
 const AddDeckPage = () => {
     const { currentCommunity } = useCurrentCommunity();
+    const { currentUser } = useCurrentUser()
     const [error, setError] = useState('');
     const [name, setName] = useState("");
     const [category, setCategory] = useState("");
@@ -16,11 +18,11 @@ const AddDeckPage = () => {
             setError('Please fill in all fields');
             return;
         }
-        await createDeck({ newDeckName: name, newDeckCategory: category, newDeckDescription: description, newDeckCommunity: currentCommunity });
+        await createDeck({ newDeckName: name, newDeckCategory: category, newDeckDescription: description, newDeckCommunity: currentCommunity, user_id: currentUser.id });
         router.push('/');
     };
 
-    const createDeck = async (deck: { newDeckName: string, newDeckCategory: string, newDeckDescription: string, newDeckCommunity: string }) => {
+    const createDeck = async (deck: { newDeckName: string, newDeckCategory: string, newDeckDescription: string, newDeckCommunity: string, user_id: number }) => {
         try {
             await fetch('/api/create/deck', {
                 method: 'POST',
