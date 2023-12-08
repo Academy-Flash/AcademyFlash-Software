@@ -17,7 +17,7 @@ export const Layout = ({ children }: LayoutInterface) => {
   const pageName = router.pathname;
 
   return (
-    <div className="w-[80%] m-auto h-[calc(100vh-64px)] relative overflow-hidden px-2 text-white layout-principal" style={{backgroundColor: '#1D1F21'}}>
+    <div className="w-[100%] m-auto h-[calc(100vh-64px)] relative overflow-hidden px-2 text-white layout-principal" style={{backgroundColor: '#1D1F21'}}>
       
       {children}
 

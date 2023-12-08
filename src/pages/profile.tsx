@@ -42,12 +42,12 @@ export default function ProfileBox() {
         }}
       />
       
-      <div className='p-20 bg-[#575369] rounded-3xl border-white border-2 '>
+      <div className='p-7 bg-[#575369] rounded-3xl border-white border-2 max-h-[90%]'>
         
         <div className='w-full flex items-center justify-center'>
           <BiUserCircle 
               className='fill-violet-900'
-              size={100} 
+              size={50} 
           />
         </div>
         <div className='w-full items-center justify-center p-3 text-center' > 
@@ -57,7 +57,6 @@ export default function ProfileBox() {
 
         </div>
         
-        <div className='flex flex-col x' >
           <div className='flex-col justify-start mx-auto'>
             <div className='flex items-center justify-start pt-5 text-center' >
 
@@ -100,6 +99,5 @@ export default function ProfileBox() {
           </div>
         </div>
       </div>
-    </div>
   );
 }
