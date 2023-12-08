@@ -38,7 +38,7 @@ const AddCardPage = () => {
     return (
         <div className="flex flex-col h-full w-full justify-center items-center gap-6">
             <h1 className="text-3xl font-bold mb-4">Add Card</h1>
-            <form onSubmit={handleSubmit} className="w-full max-w-md p-6 rounded-md shadow-md" style={{backgroundColor : '#575369'}}>
+            <form onSubmit={handleSubmit} className="w-full max-w-md p-6 rounded-md shadow-md bg-[#575369]">
                 <div className="mb-4">
                     <label htmlFor="front" className="text-white">Question:</label>
                     <input
@@ -79,7 +79,7 @@ const AddCardPage = () => {
                 {error && <p className="pt-5 flex justify-center text-purple-300">{error}</p>}
 
                 <button type="submit" className="w-full bg-violet-950 text-white py-2 px-4 rounded-md hover:bg-violet-950/70 mt-4">
-                    Save
+                    Create Card
                 </button>
             </form>
             <Popup />

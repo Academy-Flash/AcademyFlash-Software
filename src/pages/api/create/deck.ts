@@ -34,6 +34,13 @@ export default async function handler(
         }
     })
 
+    const user_deck = await prisma.user_decks.create({
+        data: {
+            id_deck: deck.id,
+            id_user: req.body.user_id,
+        }
+    })
+
     res.status(200).json( {ok: true} );
   } catch (error) {
     console.log(error);

@@ -7,8 +7,13 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const userCount = await prisma.users.count();
-    res.status(200).json({ userCount });
+    const user = await prisma.users.findFirst({
+      where:{
+        id: 14
+      }
+    });
+
+    res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ error: 'Erro ao recuperar a quantidade de usuários.' });
   } finally {

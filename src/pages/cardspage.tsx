@@ -12,6 +12,7 @@ import { PiCards } from 'react-icons/pi';
 
 
 interface CardInterface {
+    id:any
     question: string
     answer: string
     rating: number
@@ -57,6 +58,19 @@ export default function CardsPage() {
         setDarkMode(!darkMode);
     }
 
+    async function getCards() {
+        try {
+            const response = await fetch('/api/getCards', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({deck_name: deck_name}),
+            });
+            const data = await response.json();
+            setCards(data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
     /* 
         This useEffect hook is executing the getCards function when the component mounts and whenever 
         the router or deck_name dependencies change. The getCards function makes a POST request to the 
@@ -64,19 +78,6 @@ export default function CardsPage() {
         successful, the response data is set to the cards state using the setCards function. 
     */
     useEffect(() => {
-        async function getCards() {
-            try {
-                const response = await fetch('/api/getCards', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({deck_name: deck_name}),
-                });
-                const data = await response.json();
-                setCards(data);
-            } catch (error) {
-                console.error(error);
-            }
-        }
         getCards()
     }, [deck_name])
 
@@ -95,14 +96,14 @@ export default function CardsPage() {
             )} 
             
             <div className='pt-20 flex justify-center items-center'>
-                <div className="overflow-hidden flex-row rounded-[40px] border-black border-4 bg-gray-100 drop-shadow-lg p-[30px] w-[70%] h-fit items-center">
+                <div className="overflow-hidden flex-row rounded-[40px] border-4 bg-gray-100 drop-shadow-lg p-[30px] w-[70%] h-fit items-center border-violet-700 ">
                     <Cards showAnswer={answer} index={index} cards={cards}/>
                 </div>
             </div>
             
             <div className='flex justify-center items-center space-x-2'>
                 <div className='bg-[#D9D9D9] mt-5 w-fit h-fit rounded-full shadow-lg shadow-black/60 border-black border-2'>
-                    <FeedbackCards />
+                    <FeedbackCards index={index} cards={cards} />
                 </div>
                 <button onClick={toggleCommentBox} className='mt-5 bg-[#D9D9D9] rounded-full hover:bg-white/30 p-2 cursor-pointer transition duration-200 border-black border-2' >
                     <BiSolidCommentDetail className='fill-black' size={20} />

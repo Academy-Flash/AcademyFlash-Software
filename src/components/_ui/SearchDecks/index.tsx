@@ -10,7 +10,7 @@ interface Deck {
     description: string;
 }
 
-export const Search = () => {
+export const SearchDecks = () => {
     const [input, setInput] = useState('');
 
     const { communityDecks, setDecks, getDecks } = useCurrentCommunity();

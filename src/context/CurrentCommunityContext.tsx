@@ -1,4 +1,5 @@
 import { createContext, useContext, ReactNode, useState, Dispatch, SetStateAction, useEffect } from 'react';
+import { useCurrentUser } from '@/context/CurrentUserContext';
 
 interface CurrentCommunityContextType {
   currentCommunity: string;
@@ -8,9 +9,10 @@ interface CurrentCommunityContextType {
   getDecks: () => Promise<Deck[]>;
   communities: Community[];
   communityDecks: Deck[];
+  getCommunities: () => Promise<Community[]>;
 }
 
-interface Community {
+export interface Community {
     id: number;
     community_name: string;
     description: string;
@@ -34,13 +36,14 @@ export function CurrentCommunityProvider({ children }: { children: ReactNode }) 
   const [currentCommunity, setCurrentCommunity] = useState<string>('UNIFESP'); 
   const [communities, setCommunities] = useState<Community[]>([]);
   const [communityDecks, setDecks] = useState<Deck[]>([]);
+  const { currentUser } = useCurrentUser()
 
   async function getDecks(): Promise<Deck[]> {
     try {
       const response = await fetch('/api/getCommunityDecks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ com_name: currentCommunity }),
+        body: JSON.stringify({ com_name: currentCommunity, user_id: currentUser.id }),
       });
 
       if (!response.ok) {
@@ -60,8 +63,12 @@ export function CurrentCommunityProvider({ children }: { children: ReactNode }) 
     }
   }
 
-  async function getCommunities() {
-    fetch('/api/getCommunities')
+  async function getCommunities(): Promise<Community[]> {
+    fetch('/api/getCommunities', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({user_id: currentUser.id}),
+            })
         .then((response) => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -76,17 +83,30 @@ export function CurrentCommunityProvider({ children }: { children: ReactNode }) 
         .catch((error) => {
             console.error('Error fetching communities:', error);
         });
+
+    return communities;
   }
 
 
   useEffect(() => {
-    console.log("use1")
+    console.log("aqui")
     getDecks();
     getCommunities();
-  }, [currentCommunity, communities, communityDecks]);
+  }, [currentCommunity, communities, communityDecks, currentUser]);
 
   return (
-    <CurrentCommunityContext.Provider value={{ currentCommunity, setCurrentCommunity, communities, setCommunities, communityDecks, setDecks, getDecks }}>
+    <CurrentCommunityContext.Provider
+      value={{
+        currentCommunity,
+        setCurrentCommunity,
+        setCommunities,
+        setDecks,
+        getDecks,
+        getCommunities,
+        communities,
+        communityDecks
+      }}
+    >
       {children}
     </CurrentCommunityContext.Provider>
   );

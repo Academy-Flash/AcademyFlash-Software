@@ -89,7 +89,7 @@ export const Footer = () => {
     }
 
     return (
-        <footer className="flex p-2 w-[80%] h-16 fixed bottom-0 left-[10%]" style={{backgroundColor : '#1F1640'}}>
+        <footer className="flex p-2 w-[100%] h-16 fixed bottom-0 left-0" style={{backgroundColor : '#1F1640'}}>
 
             {showAddMenu ?
                 

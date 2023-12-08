@@ -55,7 +55,7 @@ const Popup = () => {
                                     id="deck_name"
                                     value={newDeckName}
                                     onChange={(event) => setNewDeckName(event.target.value)}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                                    className="text-black w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                                 />
                             </div>
                             <div className="mb-4">
@@ -65,7 +65,7 @@ const Popup = () => {
                                     id="category"
                                     value={newDeckCategory}
                                     onChange={(event) => setNewDeckCategory(event.target.value)}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                                    className="text-black w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                                 />
                             </div>
                             <div className="mb-4">
@@ -74,7 +74,7 @@ const Popup = () => {
                                     id="description"
                                     value={newDeckDescription}
                                     onChange={(event) => setNewDeckDescription(event.target.value)}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 text-black"
                                 />
                             </div>
 

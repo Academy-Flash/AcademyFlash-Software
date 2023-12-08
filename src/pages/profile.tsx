@@ -1,85 +1,103 @@
-import React, { useState } from 'react';
-import { BiUserCircle} from 'react-icons/bi';
+import { useCurrentUser } from '@/context/CurrentUserContext';
+import { AiOutlineMail, AiOutlineUser } from 'react-icons/ai';
+import { BiUserCircle, BiLogOut} from 'react-icons/bi';
 import { FiCalendar } from 'react-icons/fi';
 import { LiaUserFriendsSolid } from 'react-icons/lia';
-import { AiOutlineMail } from 'react-icons/ai';
-import { AiOutlineUser } from 'react-icons/ai';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
 
-interface ConfigGearProps {
-  onToggle: () => void;
-}
+export default function ProfileBox() {
 
-export default function ProfileBox({ onToggle }: ConfigGearProps) {
+  const { currentUser, setCurrentUser } = useCurrentUser()
+
+  function changeUser() {
+    if (currentUser.username === 'Edu') {
+      setCurrentUser({
+        username: 'Ricardinho',
+        email: 'rica@rico.com',
+        id: 14
+      })
+    } else {
+      setCurrentUser({
+        username: 'Edu',
+        email: 'edu@mail.com',
+        id: 15
+      })
+    }    
+  }
+
   return (
-    /* Container flexbox para centralizar o conteúdo */
     <div
-      className={`w-full h-full flex-col relative overflow-y-auto`}
-      style={{backgroundColor: '#F24130'}}
+      className={`w-full h-full flex overflow-y-auto justify-center items-center relative `}
     >  
-
-      <div className='w-full items-center justify-center pt-3' > 
+      <BiLogOut
+        size={50}
+        style={{
+          color: '#36199D',
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          cursor: 'pointer',
+        }}
+        onClick={() => {
+          changeUser()
+        }}
+      />
       
-        <BiUserCircle 
-          size={100} 
-          className='w-full' 
-          style={{
-            color: '#f2be5c',
-            backgroundColor: '#F24130',
-          }}
-        />
-      
-      </div>
+      <div className='p-7 bg-[#575369] rounded-3xl border-white border-2 max-h-[90%]'>
+        
+        <div className='w-full flex items-center justify-center'>
+          <BiUserCircle 
+              className='fill-violet-900'
+              size={50} 
+          />
+        </div>
+        <div className='w-full items-center justify-center p-3 text-center' > 
+        
+          <h1 className='w-full text-gray-200  text-3xl font-bold'>{currentUser.username}</h1>
+          <h1 className='w-full pt-2 text-gray-200  text-xl font-bold'>{currentUser.email}</h1>
 
-      <div className='w-full items-center justify-center pt-3 text-center' > 
-      
-        <h1 className='w-full text-white text-3xl font-bold'>Fabio Fagundes Silveira</h1>
-        <h1 className='w-full pt-2 text-white text-xl font-bold'>fsilveira@unifesp.br</h1>
+        </div>
+        
+          <div className='flex-col justify-start mx-auto'>
+            <div className='flex items-center justify-start pt-5 text-center' >
 
-      </div>
-      
-      <div className='flex flex-col' >
-        <div className='flex-col justify-start mx-auto'>
-          <div className='flex items-center justify-start pt-5 text-center' >
+              <FiCalendar size={50} className='text-violet-900' />
+              <h1 className='pl-4 text-gray-200  text-xl font-bold'>  
+                Calendar
+              </h1>
 
-            <FiCalendar size={50} style={{color : '#f2be5c'}}/>
-            <h1 className='pl-4 text-white text-xl font-bold' style={{color : '#f2be5c'}}>  
-              Calendar
-            </h1>
+            </div>
 
-          </div>
+                  
+            <div className='flex items-center justify-start pt-5 text-center' >
 
-                
-          <div className='flex items-center justify-start pt-5 text-center' >
+              <LiaUserFriendsSolid size={50} className='text-violet-900'/>
+              <h1 className='pl-4 text-gray-200 text-xl font-bold' >  
+                Friends
+              </h1>
 
-            <LiaUserFriendsSolid size={50} style={{color : '#f2be5c'}}/>
-            <h1 className='pl-4 text-white text-xl font-bold' style={{color : '#f2be5c'}}>  
-              Friends
-            </h1>
+            </div>
 
-          </div>
+        
+            <div className='flex items-center justify-start pt-5 text-center' >
 
-      
-          <div className='flex items-center justify-start pt-5 text-center' >
+              <AiOutlineMail size={50} className='text-violet-900'/>
+              <h1 className='pl-4 text-xl font-bold text-gray-200 ' >  
+                News
+              </h1>
 
-            <AiOutlineMail size={50} style={{color : '#f2be5c'}}/>
-            <h1 className='pl-4 text-xl font-bold' style={{color : '#f2be5c'}}>  
-              News
-            </h1>
+            </div>
 
-          </div>
+            
+            <div className='flex items-center justify-start pt-5 text-center' >
 
-          
-          <div className='flex items-center justify-start pt-5 text-center' >
+              <AiOutlineUser size={50} className='text-violet-900'/>
+              <h1 className='pl-4 text-xl font-bold text-gray-200 '  >  
+                Profile Settings 
+              </h1>
 
-            <AiOutlineUser size={50} style={{color : '#f2be5c'}}/>
-            <h1 className='pl-4 text-xl font-bold' style={{color : '#f2be5c'}} >  
-              Profile Settings 
-            </h1>
-
+            </div>
           </div>
         </div>
       </div>
-    </div>
   );
 }

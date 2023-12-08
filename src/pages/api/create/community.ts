@@ -17,6 +17,13 @@ export default async function handler(
                 // URL_image: req.body.image,
             }
         })    
+
+        const comuser = await prisma.community_users.create({
+            data: {
+                id_user: req.body.user_id,
+                id_community: community.id
+            }
+        });
     
         res.status(200).json( {ok: true} );
     } catch (error) {
