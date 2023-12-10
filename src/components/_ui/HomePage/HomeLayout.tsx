@@ -1,8 +1,13 @@
 // Não estou utilizando esse componente
 
 import React from 'react';
+import { ReactNode } from "react"
 
-const HomeLayout: React.FC = ({ children }) => {
+interface LayoutInterface {
+  children: ReactNode
+}
+
+const HomeLayout = ({ children }: LayoutInterface) => {
   return (
     <div className="font-sans">
       <header className="bg-purple-800 text-white flex-col items-center justify-center p-2">
