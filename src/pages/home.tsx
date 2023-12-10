@@ -7,17 +7,20 @@ import logo from "/img/Ricardinho.png";
 import React from 'react';
 import Header from '@/components/_ui/HomePage/Header';
 import Footer from '@/components/_ui/HomePage/Footer';
-import CarouselDecks from "@/components/_ui/HomePage/Caroussel/CarousselDecks";
+import FirstSection from "@/components/_ui/HomePage/FirstSection";
+import SecondSection from "@/components/_ui/HomePage/SecondSection";
 
 const HomePage: React.FC = () => {
   return (
-    <div className="font-sans">
-      <Header />
-      <main className="p-4">
-      <CarouselDecks />
-      </main>
-      <Footer />
-    </div>
+    <div className="font-sans w-[100%] h-[100%]">
+    <Header />
+    <main className="w-[100%] h-full p-6 overflow-y-auto">
+      <FirstSection />
+      <SecondSection />
+      
+    </main>
+    <Footer />
+  </div>
   );
 };
 
