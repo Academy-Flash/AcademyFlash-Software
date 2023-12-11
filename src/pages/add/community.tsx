@@ -75,12 +75,9 @@ const AddCommunityPage = () => {
         <div className="flex flex-col h-full w-full justify-center items-center gap-6">
             <h1 className="text-3xl font-bold mb-4">Add Community</h1>
             
-            <div className="bg-[#575369] p-6 rounded-md shadow-md">
+            <div className="bg-[#575369] p-6 rounded-md shadow-md w-full max-w-md">
                 <Box
                     component="form"
-                    sx={{
-                        '& .MuiTextField-root': { m: 0, width: '50ch' },
-                    }}
                     className='flex flex-col gap-4'
                     noValidate
                     autoComplete="off"
