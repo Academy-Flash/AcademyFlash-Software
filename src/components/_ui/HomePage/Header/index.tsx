@@ -1,5 +1,6 @@
 // Header.tsx
 import React from 'react';
+import Link from 'next/link';
 
 const Header: React.FC = () => {
   return (
@@ -13,9 +14,9 @@ const Header: React.FC = () => {
         </div>
         
         <div className="flex justify-center">
-          <button className="bg-purple-700 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded">
-          Login/Sign in
-        </button>
+          <Link href="/" className="bg-purple-700 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded">
+            Login/Sign in
+          </Link>
         </div>
         
       </div>
