@@ -4,7 +4,7 @@ import { ComponentGithubApp, ComponentInstagramApp, ComponentLinkedinApp } from 
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-200 p-10 items-center fixed bottom-0 w-full">
+    <footer className="bg-gray-200 p-10 items-center w-full bg-full ">
       <div className="flex justify-center space-x-20">
         {/* Não consegui fazer o espaço entre os itens ficar igual */}
         {/* 1 */}
